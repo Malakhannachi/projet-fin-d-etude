@@ -9,6 +9,6 @@ use Model\Connect;
     public function accueil()  
     {
 
-        require ("view/acceuil.php");
+        require ("view/accueil.php");
     }
 }
