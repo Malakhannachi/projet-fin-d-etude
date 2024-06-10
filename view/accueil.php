@@ -14,7 +14,15 @@
 <section>
 
 <section id="services">
-    div#se
+    <div id="melieux">
+        <picture>
+            <img src="public/image/image2.jpg" alt="image de démanegement"/>
+            <p>
+            Déménagez en toute sérénité avec notre service rapide, sécurisé et professionnel
+            <a href="services.php" button >Voi plus</a>
+            </p>
+        </picture>
+         
 
 </section>
 
