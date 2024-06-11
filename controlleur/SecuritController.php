@@ -39,6 +39,14 @@ class SecuritController
                             'email' => $email,
                             'mdp' => password_hash($mdp, PASSWORD_DEFAULT)
                         ]);
+                        header('location: index.php?action=login');
+                        exit();
+                    }else
+                    {
+                        header('location: index.php?action=register');
+                        exit();
+                    }
+                }
                
 
         
@@ -47,6 +55,27 @@ class SecuritController
     require ("view/register.php");
     }
 
+    public function login()
+    {
+        if (isset($_POST['submit']))
+        {
+            $pdo = Connect::seConnecter();
+            $email = filter_input (INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+            $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if ($email && $mdp) 
+            {
+                $requete = $pdo -> prepare("
+                SELECT * FROM users 
+                WHERE email = :email");
+                $requete -> execute(['email' => $email]);
+                $user = $requete -> fetch();
+                if ($user) 
+                {
+                    if (password_verify($mdp, $user['mdp'])) 
+                    {
+                        $_SESSION['user'] = $user;
+
 }
-    }
-}
+                }
+    
+

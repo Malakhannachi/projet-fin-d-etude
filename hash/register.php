@@ -18,11 +18,11 @@
         <label for="email">Mail</label>
         <input type="email" name="email" id="email" placeholder="email"><br>
 
-        <label for="pass1">Mot de passe</label>
-        <input type="password" name="pass1" id="pass1"><br>
+        <label for="mdp">Mot de passe</label>
+        <input type="password" name="mdp" id="mdp"><br>
 
-        <label for="pass2"> Confirmation de mot de passe</label>
-        <input type="password" name="pass2" id="pass2"><br>
+        <label for="mdp2"> Confirmation de mot de passe</label>
+        <input type="password" name="mdp2" id="mdp2"><br>
 
         <input type="submit" name="submit" value="s'inscrire">
     </form>
