@@ -21,7 +21,7 @@
     <nav>
         <a href="index.php?action=accueil">Accueil</a>
         <a href="index.php?action=listeCat">Services</a>
-        <a href="index.php?action=listeCat">Devis</a>
+        <a href="index.php?action=devis">Devis</a>
         <a href="index.php?action=listeCat">Contact</a> 
        
     </nav>

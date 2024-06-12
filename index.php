@@ -23,6 +23,12 @@ if(isset($_GET['action'])) {
         case
         "logout":$secuCtrl->logout();
         break;
+        case
+        "devis":$ctrFrm->devis();
+        break;
+        case
+        "devis":$ctrFrm->listDevis();
+        break;
         
         
        
