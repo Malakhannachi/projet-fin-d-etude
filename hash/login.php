@@ -16,8 +16,6 @@
        <label for="password">Mot de passe</label>
        <input type="password" name="password" id="password" placeholder="password"><br>
 
-       
-
        <input type="submit" name="submit" value="Se connecter">
    </form>
     

@@ -29,6 +29,5 @@
 </body>
 </html>
 <?php
-$title = "s'inscrire";
 $contenu = ob_get_clean();
 require "template/template.php";

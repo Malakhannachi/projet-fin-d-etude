@@ -17,7 +17,8 @@ class SecuritController
             if ($nom && $prenom && $email && $mdp && $mdp2) 
             {
                 $requete = $pdo -> prepare("
-                SELECT * FROM users 
+                SELECT * 
+                FROM users 
                 WHERE email = :email");
                 $requete -> execute(['email' => $email]);
                 $user = $requete -> fetch();
@@ -52,46 +53,49 @@ class SecuritController
         
             }
         }
-    require ("view/register.php");
+    require ("hash/register.php");
     }
 
     public function login() {
         if (isset($_POST ["submit"])) {
             $pdo = Connect::seConnecter();
-            //filtrer les données 
+            
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if ($email && $password) { 
-                //var_dump("ok");
+            
                 $requete = $pdo -> prepare("
                     SELECT * 
-                    FROM membre 
-                    WHERE email=:email");  //recuperer l'email
+                    FROM users
+                    WHERE email=:email");  
                     $requete ->execute(["email"=>$email]);
-                    $membre = $requete->fetch();
-                    //var_dump($membre);die;
-                    if($membre){  
-                        //var_dump("existe");die;                          // si l'email existe
-                        $hash = $membre["password"];  
-                        // var_dump($hash);die;    //acceder au mot de passe 
+                    $user = $requete->fetch();
+                    
+                    if($user){  
+                                               
+                        $hash = $user["password"];  
+                        
                         if(password_verify($password, $hash)){
-                            //var_dump("ok");die;
-                            $_SESSION["membre"] = $membre;
-                            header("Location: index.php?action=accueil");exit;
+                            
+                            $_SESSION["user"] = $user;
+                            header("Location: index.php?action=accueil");
+                            exit;
                         } 
                     }else{
-                        header("Location: index.php?action=login");exit;
+                        header("Location: index.php?action=login");
+                        exit;
                         echo "email ou mot de passe incorrect";
                     }  
                     }   
-                }  //fin submit
+                }  
                 require ("hash/login.php");  
             }     
             
     public function logout()
     {
-        unset($_SESSION["membre"]);
-        header("location: index.php?action=login");exit;
+        unset($_SESSION["user"]);
+        header("location: index.php?action=login");
+        exit;
        
       } 
 

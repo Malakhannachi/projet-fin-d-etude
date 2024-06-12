@@ -1,5 +1,5 @@
 <?php
-// session_start(); ?>
+ //session_start(); ?>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,14 @@
 <title>PFE</title>
 
 <body>
-    
+<?php 
+   
+    if ( isset ($_SESSION["membre"])) {     ?>          
+        <a href="index.php?action=logout">Se déconnecter</a>
+   <?php }   else { ?>
+        <a href="index.php?action=login">Se connecter</a>
+        <a href="index.php?action=register">S'incrire</a>
+   <?php } ?> 
    <div id="nav">
     <nav>
         <a href="index.php?action=accueil">Accueil</a>

@@ -1,12 +1,13 @@
 <?php
 use Controlleur\Controller;
+use Controlleur\SecuritController;
 
 spl_autoload_register(function ($class_name) {
     require $class_name.'.php';
 });
 
 $ctrFrm = new Controller();
-$secuCtrl = new SecuriteController();
+$secuCtrl = new SecuritController();
 
 if(isset($_GET['action'])) {
     switch($_GET['action']) {
@@ -16,10 +17,13 @@ if(isset($_GET['action'])) {
         case
         "login":$secuCtrl->login();
         break;
-        "register":$secuCtrl->register(); 
+        case
+        "register":$secuCtrl->register();
         break;
+        case
         "logout":$secuCtrl->logout();
-          break;
+        break;
+        
         
        
 
