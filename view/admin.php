@@ -1,38 +1,30 @@
-<?php ob_start(); ?>
-<h1>Liste des joueurs</h1>
-<table class="uk-table uk-table-striped">
+<?php ob_start();?>
+
+<table>
     <thead>
         <tr>
-            <th>id_Devis</th>
+            <th>Id_Devis</th>
             <th>Nom du client</th>
             <th>Date</th>
-            <th>Besoin</th>
-            <th>Montant</th>
+            <th>Besoin</th>             
         </tr>
     </thead>
     <tbody>
         <?php
-            foreach ($requete->fetchAll() as $joueur) { ?>
-                <tr>
-                    <td><a href="index.php?action=listJoueurEquipe&id=<?= $joueur['id_joueur'] ?>"> 
-                    <?= $joueur['nom_J'] ?></a>
-                    <a href="index.php?action=delJoueur&id=<?= $joueur['id_joueur'] ?>" >
-        <button type="button" class="btn-delete">Supprimer</button>
-    </a>
-                </td>
-                
-                    <td><?= $joueur['prenom'] ?></td>
-                    <td><?= $joueur['date_N'] ?></td>
-                    <td><?= $joueur['id_pays'] ?></td>
-                    <td><?= $joueur['nom_P'] ?></td>
-                </tr>
-                <?php } ?>
+        foreach ($requete->fetchAll() as $dev) //boucle pour afficher les messages
+         {
+            $date_Devis = (new DateTime($msg['date_Devis']))->format('d/m/Y H:i');   // changer le format de la datetime en francais 
+            ?>
+            <tr>
+                <td><?= $dev['id_Devis'] ?></td>
+                <td><?= $date_Devis ?></td>
+                <td><?= $dev['besoin'] ?></td>
+                <?= $dev['nom'] ?></a>
+            </tr>
+            <?php } ?>
     </tbody>
 </table>
+
 <?php
-$titre = "liste des joueurs";
 $contenu = ob_get_clean();
-
-require 'template.php';
-
-
+require "template/template.php";

@@ -29,6 +29,8 @@ if(isset($_GET['action'])) {
         case
         "devis":$ctrFrm->listDevis();
         break;
+        case
+        
         
         
        

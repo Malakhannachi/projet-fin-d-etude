@@ -23,10 +23,12 @@
         <a href="index.php?action=listeCat">Services</a>
         <a href="index.php?action=devis">Devis</a>
         <a href="index.php?action=listeCat">Contact</a> 
+        <?php if ($role == "admin") { ?> 
+            <a href="index.php?action=listDevis">Admin</a> <?php } ?>
        
     </nav>
    </div>
-    
+ 
     <main>
      <div id="contenu">
            <?= $contenu ?>

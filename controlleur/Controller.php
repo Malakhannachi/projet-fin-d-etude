@@ -20,10 +20,9 @@ use Model\Connect;
     {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-        SELECT categorie.id_categorie, categorie.categorie
-        FROM categorie
-        WHERE id_categorie = 1");
-        
+        SELECT devis.id_Devis, devis.date_Devis, devis.besoin, users.nom
+        FROM devis
+        INNER JOIN users ON devis.id_User = users.id_User; ");
         require ("view/admin.php");
 
     }
