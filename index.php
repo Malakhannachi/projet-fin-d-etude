@@ -27,9 +27,9 @@ if(isset($_GET['action'])) {
         "devis":$ctrFrm->devis();
         break;
         case
-        "devis":$ctrFrm->listDevis();
+        "admin":$ctrFrm->listDevis();
         break;
-        case
+      
         
         
         

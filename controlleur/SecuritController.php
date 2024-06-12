@@ -61,9 +61,9 @@ class SecuritController
             $pdo = Connect::seConnecter();
             
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
-            $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            if ($email && $password) { 
-            
+            $mdp = filter_input(INPUT_POST, "mdp", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if ($email && $mdp) { 
+            //var_dump($mdp); die();
                 $requete = $pdo -> prepare("
                     SELECT * 
                     FROM users
@@ -73,11 +73,13 @@ class SecuritController
                     
                     if($user){  
                                                
-                        $hash = $user["password"];  
+                        $hash = $user["mdp"];  
                         
-                        if(password_verify($password, $hash)){
+                        if(password_verify($mdp, $hash)){
                             
                             $_SESSION["user"] = $user;
+                            //var_dump($_SESSION["user"]);
+                            //die();
                             header("Location: index.php?action=accueil");
                             exit;
                         } 

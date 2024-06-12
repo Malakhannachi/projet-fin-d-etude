@@ -13,6 +13,7 @@ use Model\Connect;
     }
     public function devis()
     {
+        
         require ("view/devis.php");
     }
 
