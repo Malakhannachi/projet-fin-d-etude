@@ -13,7 +13,7 @@
         <?php
         foreach ($requete->fetchAll() as $dev) //boucle pour afficher les messages
          {
-            $date_Devis = (new DateTime($msg['date_Devis']))->format('d/m/Y H:i');   // changer le format de la datetime en francais 
+            $date_Devis = (new DateTime($dev['date_Devis']))->format('d/m/Y H:i');   // changer le format de la datetime en francais 
             ?>
             <tr>
                 <td><?= $dev['id_Devis'] ?></td>

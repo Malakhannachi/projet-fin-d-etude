@@ -17,7 +17,7 @@ use Model\Connect;
         require ("view/devis.php");
     }
 
-    public function listDevis()
+    public function admin()
     {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("

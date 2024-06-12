@@ -32,7 +32,7 @@ if (isset($_SESSION['user']['role'])) {
         <a href="index.php?action=devis">Devis</a>
         <a href="index.php?action=listeCat">Contact</a> 
         <?php if ($role == "admin") { ?> 
-            <a href="index.php?action=listDevis">Admin</a> <?php } ?>
+            <a href="index.php?action=admin">Admin</a> <?php } ?>
        
     </nav>
    </div>
