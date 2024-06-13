@@ -5,7 +5,11 @@ if (isset($_SESSION['user']['role'])) {
 } else {
     $role = 'user';
 }
-header('Content-Type: text/html; charset=iso8859');
+// ajoter l'encodage html pour afficher les mots avec accents
+header('Content-Type: text/html; charset=iso8859'); 
+header('Content-Type: text/html; charset=utf-8');
+header('Content-Type: text/html; charset=iso-8859-1');
+
 ?>
 
 <meta charset="utf-8">
