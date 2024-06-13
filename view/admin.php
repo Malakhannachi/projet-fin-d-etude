@@ -28,6 +28,7 @@
             <?php } ?>
     </tbody>
 </table>
+<input type="button" value="Ajouter " onclick="window.location.href='index.php?action=addDevis'">
 <h2>Avis des clients</h2>
 
 <!---- Afficher la liste des avis-->
@@ -59,6 +60,7 @@
             <?php } ?>
     </tbody>
 </table>
+<input type="button" value="Ajouter " onclick="window.location.href='index.php?action=addAvis'">
 
 <?php
 $contenu = ob_get_clean();

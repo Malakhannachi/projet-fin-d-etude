@@ -35,5 +35,14 @@ use Model\Connect;
         require ("view/admin.php");
 
     }
+
+    public function addDevis()
+    {
+        $pdo = Connect::seConnecter();
+        $requeteDev = $pdo->query("
+        INSERT INTO devis( date_Devis, besoin, id_User)
+        VALUES ('2024-06-12 16:30:10', 'azsdc', 2)");
+        require ("view/addDevis.php");
+    }
     
 }
