@@ -1,12 +1,13 @@
 <?php
-//session_start();
 
 if (isset($_SESSION['user']['role'])) {
     $role = $_SESSION['user']['role'];
 } else {
     $role = 'user';
 }
+header('Content-Type: text/html; charset=iso8859');
 ?>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +18,7 @@ if (isset($_SESSION['user']['role'])) {
 
 <body>
 <?php 
-   
+   // afficher le lien pour se connecter
     if ( isset ($_SESSION["user"])) {     ?>          
         <a href="index.php?action=logout">Se déconnecter</a>
    <?php }   else { ?>

@@ -1,5 +1,8 @@
 <?php ob_start();?>
 <h2>Liste des devis</h2>
+
+<!---- Afficher la liste des devis -->
+
 <table border="1">
     <thead>
         <tr>
@@ -17,16 +20,19 @@
             ?>
             <tr>
                 <td><?= $dev['id_Devis'] ?></td>
+                <td><?= $dev['nom'] ?></td>
                 <td><?= $date_Devis ?></td>
                 <td><?= $dev['besoin'] ?></td>
-                <td><?= $dev['nom'] ?></td>
+                
             </tr>
             <?php } ?>
     </tbody>
 </table>
 <h2>Avis des clients</h2>
 
-<table>
+<!---- Afficher la liste des avis-->
+
+<table border="1">
     <thead>
         <tr>
             <th>Date_Avis</th>
@@ -44,9 +50,11 @@
             ?>
             <tr>
                 <td><?= $date_Avis ?></td>
-                <td><?= $avi['id_Devis'] ?></td>  
-                <td><?= $dev['besoin'] ?></td>
-                <td><?= $dev['nom'] ?></td>
+                <td><?= $avi['nom'] ?></td>
+                <td><?= $avi['commentaire'] ?></td>  
+                <td><?= $avi['note'] ?></td>
+                <td><?= $avi['nom_Ser'] ?></td>
+                
             </tr>
             <?php } ?>
     </tbody>
