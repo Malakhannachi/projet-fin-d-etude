@@ -24,7 +24,16 @@ use Model\Connect;
         SELECT devis.id_Devis, devis.date_Devis, devis.besoin, users.nom
         FROM devis
         INNER JOIN users ON devis.id_User = users.id_User; ");
+
+        $requeteAvis = $pdo->query("
+        SELECT avis.commentaire, avis.date_Avis, avis.note, services.nom_Ser, users.nom
+        FROM avis
+        INNER JOIN services ON services.id_Services = avis.id_Services
+        INNER JOIN users ON avis.id_User = users.id_User;  ");
+
+
         require ("view/admin.php");
 
     }
+    
 }
