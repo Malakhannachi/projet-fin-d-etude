@@ -5,8 +5,9 @@
 
 
 <form action="index.php?action=addDevis" method="post">
-    <input type="hidden" name="id_Devis" value="<?= ($_GET['id_Devis']) ?>">  <!-- récupérer l'id de topic-->
-    <input type="textarea" name="message" placeholder="message">
+    <input type="datetime-local" name="date_Devis" placeholder="date">
+    <input type="textarea" name="besoin" placeholder="besoin">
+    <input type="text" name="nom" placeholder="nom">
     <input type="submit" name="submit" value="Ajouter">
 </form>
 <?php

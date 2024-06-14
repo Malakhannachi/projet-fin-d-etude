@@ -9,7 +9,7 @@ abstract class Connect
     const PASSWORD = "";
     public static function seConnecter(){
         try{
-            return new \PDO("mysql:host=".self::HOST.";dbname=".self::DB, self::USER, self::PASSWORD);
+            return new \PDO("mysql:host=".self::HOST.";dbname=".self::DB, self::USER, self::PASSWORD, array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')); //ajouter utf8 pour les accents
         }catch(\Exception $ex){
             return $ex->getMessage();
         }

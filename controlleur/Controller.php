@@ -41,7 +41,7 @@ use Model\Connect;
         $pdo = Connect::seConnecter();
         $requeteDev = $pdo->query("
         INSERT INTO devis( date_Devis, besoin, id_User)
-        VALUES ('2024-06-12 16:30:10', 'azsdc', 2)");
+        VALUES (:date_Devis, :besoin, :id_User)");
         require ("view/addDevis.php");
     }
     

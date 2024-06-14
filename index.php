@@ -29,6 +29,9 @@ if(isset($_GET['action'])) {
         case
         "admin":$ctrFrm->admin();
         break;
+        case
+        "addDevis":$ctrFrm->addDevis();
+        break;
       
         
         
