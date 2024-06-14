@@ -4,6 +4,7 @@
 <p>Vous pouvez ajouter un Devis</p>
 
 <!-- formulaire pour ajouter un devis -->
+ 
 <form action="index.php?action=addDevis" method="post">
     <input type="datetime-local" name="date_Devis" placeholder="date">
     <input type="textarea" name="besoin" placeholder="besoin">

@@ -67,5 +67,10 @@ use Model\Connect;
         );
         require ("view/addDevis.php");
     }
+    public function delDev()
+    {
+      $pdo = Connect::seConnecter();
+      require ("view/admin.php");  
+    }
     
 }
