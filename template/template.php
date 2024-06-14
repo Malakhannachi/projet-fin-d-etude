@@ -35,9 +35,9 @@ if (isset($_SESSION['user']['role'])) {
    <div id="nav">
     <nav>
         <a href="index.php?action=accueil">Accueil</a>
-        <a href="index.php?action=listeCat">Services</a>
+        <a href="index.php?action=listeServ">Services</a>
         <a href="index.php?action=devis">Devis</a>
-        <a href="index.php?action=listeCat">Contact</a> 
+        <a href="index.php?action=listeCont">Contact</a> 
         <?php if ($role == "admin") { ?> 
             <a href="index.php?action=admin">Admin</a> <?php } ?>
        

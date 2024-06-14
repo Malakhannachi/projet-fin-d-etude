@@ -39,9 +39,26 @@ use Model\Connect;
     public function addDevis()
     {
         $pdo = Connect::seConnecter();
-        $requeteDev = $pdo->query("
-        INSERT INTO devis( date_Devis, besoin, id_User)
-        VALUES (:date_Devis, :besoin, :id_User)");
+        if (isset($_POST['submit']))
+        {
+            $date_Devis = filter_input(INPUT_POST, "date_Devis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $id_User = $_SESSION["user"]["id_User"]; 
+            if ($date_Devis && $besoin && $id_User)
+            {
+                $requeteDev = $pdo->prepare("
+                    INSERT INTO devis( date_Devis, besoin, id_User)
+                    VALUES (:date_Devis, :besoin, :id_User)");
+                $requeteDev->execute
+                ([
+                    "date_Devis" => $date_Devis,
+                    "besoin" => $besoin,
+                    "id_User" => $id_User
+
+                ]);
+
+            }
+        }
         require ("view/addDevis.php");
     }
     
