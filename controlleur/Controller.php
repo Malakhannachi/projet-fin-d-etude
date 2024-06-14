@@ -67,10 +67,23 @@ use Model\Connect;
         );
         require ("view/addDevis.php");
     }
-    public function delDev()
+    public function delDev($id)
     {
-      $pdo = Connect::seConnecter();
-      require ("view/admin.php");  
+        $pdo = Connect::seConnecter();
+        $requeteDel = $pdo-> prepare
+        ("
+            DELETE FROM devis 
+            WHERE devis.id_Devis = :id"
+        );
+        $requeteDel-> execute
+        ([
+            "id"=>$id
+        ]);
+        ?>
+        
+        <?php
+        header("Location: index.php?action=admin");
+ 
     }
     
 }

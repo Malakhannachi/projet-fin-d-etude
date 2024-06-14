@@ -8,6 +8,7 @@ spl_autoload_register(function ($class_name) {
 
 $ctrFrm = new Controller();
 $secuCtrl = new SecuritController();
+$id = isset($_GET['id']) ? $_GET["id"] : null; 
 
 if(isset($_GET['action'])) {
     switch($_GET['action']) {
@@ -31,6 +32,9 @@ if(isset($_GET['action'])) {
         break;
         case
         "addDevis":$ctrFrm->addDevis();
+        break;
+        case
+        "delDev":$ctrFrm->delDev($id);
         break;
       
         

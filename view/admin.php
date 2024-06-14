@@ -23,6 +23,7 @@
                 <td><?= $dev['nom'] ?></td>
                 <td><?= $date_Devis ?></td>
                 <td><?= $dev['besoin'] ?></td>
+                <td><a href="index.php?action=delDev&id=<?= $dev['id_Devis'] ?>">Supprimer</a></td>
                 
             </tr>
             <?php } ?>
