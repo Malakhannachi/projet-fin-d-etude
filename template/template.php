@@ -25,6 +25,7 @@ if (isset($_SESSION['user']['role'])) {
 
 <?php 
    // afficher le lien pour se connecter
+   
     if ( isset ($_SESSION["user"])) {     ?>          
         <a href="index.php?action=logout">Se déconnecter</a>
    <?php }   else { ?>
