@@ -120,5 +120,23 @@ use Model\Connect;
         );
         require ("view/addAvis.php");
     }
+    public function delAv($id)
+    {
+        $pdo = Connect::seConnecter();
+        $requeteDel = $pdo-> prepare
+        ("
+            DELETE FROM avis 
+            WHERE devis.id_Avis = :id"
+        );
+        $requeteDel-> execute
+        ([
+            "id"=>$id
+        ]);
+        ?>
+        
+        <?php
+        header("Location: index.php?action=admin");
+ 
+    }
     
 }
