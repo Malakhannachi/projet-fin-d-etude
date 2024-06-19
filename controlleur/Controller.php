@@ -98,13 +98,15 @@ use Model\Connect;
             $id_User = $_SESSION["user"]["id_User"]; 
             if ($commentaire && $date_Avis && $note && $id_Services && $id_User)
             {
-                $requeteDev = $pdo->prepare("
-                    INSERT INTO devis( date_Devis, besoin, id_User)
-                    VALUES (:date_Devis, :besoin, :id_User)");
-                $requeteDev->execute
+                $requeteAv = $pdo->prepare("
+                    INSERT INTO avis ( commentaire, date_Avis, note, id_Services, id_User)
+                    VALUES (:commentaire, :besoin, :note, :id_Services, :id_User)");
+                $requeteAv->execute
                 ([
                     "commentaire" => $commentaire,
-                    "besoin" => $date_Avis,
+                    "date_Avis" => $date_Avis,
+                    "note" => $note,
+                    "id_Services" => $id_Services,
                     "id_User" => $id_User
 
                 ]);
@@ -116,7 +118,7 @@ use Model\Connect;
             "SELECT * 
             FROM users"
         );
-        require ("view/addDevis.php");
+        require ("view/addAvis.php");
     }
     
 }
