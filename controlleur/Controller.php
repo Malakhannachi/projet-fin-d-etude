@@ -91,10 +91,12 @@ use Model\Connect;
         if (isset($_POST['submit']))
         {
             $commentaire = filter_input(INPUT_POST, "commentaire", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $date_Avis= filter_input(INPUT_POST, "date_Avis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_INT);
+            $id_Services = filter_input(INPUT_POST, "id_Services", FILTER_SANITIZE_NUMBER_INT);
             $id_User = filter_input(INPUT_POST, "id_User", FILTER_SANITIZE_NUMBER_INT);
             $id_User = $_SESSION["user"]["id_User"]; 
-            if ($commentaire && $besoin && $id_User)
+            if ($commentaire && $date_Avis && $note && $id_Services && $id_User)
             {
                 $requeteDev = $pdo->prepare("
                     INSERT INTO devis( date_Devis, besoin, id_User)
@@ -102,7 +104,7 @@ use Model\Connect;
                 $requeteDev->execute
                 ([
                     "commentaire" => $commentaire,
-                    "besoin" => $besoin,
+                    "besoin" => $date_Avis,
                     "id_User" => $id_User
 
                 ]);
