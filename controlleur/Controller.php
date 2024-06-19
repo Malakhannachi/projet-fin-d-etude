@@ -90,18 +90,18 @@ use Model\Connect;
         $pdo = Connect::seConnecter();
         if (isset($_POST['submit']))
         {
-            $date_Devis = filter_input(INPUT_POST, "date_Devis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $commentaire = filter_input(INPUT_POST, "commentaire", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $id_User = filter_input(INPUT_POST, "id_User", FILTER_SANITIZE_NUMBER_INT);
             $id_User = $_SESSION["user"]["id_User"]; 
-            if ($date_Devis && $besoin && $id_User)
+            if ($commentaire && $besoin && $id_User)
             {
                 $requeteDev = $pdo->prepare("
                     INSERT INTO devis( date_Devis, besoin, id_User)
                     VALUES (:date_Devis, :besoin, :id_User)");
                 $requeteDev->execute
                 ([
-                    "date_Devis" => $date_Devis,
+                    "commentaire" => $commentaire,
                     "besoin" => $besoin,
                     "id_User" => $id_User
 
