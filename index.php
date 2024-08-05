@@ -14,7 +14,7 @@ if(isset($_GET['action'])) {
     switch($_GET['action']) {
         case 
         "accueil":$ctrFrm->accueil(); 
-    break;
+        break;
         case
         "login":$secuCtrl->login();
         break;

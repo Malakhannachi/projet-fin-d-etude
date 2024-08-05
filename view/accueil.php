@@ -1,19 +1,93 @@
 <?php ob_start(); ?>
-<section id="accueil">
-    <div id="contenu">
-        <picture>
-            <img src="public/image/images.jpg" alt="image d'accueil"/>
-        </picture>
+
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;  
+    width: 100%;
+    height: 100vh;
+   
+    
+    
+}
+    #hero{
+    width: 100%;
+    height: 100vh;
+    flex-direction: row;
+    display: flex;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(public/image/clean2.jpeg) ;
+    background-repeat: no-repeat; /*n'est pas repeate*/
+    background-size: cover; /*la largeur et la hauteur sont respectivement 100% de la largeur et de la hauteur de l'image*/
+    
+
+}
+.imgHero{
+    width: 100%;
+    height: 100%;
+    
+}
+.contenu{
+    width: 40%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+       
+}
+.lead{
+    font-size: 20px;
+    color: white;
+    padding-bottom: 15px;
+}
+.par{
+    font-size: 16px;
+    color: white;
+   
+}
+.btn{
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FFD028;
+    color: white;
+}
+</style>
+
+<section id="hero">    <!-- hero section -->
+    
+    <div class="contenu">  
         <p class="lead">
             <strong>Nous sommes là pour vous faciliter la vie !</strong>
         </p>
         <p class="par">
         Des services de qualité pour votre maison et votre entreprise : nettoyage, bricolage, installations électriques et vidéosurveillance .
         </p>
+        <a href="services.php" ><button class="btn">En savoir plus</button></a>
     </div>
-<section>
+</section>
+<section id="hero">    <!-- hero section -->
+    
+    <div class="contenu">  
+        <p class="lead">
+            <strong>Nous sommes là pour vous faciliter la vie !</strong>
+        </p>
+        <p class="par">
+        Des services de qualité pour votre maison et votre entreprise : nettoyage, bricolage, installations électriques et vidéosurveillance .
+        </p>
+        <a href="services.php" ><button class="btn">En savoir plus</button></a>
+    </div>
+</section>
 
-<section id="services">
+
+<!-- <section id="services">
     <div id="milieu">
         <picture>
             <img src="public/image/image2.jpg" alt="image de démanegement"/>
@@ -34,7 +108,7 @@
             </p>
         </picture>
     </div>
-</section>
+</section> 
 
 <section id="devis">
     <h2>Pourquoi choisir MK service ?</h2>
@@ -91,7 +165,7 @@
     </p>
     <a href="avis.php" ><button>Voir tout les avis </button"></a>
 
-</section>
+</section> -->
 
 <?php
 $contenu = ob_get_clean();

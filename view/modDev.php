@@ -18,7 +18,7 @@
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email">
                 <label for="besoin">Votre besoin</label>
-                <textarea name="besoin" id="bsoin">Votre besoin</textarea>
+                <textarea name="besoin" id="bsoin" rows="10" cols="30">Votre besoin</textarea>
 
             </form>
         </div>

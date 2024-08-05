@@ -17,6 +17,7 @@
                 <input type="tel" name="tel" id="tel" placeholder="06 00 00 00 00">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email">
+                <select name="" id="id_services">sélectionnez un service</select>
                 <label for="besoin">Votre besoin</label>
                 <textarea name="besoin" id="bsoin">Votre besoin</textarea>
 
