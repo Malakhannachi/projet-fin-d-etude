@@ -3,11 +3,24 @@
 namespace Controlleur;
 
 use Model\Connect;
+use PDO;
 
  class Controller {
 
     public function accueil()  
     {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("
+            SELECT * 
+            FROM services
+        ");
+        $services = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        $requete = $pdo->query("
+            SELECT * 
+            FROM avis
+        ");
+        $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
 
         require ("view/accueil.php");
     }
@@ -16,7 +29,27 @@ use Model\Connect;
         
         require ("view/devis.php");
     }
+    public function avis()
+    {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("
+            SELECT * 
+            FROM avis
+        ");
+        $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
+        
+        require ("view/avis.php");
+    }
+    public function contact()
+    {
+        
+        require ("view/contact.php");
+    }
 
+    public function service(){
+
+        require ("view/service.php");
+    }
     public function admin()
     {
         $pdo = Connect::seConnecter();

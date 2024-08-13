@@ -8,26 +8,573 @@ body{
     font-family: Arial, Helvetica, sans-serif;  
     width: 100%;
     height: 100vh;
+ 
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+/*--===== Navbar ========--*/
+.nav{
     display: flex;
-    flex-direction: column;
-    background-color: aqua;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 50px;
+    position: fixed;
+    background-color: white;
+    cursor: pointer;
+    top: 0;
+    z-index: 3;
+}
+.login{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logo{
+    width: 40px;
     
 }
+.sec li{
+    position: relative;
+    padding: 30px;
+}
+ul{
+    list-style: none; 
+    
+}
+.item{
+    text-decoration: none;
+    color: #132535;
+    padding: 10px;
+    font-weight: bold;    
+}
+.item:hover{
+    color: #FFD028;
+}
+.dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #132535;
+  }
+  .dropdown-menu  {
+    display: none;
+  }
+  .sec li:hover > .dropdown-menu {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #132535;
+  }
+  
+  .dropdown-menu ul{
+    display: block;
+    margin: 10px;
+  }
+  .dropdown-menu li{
+    width: 150px;
+    padding: 10px;
+  }
+  .item1{
+    color: white;
+    text-decoration: none;
+  }
+  .item1:hover{
+    color: #FFD028;
+  }
+  .fas{
+    float: right;
+    margin-left: 10px;
+    padding-top: 3px;
+  }
+  .fas:hover{
+    color: #FFD028;
+  }
+
+  .dropdown-menu1{
+    display: none;
+    
+  }
+  .dropdown-menu ul li:hover > .dropdown-menu1{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 150px;
+    background-color: #132535;
+
+  }
+/*--===== Section Hero ========--*/
 
 .imgHero{
     width: 100%;
     height: 100%;
     
 }
-.contenu{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+#hero{
     width: 100%;
+    height: 100vh;
+    flex-direction: row;
+    display: flex;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../image/professionnels-nettoyage.jpg") ; /*image plus sembre*/
+    background-repeat: no-repeat; /*n'est pas repeate*/
+    background-size: cover; /*la largeur et la hauteur sont respectivement 100% de la largeur et de la hauteur de l'image*/
+    
+
+}
+.contenu{
+    width: 40%;
     height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+       
+}
+.lead{
+    font-size: 20px;
+    color: white;
+    padding-bottom: 15px;
+}
+.par{
+    font-size: 16px;
+    color: white;
+   
+}
+.btn{
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FFD028;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn:hover{
+    background-color: #142637;
+}
+/*--===== Section services ========--*/
+#services{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction:column;
+    background-color: #F3F5F7;
+    align-items: center;
+    padding-bottom: 120px;
+}
+.title{
+    text-align: center;
+    color: #142637;
+    padding-top: 15px;
+    font-size: 32px;
+}
+.description{
+    text-align: center;
+    padding: 10px;
+    color: #142637;
+    width: 60%;
+}
+.bloc{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+    
+}
+.card{
+    width: 350px;
+    border-radius: 5px;
+    background-color: white;
+    overflow: hidden;  /*effet cache*/
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    
+}
+.card:hover{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.card-content{
+    width: 80%;
+    height: 200px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.card-title{
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+.card-text{
+    font-size: 16px;
+    text-align: justify; /*aligner le texte */
+    line-height: 1.3; /*espace entre les lignes*/
+}
+.card-img {
+    width: 100%;
+    height: 250px;
+    
+}
+/*--===== Section avis ========--*/
+#avis{
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    background-color:white;
+    padding-bottom: 120px;
+    padding-top: 100px;
+    
+}
+.card-avis{
+  width: 350px;  
+  border-radius: 5px;
+  background-color: #F3F5F7;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1) ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  
+}
+.card-avis:hover{  
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.text-avis{
+    text-align: justify;
+    padding-top: 15px;
+    font-size: 16px;
+    font-style: italic;
+}
+.avis-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover; /*redimensionner l'image*/
+
+}
+.avis-name{
+    font-size: 18px;
+    padding: 10px;
+}
+.btn-avis{
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FFD028;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    cursor: pointer;
+}
+.stars{
+    color: #FFD028;
+}
+.btn-avis:hover{
+    background-color: #142637;
+}
+
+/*--===== Section devis ========--*/
+#devis{
+    width: 100%;
+    background-repeat: no-repeat; /*n'est pas repeate*/
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 50px;
+}
+.devis-background{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6 )), url("../image/sol.jpg") ; /*image plus sembre*/
+
+}
+
+.devis-content{
+    width: 50%;
+    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;    
+    padding: 10px; 
 }
+
+.text-devis{
+    font-size: 18px;
+    padding: 10px;
+    color: white;
+    opacity: 0.8;
+}
+.form{
+width: 50%;
+display: flex;
+flex-direction: column;
+padding: 20px;
+border-radius: 5px;
+background-color:rgba(255, 255, 255, 0.2); /*opacité background */
+backdrop-filter: blur(5px);
+
+}
+.formulaire{
+    width: 100%; 
+}
+
+.title-devis{   
+    font-size: 30px;
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+}
+.form-group{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    color: white;
+    justify-content: space-between;
+    
+}
+.nom{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+}
+.input{
+    height: 40px;
+    border-radius: 4px;
+    color: white;
+    padding: 16px;
+    background-color: white;
+    border: none;
+}
+.input:focus{
+    border: none;
+    outline: none;
+}
+textarea:focus{
+    border: none;
+    outline: none;
+}
+textarea{
+    height: 100px;
+    border-radius: 4px;
+    color: white;
+    padding: 16px;
+    background-color: white;
+    border: none;
+}
+
+label{
+    color: white;
+    font-size: 18px;
+    opacity: 0.8;
+}
+option{
+    color: black;
+}
+
+
+/*--===== Footer ========--*/
+.footer{
+    width: 100%;
+    background-color: #142637;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 30px 15px 30px; 
+    
+}
+.sec{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0px;
+    align-items: center;
+}
+.logofooter{
+    width: 100px;
+    height: 100px;
+}
+.social{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+   
+}
+.link{
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+}
+.page{
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    opacity: 0.7;
+    font-size: 18px;
+    font-weight: medium;
+}
+.page:hover{
+    color: #FFD028;
+    
+}
+.hr{
+    width: 100%;
+    border: 1px solid white;
+    opacity: 0.5;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+.copyright{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    border: white;
+    opacity: 0.7;
+    line-height: 1.5;
+    font-weight: medium;
+    font-size: 18px;
+}
+.titlefooter{
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+/*--===== page devis ========--*/
+#hero-devis{    
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6 )), url("../image/sol.jpg") ; /*image plus sembre*/
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat; /*n'est pas repeate*/
+    background-size: cover;
+    margin-top: 74px; /*pour eviter de coller le menu au hero*/
+}
+
+.devis-background1{
+    background-color: white;
+
+}
+.devis-hero{
+    font-weight: bold;
+    font-size: 65px;
+    text-align: center;
+    color:white;  
+    
+}
+.text-hero{
+    font-size: 20px;
+    padding: 10px;
+    color:white;
+    text-align: center;
+    opacity: 0.8;
+}
+.title-devis1{   
+    font-size: 30px;
+    padding: 10px;
+    font-weight: bold;
+    color: #132535;
+}
+.text-devis1{
+    font-size: 18px;
+    padding: 10px;
+    color: #132535;
+    opacity: 0.8;
+}
+.label-devis{
+    font-size: 18px;
+    padding: 10px;
+    color: #132535;
+    
+}
+.devis-background2{
+    background-color:rgba(19, 37, 53 , 0.2);
+    
+    backdrop-filter: blur(5px);
+}
+/*--===== page avis ========--*/
+.bloc-avis{
+    width: 100%;
+    display: flex;
+    
+    justify-content: center;
+    padding: 20px;
+   
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+.pagination{
+    margin-top: 50px;
+}
+.pagination-link{
+    text-decoration: none;
+    padding: 15px;
+    color: #132535;
+    font-size: 16px;
+    
+} 
+.active{
+    background-color: #FFD028;
+    border-radius: 5px;
+}
+.pagination-link:hover{
+    background-color: #FFD028;
+    border-radius: 5px;
+}
+
+/*--===== page contact ========--*/
+#contact{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction:row;
+    background-color: #F3F5F7;
+    padding-top: 120px;
+    
+}
+.contact-footer{
+    width: 50%;
+    height: 100%;
+    
+    
+    display: flex;
+    flex-direction: column;
+    padding: 30px 30px 15px 30px; 
+   
+}
+.icon{
+    color: #132535;
+    text-decoration: none;
+    padding: 10px;
+}
+
+/*--===== page services ========--*/

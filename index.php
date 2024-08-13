@@ -36,6 +36,15 @@ if(isset($_GET['action'])) {
         case
         "delDev":$ctrFrm->delDev($id);
         break;
+        case
+        "avis":$ctrFrm->avis();
+        break;
+        case
+        "contact":$ctrFrm->contact();   
+        break;
+        case
+        "service":$ctrFrm->service();
+        break;
       
         
         

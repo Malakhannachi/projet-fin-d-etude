@@ -1,172 +1,131 @@
 <?php ob_start(); ?>
 
-<style>
-    *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body{
-    font-family: Arial, Helvetica, sans-serif;  
-    width: 100%;
-    height: 100vh;
-   
+<!-- hero section -->
+<section id="hero">    
     
-    
-}
-    #hero{
-    width: 100%;
-    height: 100vh;
-    flex-direction: row;
-    display: flex;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(public/image/clean2.jpeg) ;
-    background-repeat: no-repeat; /*n'est pas repeate*/
-    background-size: cover; /*la largeur et la hauteur sont respectivement 100% de la largeur et de la hauteur de l'image*/
-    
-
-}
-.imgHero{
-    width: 100%;
-    height: 100%;
-    
-}
-.contenu{
-    width: 40%;
-    height: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:flex-start;
-       
-}
-.lead{
-    font-size: 20px;
-    color: white;
-    padding-bottom: 15px;
-}
-.par{
-    font-size: 16px;
-    color: white;
-   
-}
-.btn{
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #FFD028;
-    color: white;
-}
-</style>
-
-<section id="hero">    <!-- hero section -->
-    
-    <div class="contenu">  
+    <div class="contenu"> 
+         
         <p class="lead">
             <strong>Nous sommes là pour vous faciliter la vie !</strong>
         </p>
         <p class="par">
-        Des services de qualité pour votre maison et votre entreprise : nettoyage, bricolage, installations électriques et vidéosurveillance .
+        Des services de qualité pour votre maison et votre entreprise : nettoyage, bricolage, installations électriques et vidéosurveillance
         </p>
-        <a href="services.php" ><button class="btn">En savoir plus</button></a>
+        <a href="index.php?action=devis" ><button class="btn">Devis Express <span>&#x2197;</span></button></a>
     </div>
 </section>
-<section id="hero">    <!-- hero section -->
+
+<!--===== Section services =======-->
+
+<section id="services">
+    <h2 class="title">Nos services</h2>
+    <p class="description">
+        Chez <strong>MK service</strong>, nous offrons des services de nettoyage, déménagement et bricolage pour simplifier votre vie avec des solutions fiables et personnalisées
+    </p>
     
-    <div class="contenu">  
-        <p class="lead">
-            <strong>Nous sommes là pour vous faciliter la vie !</strong>
-        </p>
-        <p class="par">
-        Des services de qualité pour votre maison et votre entreprise : nettoyage, bricolage, installations électriques et vidéosurveillance .
-        </p>
-        <a href="services.php" ><button class="btn">En savoir plus</button></a>
-    </div>
-</section>
+    <div class="bloc">
+        <?php foreach($services as $service):?>
 
-
-<!-- <section id="services">
-    <div id="milieu">
-        <picture>
-            <img src="public/image/image2.jpg" alt="image de démanegement"/>
-            <p>
-            Déménagez en toute sérénité avec notre service rapide, sécurisé et professionnel
-            
-            <a href="services.php" ><button>Voir plus</button></a>
-            </p>
-        </picture>
-    </div>
-    <div>
-        <picture>
-            <img src="public/image/imag3.webp" alt="image de démanegement"/>
-            <p>
-            Profitez d'un intérieur impeccable grâce à notre service de nettoyage professionnel, fiable et minutieux
-            
-            <a href="services.php" ><button>Voir plus</button></a>
-            </p>
-        </picture>
+            <div class="card">
+                    <img class="card-img" src="public/image/<?php echo htmlspecialchars($service['image'] );?>" alt=<?php echo htmlspecialchars($service['nom_Ser'] );?>/>
+                <div class="card-content">
+                    <h4 class="card-title"><?php echo htmlspecialchars($service['nom_Ser']  );?></h4>
+                    <p class="card-text">
+                    <?php echo htmlspecialchars($service['description'] );?>
+                    </p>
+                    <a href="services.php" ><button class="btn">Voir plus</button></a> 
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 </section> 
 
-<section id="devis">
-    <h2>Pourquoi choisir MK service ?</h2>
-    
-    <di id="serinite">
-        <picture>
-            <img src="public/image/cadna.webp" alt="image de démanegement"/>
-        </picture>
-        <h4>SÉRÉNITÉ</h4>
-        <p>
-        Sans engagement, aucun frais d’annulation
-        </p>
-    </div>
-    <div id="transparance">
-        <picture>
-            <img src="public/image/T.webp" alt="image de démanegement"/>
-        </picture>
-        <h4>TRANSPARENCE</h4>
-        <p>
-        Le prix ? Le temps passé à vous satisfaire est notre mesure et rien d’autre !
-        </p>
-    </div>
-    <div id="flexibilite">
-        <picture>
-            <img src="public/image/cal.webp" alt="image de démanegement"/>
-        </picture>
-        <h4>FLEXIBILITÉ</h4>
-        <p>
-        Un intervenant qui s’adapte à votre planning et votre nouveau mode de vie
-        </p>
-    </div>
-    <div id="privilege">
-        <picture>
-            <img src="public/image/pri.webp" alt="image de démanegement"/>
-        </picture>
-        <h4>FLEXIBILITÉ</h4>
-        <p>
-        Un intervenant qui s’adapte à votre planning et votre nouveau mode de vie
-        </p>
-    </div>
-    <div id="button">
-        <a href="devis.php" ><button>Je demande un devis</button></a>
-        <p>C’est gratuit et sans engagement !</p>
-    </div>
-</section>
+<!--===== Section Avis =======-->
 
 <section id="avis">
-    <h3>Avis Nos Clients </h3>
-    <p id="pO">
-    ServicePro a fait un travail incroyable chez moi. Le personnel est arrivé à l'heure, équipé de tout le matériel nécessaire. Ils ont nettoyé chaque recoin de la maison avec une attention particulière aux détails. Le résultat final était impeccable
-    </p>
-    <p id="pT">
-    ServicePro s'occupe de l'entretien de mon jardin depuis six mois maintenant et je suis extrêmement satisfait. Mon jardin n'a jamais été aussi beau ! Ils sont ponctuels
-    </p>
-    <a href="avis.php" ><button>Voir tout les avis </button"></a>
+    <h2 class="title-avis">Votre satisfaction est notre priorité. Partagez votre avis !</h2>
+    <div class="bloc ">
+        <?php foreach($avis as $av):?>
+        <div class="card-avis">
+            <img class="avis-img" src="public/image/<?php echo htmlspecialchars($av['image'] );?>" alt="<?php echo htmlspecialchars($av['nom'].' '.$av['prenom']);?>"/>
+                <p class="text-avis">
+                    <?php echo htmlspecialchars($av['commentaire'] );?>
+                 </p> 
+                <div class="stars">
+                    <!--afficher les étoils -->
+                    <?php $stars = $av['note'];
+                    for ($i=0; $i < $stars ; $i++) {
+        
+                        echo "<span class='stars'>&#9733;</span>"; /*&#9733; pour laisser un étoile vide pour l'instant */
+                    }
+                    for ($i=0; $i < 5-$stars ; $i++) {
+                        
+                            echo "<span class='stars'>&#9734;</span>"; /*&#9734; pour laisser un étoile vide pour l'instant */
+                            
+                    } 
+                    ?>
+                </div>
+                <p class="avis-name"><strong><?php echo htmlspecialchars($av['nom'].' '.$av['prenom'] );?></strong></p>     
+        </div>
+        <?php endforeach; ?>
+    </div >
+    <a href="index.php?action=avis" ><button class="btn-avis">Voir plus <span>&#x2197;</span></button></a>
+  
+    <!--===== Section Devis =======-->
 
-</section> -->
 
+</section> 
+ <section id="devis" class="devis-background">
+    <div class="devis-content">
+    <h2 class="title-devis">Illuminez votre message - Contactez-nous</h2>
+    <p class="text-devis">Vous avez des questions ou êtes prêt à commencer avec nos services ? Notre équipe est là pour vous aider !</p>
+    </div>
+    
+    <div class="form">
+    <h2 class="title-devis">Demander un devis</h2>
+            <form action="index.php?action=devis" method="post" class="formulaire">
+                <div class="form-group">
+                    <div class="nom">
+                        <label for="nom">Nom</label>
+                        <input type="text" name="nom" id="nom" class="input" placeholder="nom">
+                    </div>
+                    <div class="nom">
+                        <label for="prenom">Prenom</label>
+                        <input type="text" name="prenom" id="prenom" class="input" placeholder="prenom">
+                    </div>
+                </div>
+                <div class="list">
+                    <label for="telephone" >Numéro de téléphone</label>
+                    <input type="tel" name="tel" id="telephone" class="input" placeholder="06 00 00 00 00">
+                </div>
+                <div class="list">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="input" placeholder="email">
+                </div>
+                <div class="list">
+                    <label for="id_services">sélectionnez un service</label>
+                    <select name="" id="id_services" class="input">
+                        <option value="">sélectionnez un service</option>
+                        <option value="1">Service 1</option>
+                        <option value="2">Service 2</option>
+                        <option value="3">Service 3</option>
+                        <option value="4">Service 4</option>
+                        <option value="5">Service 5</option>
+
+                    </select>
+                </div>
+                <div class="list">
+                    <label for="besoin" >Votre besoin</label>
+                    <textarea name="besoin" id="bsoin" rows="5" placeholder="Votre besoin" > </textarea>
+                </div>
+                <div class="list">
+                    <button class="btn-avis" type="submit">Envoyer <span>&#x2197;</span></button>
+                </div>
+            </form>
+        </div>
+
+</section>
+       
 <?php
 $contenu = ob_get_clean();
 require "template/template.php";
