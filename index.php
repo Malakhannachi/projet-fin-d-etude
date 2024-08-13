@@ -42,9 +42,12 @@ if(isset($_GET['action'])) {
         case
         "contact":$ctrFrm->contact();   
         break;
-        case
-        "service":$ctrFrm->service();
+       // case
+       // "service":$ctrFrm->service();
+       // break;
+        case 'serviceDet': $ctrFrm->serviceDet($id);
         break;
+           
       
         
         

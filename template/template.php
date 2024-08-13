@@ -36,7 +36,7 @@ if (isset($_SESSION['user']['role'])) {
                         <li><a href="index.php?action=service" class="item1">Nettoyage <i class="fas fa-caret-right"></i></a>
                             <div class="dropdown-menu1">
                                 <ul>
-                                    <li><a href="index.php?action=service" class="item1">Nettoyage Industriel</a></li>
+                                    <li><a href="index.php?action=serviceDet&id=1" class="item1">Nettoyage Industriel</a></li>
                                     <li><a href="index.php?action=service" class="item1">Nettoyage Particulier</a></li>
                                 </ul>
 
@@ -45,7 +45,7 @@ if (isset($_SESSION['user']['role'])) {
                         <li><a href="index.php?action=service" class="item1">Déménagement et Livraison <i class="fas fa-caret-right"></i></a>
                         <div class="dropdown-menu1">
                                 <ul>
-                                    <li><a href="index.php?action=service" class="item1">Déménagement</a></li>
+                                    <li><a href="index.php?action=serviceDet&id=2" class="item1">Déménagement</a></li>
                                     <li><a href="index.php?action=service" class="item1">Livraison</a></li>
                                 </ul>
 

@@ -9,163 +9,48 @@
 </section>
 <section id="avis">
     <div class="bloc-avis ">
+    <?php foreach($avis as $av):?>
         <div class="card-avis">
-            <img class="avis-img" src="public/image/v2.jpeg" alt="image d'une femme"/>
+            <img class="avis-img" src="public/image/<?php echo htmlspecialchars($av['image'] );?>" alt="<?php echo htmlspecialchars($av['nom'].' '.$av['prenom']);?>"/>
             
-                <blockquote class="text-avis">
-                    J'ai été extrêmement satisfaite de la qualité du service. L'équipe a été réactive et professionnelle. Je recommande vivement !
-                </blockquote> 
+                <p class="text-avis">
+                    <?php echo htmlspecialchars($av['commentaire'] );?>
+                </p> 
                 <div class="stars">
-                    <?php $stars = $avis['note';]
-
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                </div>
-                <p class="avis-name"><strong>Marie Dupont</strong></p>
-   
-        </div>
-        <div class="card-avis">
-            <img class="avis-img" src="public/image/v1.jpeg" alt="image d'une femme"/>
+                    <?php $stars = $av['note'];
+                    for ($i=0; $i < $stars ; $i++) {
         
-                <blockquote class="text-avis">
-                    Le service client est exceptionnel. Ils ont répondu à toutes mes questions et m'ont aidée à choisir le produit parfait. Très satisfaite !
-                </blockquote> 
-                <div class="stars">
-                <span class="yes stars">&#9733;</span>  
-                <span class="yes stars">&#9733;</span> 
-                <span class="yes stars">&#9733;</span> 
-                <span class="no stars">&#9733;</span>  
-                <span class="no stars">&#9733;</span> 
+                        echo "<span class='stars'>&#9733;</span>"; /*&#9733; pour laisser un étoile vide pour l'instant */
+                    }
+                    for ($i=0; $i < 5-$stars ; $i++) {
+                        
+                            echo "<span class='stars'>&#9734;</span>"; /*&#9734; pour laisser un étoile vide pour l'instant */
+                            
+                    } 
+                    ?>
                 </div>
-                <p class="avis-name"><strong>Sophie Lefèvre</strong></p>
-            
-        </div>
-        <div class="card-avis">
-            <img class="avis-img" src="public/image/v4.png" alt="image d'une femme"/>
-            
-                <blockquote class="text-avis">
-                Une expérience incroyable du début à la fin. Le produit est exactement ce que je cherchais et la livraison a été rapide. Merci !
-                </blockquote> 
-                <div class="stars">
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                </div>
-                <p class="avis-name"><strong>Jean Martin</strong></p>     
-        </div>
-        <div class="card-avis">
-            <img class="avis-img" src="public/image/v2.jpeg" alt="image d'une femme"/>
-            
-                <blockquote class="text-avis">
-                    J'ai été extrêmement satisfaite de la qualité du service. L'équipe a été réactive et professionnelle. Je recommande vivement !
-                </blockquote> 
-                <div class="stars">
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                </div>
-                <p class="avis-name"><strong>Marie Dupont</strong></p>
+                <p class="avis-name"><strong><?php echo htmlspecialchars($av['nom'].' '.$av['prenom']);?></strong></p>
    
         </div>
-        <div class="card-avis">
-            <img class="avis-img" src="public/image/v2.jpeg" alt="image d'une femme"/>
-            
-                <blockquote class="text-avis">
-                    J'ai été extrêmement satisfaite de la qualité du service. L'équipe a été réactive et professionnelle. Je recommande vivement !
-                </blockquote> 
-                <div class="stars">
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                </div>
-                <p class="avis-name"><strong>Marie Dupont</strong></p>
-   
-        </div>
-        <div class="card-avis">
-            <img class="avis-img" src="public/image/v2.jpeg" alt="image d'une femme"/>
-            
-                <blockquote class="text-avis">
-                    J'ai été extrêmement satisfaite de la qualité du service. L'équipe a été réactive et professionnelle. Je recommande vivement !
-                </blockquote> 
-                <div class="stars">
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                </div>
-                <p class="avis-name"><strong>Marie Dupont</strong></p>
-   
-        </div>
-        <div class="card-avis">
-            <img class="avis-img" src="public/image/v2.jpeg" alt="image d'une femme"/>
-            
-                <blockquote class="text-avis">
-                    J'ai été extrêmement satisfaite de la qualité du service. L'équipe a été réactive et professionnelle. Je recommande vivement !
-                </blockquote> 
-                <div class="stars">
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                </div>
-                <p class="avis-name"><strong>Marie Dupont</strong></p>
-   
-        </div>
-        <div class="card-avis">
-            <img class="avis-img" src="public/image/v2.jpeg" alt="image d'une femme"/>
-            
-                <blockquote class="text-avis">
-                    J'ai été extrêmement satisfaite de la qualité du service. L'équipe a été réactive et professionnelle. Je recommande vivement !
-                </blockquote> 
-                <div class="stars">
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                </div>
-                <p class="avis-name"><strong>Marie Dupont</strong></p>
-   
-        </div>
-        <div class="card-avis">
-            <img class="avis-img" src="public/image/v2.jpeg" alt="image d'une femme"/>
-            
-                <blockquote class="text-avis">
-                    J'ai été extrêmement satisfaite de la qualité du service. L'équipe a été réactive et professionnelle. Je recommande vivement !
-                </blockquote> 
-                <div class="stars">
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span> 
-                <span class="stars">&#9733;</span>  
-                <span class="stars">&#9733;</span> 
-                </div>
-                <p class="avis-name"><strong>Marie Dupont</strong></p>
-   
-        </div>
-    </div >
-    <div class="pagination">
-        <a href="#" class=" pagination-link" >&laquo;</a>
-        <a href="#" class=" pagination-link active">1</a>
-        <a href="#" class=" pagination-link" >2</a>
-        <a href="#" class=" pagination-link">3</a>
-        <a href="#" class=" pagination-link">4</a>
-        <a href="#" class=" pagination-link">5</a>
-        <a href="#" class=" pagination-link">6</a>
-        <a href="#" class=" pagination-link">&raquo;</a>
-</div>
+        <?php endforeach; ?>     
+    </div>
+     <!-- Pagination -->
+     <div class="pagination">
+        <?php if ($page > 1): ?>
+            <a href="?action=avis&page=<?php echo $page - 1; ?>" class="pagination-link">&laquo;</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="?action=avis&page=<?php echo $i; ?>" class="pagination-link <?php echo $i == $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+        <?php endfor; ?>
+
+        <?php if ($page < $totalPages): ?>
+            <a href="?action=avis&page=<?php echo $page + 1; ?>" class="pagination-link">&raquo;</a>
+        <?php endif; ?>
+    </div>
+</section>
 
 <?php
 $contenu = ob_get_clean();
 require "template/template.php";
+

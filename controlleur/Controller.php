@@ -9,6 +9,8 @@ use PDO;
 
     public function accueil()  
     {
+    //section des services
+
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
             SELECT * 
@@ -16,27 +18,49 @@ use PDO;
         ");
         $services = $requete->fetchAll(PDO::FETCH_ASSOC);
 
+    //section des avis
+
         $requete = $pdo->query("
             SELECT * 
-            FROM avis
+            FROM avis limit 3
         ");
         $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
 
         require ("view/accueil.php");
     }
+       
+    //page Devis
     public function devis()
     {
         
         require ("view/devis.php");
     }
+    
+    //Page Avis
     public function avis()
     {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->query("
-            SELECT * 
-            FROM avis
-        ");
+        
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $avisPerPage = 6;
+        $offset = ($page - 1) * $avisPerPage;
+
+        // faire une requete pour compter le nombre d'avis
+        $totalAvisQuery = $pdo->query("SELECT COUNT(*) as count FROM avis");
+        $totalAvis = $totalAvisQuery->fetch(PDO::FETCH_ASSOC)['count'];
+
+        // calculer le nombre total de pages
+        $totalPages = ceil($totalAvis / $avisPerPage);
+
+        // faire une requete pour recuperer les avis
+        $requete = $pdo->prepare("SELECT * FROM avis LIMIT :limit OFFSET :offset");
+        $requete->bindValue(':limit', $avisPerPage, PDO::PARAM_INT);
+        $requete->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $requete->execute();
+
         $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        // afficher la vue avec les avis
         
         require ("view/avis.php");
     }
@@ -46,9 +70,23 @@ use PDO;
         require ("view/contact.php");
     }
 
-    public function service(){
+    //page service détail
+    public function serviceDet($id){
 
-        require ("view/service.php");
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("SELECT * FROM services WHERE id_Services = :id");
+        $requete->bindValue(':id', $id, PDO::PARAM_INT);
+        $requete->execute();
+        $service = $requete->fetch(PDO::FETCH_ASSOC);
+
+    // var_dump($service);
+
+        if (!$service) {
+            header("Location: /404"); 
+            exit();
+        }
+
+        require ("view/serviceDet.php");
     }
     public function admin()
     {
