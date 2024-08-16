@@ -33,7 +33,7 @@ if (isset($_SESSION['user']['role'])) {
      
             <div class="dropdown-menu">
                     <ul>
-                        <li><a href="index.php?action=service" class="item1">Nettoyage <i class="fas fa-caret-right"></i></a>
+                        <li class="item1">Nettoyage <i class="fas fa-caret-right"></i></a>
                             <div class="dropdown-menu1">
                                 <ul>
                                     <li><a href="index.php?action=serviceDet&id=1" class="item1">Nettoyage Industriel</a></li>
@@ -42,7 +42,7 @@ if (isset($_SESSION['user']['role'])) {
 
                             </div>
                         </li>
-                        <li><a href="index.php?action=service" class="item1">Déménagement et Livraison <i class="fas fa-caret-right"></i></a>
+                        <li class="item1">Déménagement et Livraison <i class="fas fa-caret-right"></i></a>
                         <div class="dropdown-menu1">
                                 <ul>
                                     <li><a href="index.php?action=serviceDet&id=2" class="item1">Déménagement</a></li>
@@ -51,7 +51,7 @@ if (isset($_SESSION['user']['role'])) {
 
                             </div>
                         </li>
-                        <li><a href="index.php?action=service" class="item1">Bricolage<i class="fas fa-caret-right"></i></a>
+                        <li class="item1">Bricolage <i class="fas fa-caret-right"></i></a>
                             <div class="dropdown-menu1">
                                 <ul>
                                     <li><a href="index.php?action=service" class="item1">Peinture</a></li>
