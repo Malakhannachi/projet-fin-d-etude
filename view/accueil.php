@@ -1,4 +1,8 @@
-<?php ob_start(); ?>
+<?php ob_start(); 
+$errors = $_SESSION["errors"] ?? []; // afficher les erreurs
+$old_data = $_SESSION["old_data"] ?? []; 
+session_unset();  
+?>
 
 <!-- hero section -->
 <section id="hero">    
@@ -75,7 +79,7 @@
 
 
 </section> 
- <section id="devis" class="devis-background">
+<section id="devis" class="devis-background">
     <div class="devis-content">
     <h2 class="title-devis">Illuminez votre message - Contactez-nous</h2>
     <p class="text-devis">Vous avez des questions ou êtes prêt à commencer avec nos services ? Notre équipe est là pour vous aider !</p>
@@ -83,45 +87,48 @@
     
     <div class="form">
     <h2 class="title-devis">Demander un devis</h2>
-            <form action="index.php?action=devis" method="post" class="formulaire">
-                <div class="form-group">
-                    <div class="nom">
-                        <label for="nom">Nom</label>
-                        <input type="text" name="nom" id="nom" class="input" placeholder="nom">
-                    </div>
-                    <div class="nom">
-                        <label for="prenom">Prenom</label>
-                        <input type="text" name="prenom" id="prenom" class="input" placeholder="prenom">
-                    </div>
-                </div>
-                <div class="list">
-                    <label for="telephone" >Numéro de téléphone</label>
-                    <input type="tel" name="tel" id="telephone" class="input" placeholder="06 00 00 00 00">
-                </div>
-                <div class="list">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="input" placeholder="email">
-                </div>
-                <div class="list">
-                    <label for="id_services">sélectionnez un service</label>
-                    <select name="" id="id_services" class="input">
-                        <option value="">sélectionnez un service</option>
-                        <option value="1">Service 1</option>
-                        <option value="2">Service 2</option>
-                        <option value="3">Service 3</option>
-                        <option value="4">Service 4</option>
-                        <option value="5">Service 5</option>
-
-                    </select>
-                </div>
-                <div class="list">
-                    <label for="besoin" >Votre besoin</label>
-                    <textarea name="besoin" id="bsoin" rows="5" placeholder="Votre besoin" > </textarea>
-                </div>
-                <div class="list">
-                    <button class="btn-avis" type="submit">Envoyer <span>&#x2197;</span></button>
-                </div>
-            </form>
+        <form action="index.php?action=addDevis" method="post" class="formulaire">
+        <div class="form-group">
+            <div class="nom">
+                <label for="nom">Nom</label>
+                <input type="text" name="nom" id="nom" class="input" placeholder="Nom" value="<?php echo htmlspecialchars($nom ?? ''); ?>">
+                <?php if (!empty($errors['nom'])): ?>
+                    <div class="error"><?php echo $errors['nom']; ?></div>
+                <?php endif; ?>
+            </div>
+            <div class="nom">
+                <label for="prenom">Prenom</label>
+                <input type="text" name="prenom" id="prenom" class="input" placeholder="Prénom" value="<?php echo htmlspecialchars($prenom ?? ''); ?>">
+                <?php if (!empty($errors['prenom'])): ?>
+                    <div class="error"><?php echo $errors['prenom']; ?></div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="list">
+            <label for="telephone">Numéro de téléphone</label>
+            <input type="tel" name="tel" id="telephone" class="input" placeholder="06 00 00 00 00" value="<?php echo htmlspecialchars($tel ?? ''); ?>">
+            <?php if (!empty($errors['tel'])): ?>
+                <div class="error"><?php echo $errors['tel']; ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="list">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" class="input" placeholder="Email" value="<?php echo htmlspecialchars($email ?? ''); ?>">
+            <?php if (!empty($errors['email'])): ?>
+                <div class="error"><?php echo $errors['email']; ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="list">
+            <label for="besoin">Votre besoin</label>
+            <textarea name="besoin" id="besoin" rows="5" placeholder="Votre besoin"><?php echo htmlspecialchars($besoin ?? ''); ?></textarea>
+            <?php if (!empty($errors['besoin'])): ?>
+                <div class="error"><?php echo $errors['besoin']; ?></div>
+            <?php endif; ?>
+        </div>
+        <div class="list">
+            <button class="btn-avis" type="submit">Envoyer <span>&#x2197;</span></button>
+        </div>
+    </form>
         </div>
 
 </section>

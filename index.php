@@ -42,6 +42,8 @@ if(isset($_GET['action'])) {
         case
         "contact":$ctrFrm->contact();   
         break;
+        case
+        "secDev":$secuCtrl->secDev();
        // case
        // "service":$ctrFrm->service();
        // break;

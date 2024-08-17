@@ -28,7 +28,7 @@
                 </div>
                 <div class="list">
                     <label for="telephone"  class="label-devis">Numéro de téléphone</label>
-                    <input type="tel" name="tel" id="telephone" class="input" placeholder="06 00 00 00 00">
+                    <input type="tel" name="telephone" id="telephone" class="input" placeholder="06 00 00 00 00">
                 </div>
                 <div class="list">
                     <label for="email" class="label-devis">Email</label>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="list">
                     <label for="id_services" class="label-devis">sélectionnez un service</label>
-                    <select name="" id="id_services" class="input">
+                    <select name=" liste_Service" id="id_services" class="input">
                         <option value="">sélectionnez un service</option>
                         <option value="1">Service 1</option>
                         <option value="2">Service 2</option>
@@ -51,7 +51,7 @@
                     <textarea name="besoin" id="bsoin" rows="5" placeholder="Votre besoin" > </textarea>
                 </div>
                 <div class="list">
-                    <button class="btn-avis" type="submit">Envoyer <span>&#x2197;</span></button>
+                    <button class="btn-avis" type="submit" name="submit">Envoyer <span>&#x2197;</span></button>
                 </div>
             </form>
         </div>

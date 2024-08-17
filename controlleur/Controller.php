@@ -64,6 +64,7 @@ use PDO;
         
         require ("view/avis.php");
     }
+    //page contact
     public function contact()
     {
         
@@ -106,54 +107,109 @@ use PDO;
         require ("view/admin.php");
 
     }
-
+    //page pour afficher un msg de succées 
+    public function secDev()   
+    {
+        require ("view/secDev.php");
+    }
+    //Ajouter un Devis
     public function addDevis()
     {
-        $pdo = Connect::seConnecter();
-        if (isset($_POST['submit']))
-        {
-            $date_Devis = filter_input(INPUT_POST, "date_Devis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $id_User = filter_input(INPUT_POST, "id_User", FILTER_SANITIZE_NUMBER_INT);
-            $id_User = $_SESSION["user"]["id_User"]; 
-            if ($date_Devis && $besoin && $id_User)
-            {
-                $requeteDev = $pdo->prepare("
-                    INSERT INTO devis( date_Devis, besoin, id_User)
-                    VALUES (:date_Devis, :besoin, :id_User)");
-                $requeteDev->execute
-                ([
-                    "date_Devis" => $date_Devis,
-                    "besoin" => $besoin,
-                    "id_User" => $id_User
-
-                ]);
-
-            }
+        //session_start(); // demarrer la session
+        $errors = [];     // tableau des erreurs
+        $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $telephone = filter_input(INPUT_POST, "telephone", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $liste_Service = filter_input(INPUT_POST, "liste_Service", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    
+        // Validation
+        if (empty($nom)) {
+            $errors['nom'] = "Le nom est requis.";
         }
-        $id_User = $pdo->query
-        (
-            "SELECT * 
-            FROM users"
-        );
-        require ("view/addDevis.php");
+    
+        if (empty($prenom)) {
+            $errors['prenom'] = "Le prénom est requis.";
+        }
+    
+        if (empty($tel)) {
+            $errors['tel'] = "Le numéro de téléphone est requis.";
+            // test preg_match pour le format
+        } elseif (!preg_match("/^\d{10}$/", $tel)) {
+            $errors['tel'] = "Le numéro de téléphone doit comporter 10 chiffres .";
+        }
+    
+        if (empty($email)) {
+            $errors['email'] = "L'email est requis.";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = "L'email n'est pas valide.";
+        }
+    
+        if (empty($besoin)) {
+            $errors['besoin'] = "Le besoin est requis.";
+        }
+    
+        // si il n'y a pas d'erreurs
+
+        if (empty($errors)) {
+            $pdo = Connect::seConnecter();
+            
+            if (isset($_POST['submit']))
+            {
+                // var_dump("inside post");
+                // die();
+                // var_dump($nom, $prenom, $telephone, $email, $liste_Service, $besoin);die();
+                date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
+                if ($nom && $prenom && $telephone && $email && $liste_Service && $besoin)
+                {
+                    $requeteDev = $pdo->prepare("
+                        INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Devis) 
+                        VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Devis)");
+                    $requeteDev->execute
+                    ([
+                        "nom"=>$nom,
+                        "prenom"=>$prenom,
+                        "telephone"=>$telephone,
+                        "email"=>$email,
+                        "id_Services"=>$liste_Service,
+                        "besoin"=>$besoin,
+                        
+                        "date_Devis" => date("Y-m-d H:i:s")  // changer le format de la datetime en francais
+
+                    ]);
+
+                }
+                   // rediger l'utilisateur vers la page de success
+                   header('Location: index.php?action=secDev');
+                   exit;
+               } else {
+                   // S'il y a des erreurs
+                   $_SESSION['errors'] = $errors;
+                   $_SESSION['old_data'] = $_POST;
+           
+                   // rediger l'utilisateur vers la page devis
+                   header('Location: index.php?action=accueil#devis');
+                   exit;
+               }
+        }
     }
-    public function delDev($id)
-    {
-        $pdo = Connect::seConnecter();
-        $requeteDel = $pdo-> prepare
-        ("
-            DELETE FROM devis 
-            WHERE devis.id_Devis = :id"
-        );
-        $requeteDel-> execute
-        ([
-            "id"=>$id
-        ]);
-        ?>
-        
-        <?php
-        header("Location: index.php?action=admin");
+
+        public function delDev($id)
+        {
+            $pdo = Connect::seConnecter();
+            $requeteDel = $pdo-> prepare
+            ("
+                DELETE FROM devis 
+                WHERE devis.id_Devis = :id"
+            );
+            $requeteDel-> execute
+            ([
+                "id"=>$id
+            ]);
+            ?>
+            <?php
+            header("Location: index.php?action=admin");
  
     }
     public function addAvis()
