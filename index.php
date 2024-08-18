@@ -25,13 +25,13 @@ if(isset($_GET['action'])) {
         "logout":$secuCtrl->logout();
         break;
         case
-        "devis":$ctrFrm->devis();
-        break;
-        case
         "admin":$ctrFrm->admin();
         break;
         case
-        "addDevis":$ctrFrm->addDevis();
+        "devis":$ctrFrm->devis();
+        break;
+        case
+        "addDevis":$ctrFrm->addMyDevis();  //page devis
         break;
         case
         "delDev":$ctrFrm->delDev($id);
@@ -40,10 +40,19 @@ if(isset($_GET['action'])) {
         "avis":$ctrFrm->avis();
         break;
         case
+        "pageAvis":$ctrFrm->pageAvis();
+        break;
+        case
+        "addAvis":$ctrFrm->addAvis();
+        break;
+        case 
+        "secAvis":$ctrFrm->secAvis();
+        break;
+        case
         "contact":$ctrFrm->contact();   
         break;
         case
-        "secDev":$secuCtrl->secDev();
+        "secDev":$ctrFrm->secDev();
        // case
        // "service":$ctrFrm->service();
        // break;

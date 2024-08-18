@@ -1,4 +1,9 @@
-<?php ob_start(); ?>
+<?php 
+
+ob_start(); 
+
+
+?>
 
 <!-- hero section -->
 <section id="hero-devis">    
@@ -20,10 +25,16 @@
                     <div class="nom">
                         <label for="nom" class="label-devis">Nom</label>
                         <input type="text" name="nom" id="nom" class="input" placeholder="nom">
+                        <?php if (!empty($_SESSION["errors"]['nom'])): ?>
+                            <div class="error"><?php echo $_SESSION["errors"]['nom']; ?></div>
+                        <?php endif; ?>
                     </div>
                     <div class="nom">
                         <label for="prenom" class="label-devis">Prenom</label>
                         <input type="text" name="prenom" id="prenom" class="input" placeholder="prenom">
+                        <?php if (!empty($_SESSION["errors"]['prenom'])): ?>
+                            <div class="error"><?php echo $_SESSION["errors"]['prenom']; ?></div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="list">
@@ -32,7 +43,7 @@
                 </div>
                 <div class="list">
                     <label for="email" class="label-devis">Email</label>
-                    <input type="email" name="email" id="email" class="input" placeholder="email">
+                    <input type="text" name="email" id="email" class="input" placeholder="email">
                 </div>
                 <div class="list">
                     <label for="id_services" class="label-devis">sélectionnez un service</label>
@@ -59,5 +70,6 @@
 </section>
 
 <?php
+session_unset(); // vider les erreurs
 $contenu = ob_get_clean();
 require "template/template.php";

@@ -5,7 +5,7 @@
     
         <h1 class="devis-hero">Avis de Nos Clients</h1>
         <p class="text-hero">Votre satisfaction est notre priorité. Partagez votre avis !</p>
-    
+        <a href="index.php?action=pageAvis" ><button class="btn">Ajouter un avis <span>&#x2197;</span></button></a>
 </section>
 <section id="avis">
     <div class="bloc-avis ">
