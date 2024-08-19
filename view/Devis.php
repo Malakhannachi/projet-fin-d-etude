@@ -1,9 +1,4 @@
-<?php 
-
-ob_start(); 
-
-
-?>
+<?php ob_start(); ?>
 
 <!-- hero section -->
 <section id="hero-devis">    

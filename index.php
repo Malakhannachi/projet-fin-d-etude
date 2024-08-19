@@ -16,6 +16,9 @@ if(isset($_GET['action'])) {
         "accueil":$ctrFrm->accueil(); 
         break;
         case
+        "addDevAcceuil":$ctrFrm->addDevAcceuil();
+        break;
+        case
         "login":$secuCtrl->login();
         break;
         case
@@ -56,7 +59,8 @@ if(isset($_GET['action'])) {
        // case
        // "service":$ctrFrm->service();
        // break;
-        case 'serviceDet': $ctrFrm->serviceDet($id);
+        case 
+        'serviceDet': $ctrFrm->serviceDet($id);
         break;
            
       

@@ -28,6 +28,74 @@ class Controller
         $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
 
         require("view/accueil.php");
+        
+    }
+    public function addDevAcceuil()
+    {
+        $pdo = Connect::seConnecter();
+
+        if (isset($_POST['submit'])) {
+            $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);  // filtrer codes malveillants
+            $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $telephone = filter_input(INPUT_POST, "telephone", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $liste_Service = filter_input(INPUT_POST, "liste_Service", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // var_dump("inside post");
+            // die();
+            //var_dump($nom, $prenom, $telephone, $email, $liste_Service, $besoin);die();
+            $errors = [];
+            // Validation
+            if (empty($nom)) {
+                $errors['nom'] = "Le nom est requis.";
+            }
+            if (empty($prenom)) {
+                $errors['prenom'] = "Le prénom est requis.";
+            }
+            if (empty($tel)) {
+                $errors['tel'] = "Le numéro de téléphone est requis.";
+            } elseif (!preg_match("/^\d{10}$/", $tel)) {
+                $errors['tel'] = "Le numéro de téléphone doit comporter 10 chiffres .";
+            }
+            if (empty($email)) {
+                $errors['email'] = "L'email est requis.";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors['email'] = "L'email n'est pas valide.";
+            }
+
+            if (empty($besoin)) {
+                $errors['besoin'] = "Le besoin est requis.";
+            }
+            date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
+            if (empty($errors)) {
+                $requeteDev = $pdo->prepare("
+                        INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Devis) 
+                        VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Devis)");
+                $requeteDev->execute([
+                    
+                        "nom" => $nom,
+                        "prenom" => $prenom,
+                        "telephone" => $telephone,
+                        "email" => $email,
+                        "id_Services" => $liste_Service,
+                        "besoin" => $besoin,
+                        "date_Devis" => date("Y-m-d H:i:s")  // changer le format de la datetime en francais
+
+                    ]);
+                    
+                    // rediger l'utilisateur vers la page de success
+                    header('Location: index.php?action=secDev');
+                    exit;
+            } else {
+
+                $_SESSION['errors'] = $errors;
+                
+                // rediger l'utilisateur vers la page devis
+                header('Location: index.php?action=accueil#devis');
+                exit;
+            }
+
+        }
     }
 
     //page Devis
@@ -77,10 +145,14 @@ class Controller
     {
 
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("SELECT * FROM services WHERE id_Services = :id");
+        $requete = $pdo->prepare
+        ("
+        SELECT * FROM services 
+        WHERE id_Services = :id"
+        );
         $requete->bindValue(':id', $id, PDO::PARAM_INT);
         $requete->execute();
-        $service = $requete->fetch(PDO::FETCH_ASSOC);
+        $service = $requete->fetch(PDO::FETCH_ASSOC); // fetch 
 
         // var_dump($service);
 
@@ -207,13 +279,13 @@ class Controller
     }
         //Ajouter un Avis
         public function addAvis(){
-            $image = $_FILES['image']['name'];
             $pdo = Connect::seConnecter();
             if (isset($_POST['submit'])) {
                 $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $prenom = filter_input(INPUT_POST,"prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $commentaire = filter_input(INPUT_POST, "commentaire", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $image = $_FILES['image']['name'];
                 
                 // Validation
                 $errors = [];
@@ -256,8 +328,8 @@ class Controller
                         }
                     }
                     $requete = $pdo->prepare("
-                            INSERT INTO avis (commentaire, note, id_Services, nom, prenom, email, tel, image)
-                            VALUES (:commentaire, :note, :id_Services, :nom, :prenom, :email, :tel, :image)
+                            INSERT INTO avis (commentaire, note, nom, prenom, image)
+                            VALUES (:commentaire, :note, :nom, :prenom, :image)
                         ");
                         $requete->execute([
                             'commentaire' => $commentaire,

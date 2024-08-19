@@ -14,7 +14,7 @@
     </div> 
     <div class="form devis-background2" >
     <h2 class="title-devis1">Ajouter un Avis</h2>
-            <form action="index.php?action=addAvis" method="post" class="formulaire">
+            <form action="index.php?action=addAvis" method="post" class="formulaire" enctype="multipart/form-data">
                 <div class="form-group " >
                     <div class="nom">
                         <label for="nom" class="label-devis">Nom</label>
@@ -43,11 +43,11 @@
                     </select>
                 </div>
                 <div class="list">
-                    <label for="besoin"  class="label-devis">Votre Avis</label>
-                    <textarea name="commentaire" id="bsoin" rows="5" placeholder="Votre besoin" > </textarea>
+                    <label for="commentaire" class="label-devis">Commentaire</label>
+                    <textarea name="commentaire" id="commentaire" rows="5" placeholder="Votre commentaire"></textarea>
                 </div>
                 <div class="nom">
-                        <label for="image" class="label-devis">Prenom</label>
+                        <label for="image" class="label-devis">Image</label>
                         <input type="file" name="image" id="image" class="input" placeholder="image">
                         <?php if (!empty($_SESSION["errors"]['image'])): ?>
                             <div class="error"><?php echo $_SESSION["errors"]['image']; ?></div>

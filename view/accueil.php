@@ -37,7 +37,7 @@ session_unset();
                     <p class="card-text">
                     <?php echo htmlspecialchars($service['description'] );?>
                     </p>
-                    <a href="services.php" ><button class="btn">Voir plus</button></a> 
+                    <a href="index.php?action=serviceDet&id=<?php echo htmlspecialchars($service['id_Services'] );?>" ><button class="btn">Voir plus</button></a> 
                 </div>
             </div>
         <?php endforeach; ?>
@@ -87,7 +87,7 @@ session_unset();
     
     <div class="form">
     <h2 class="title-devis">Demander un devis</h2>
-        <form action="index.php?action=addDevis" method="post" class="formulaire">
+        <form action="index.php?action=addDevAcceuil" method="post" class="formulaire">
         <div class="form-group">
             <div class="nom">
                 <label for="nom">Nom</label>
@@ -134,5 +134,6 @@ session_unset();
 </section>
        
 <?php
+session_unset();
 $contenu = ob_get_clean();
 require "template/template.php";
