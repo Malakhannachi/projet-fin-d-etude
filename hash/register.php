@@ -1,33 +1,56 @@
 <?php ob_start(); ?> 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>s'inscrire</title>
-</head>
-<body>
-    <h1>s'inscrire</h1>
-    <form action="index.php?action=register" method="post">
-        
-        <label for="pseudo">Nom</label>
-        <input type="text" name="nom" id="pseudo"><br>
-        <label for="pseudo">Prenom</label>
-        <input type="text" name="prenom" id="pseudo"><br>
+<!-- hero section -->
+<section id="hero-devis">    
+    
+        <h1 class="devis-hero">Inscription </h1>
+    
+</section>
 
-        <label for="email">Mail</label>
-        <input type="email" name="email" id="email" placeholder="email"><br>
+ <section id="devis" class="devis-background1">
+     
+    <div class="form devis-background2" >
+    <h2 class="title-devis1">Inscription</h2>
 
-        <label for="mdp">Mot de passe</label>
-        <input type="password" name="mdp" id="mdp"><br>
+            <form action="index.php?action=register" method="post" class="formulaire">
+                <div class="form-group " >
+                <div class="nom">
+                        <label for="nom" class="label-devis">Nom</label>
+                        <input type="text" name="nom" id="nom" class="input" placeholder="nom">
+                        
+                    </div>
+                    <div class="nom">
+                        <label for="prenom" class="label-devis">Prenom</label>
+                        <input type="text" name="prenom" id="prenom" class="input" placeholder="prenom">
+                        
+                    </div>
+                </div>
+                <div class="list">
+                    <label for="email" class="label-login">Email</label>
+                    <input type="email" name="email" id="email" placeholder="email"class="input-login"><br>
+                </div>
+                <div class="list">
+                    <label for="password" class="label-login">Mot de passe</label>
+                    <input type="password" name="mdp" id="password" placeholder="password" class="input-login"><br>
+                </div>
 
-        <label for="mdp2"> Confirmation de mot de passe</label>
-        <input type="password" name="mdp2" id="mdp2"><br>
+                <div class="list">
 
-        <input type="submit" name="submit" value="s'inscrire">
-    </form>
-</body>
-</html>
+                    <label for="mdp" class="label-login">Mot de passe</label>
+                    <input type="password" name="mdp" id="mdp" class="input-login"><br>
+                </div>
+                <div class="list">
+                    <label for="mdp2"class="label-login"> Confirmation de mot de passe</label>
+                    <input type="password" name="mdp2" id="mdp2" class="input-login"><br>
+                </div>
+
+                    <button type="submit" class="btn">S'inscrire</button>
+                </div>
+
+            </form>
+   </div>
+</section>
+
+
 <?php
 $contenu = ob_get_clean();
 require "template/template.php";

@@ -1,7 +1,5 @@
 <?php ob_start(); 
-$errors = $_SESSION["errors"] ?? []; // afficher les erreurs
-$old_data = $_SESSION["old_data"] ?? []; 
-session_unset();  
+$errors = $_SESSION["errors"] ?? []; // afficher les erreurs  
 ?>
 
 <!-- hero section -->
@@ -105,8 +103,8 @@ session_unset();
             </div>
         </div>
         <div class="list">
-            <label for="telephone">Numéro de téléphone</label>
-            <input type="tel" name="tel" id="telephone" class="input" placeholder="06 00 00 00 00" value="<?php echo htmlspecialchars($tel ?? ''); ?>">
+            <label for="tel">Numéro de téléphone</label>
+            <input type="tel" name="tel" id="tel" class="input" placeholder="06 00 00 00 00" value="<?php echo htmlspecialchars($tel ?? ''); ?>">
             <?php if (!empty($errors['tel'])): ?>
                 <div class="error"><?php echo $errors['tel']; ?></div>
             <?php endif; ?>
@@ -119,6 +117,15 @@ session_unset();
             <?php endif; ?>
         </div>
         <div class="list">
+                    <label for="id_services" class="label-devis">sélectionnez un service</label>
+                    <select name=" liste_Service" id="id_services" class="input">
+                        <option value="">sélectionnez un service</option>
+                            <?php foreach($serDev as $service): ?>
+                        <option value="<?php echo $service['id_Services'] ?>"><?php echo $service['nom_Ser'] ?></option>
+                            <?php endforeach; ?>
+                    </select>
+                </div>
+        <div class="list">
             <label for="besoin">Votre besoin</label>
             <textarea name="besoin" id="besoin" rows="5" placeholder="Votre besoin"><?php echo htmlspecialchars($besoin ?? ''); ?></textarea>
             <?php if (!empty($errors['besoin'])): ?>
@@ -126,7 +133,7 @@ session_unset();
             <?php endif; ?>
         </div>
         <div class="list">
-            <button class="btn-avis" type="submit">Envoyer <span>&#x2197;</span></button>
+            <button class="btn-avis" type="submit" name="submit">Envoyer <span>&#x2197;</span></button>
         </div>
     </form>
         </div>

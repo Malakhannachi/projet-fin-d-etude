@@ -44,12 +44,9 @@
                     <label for="id_services" class="label-devis">sélectionnez un service</label>
                     <select name=" liste_Service" id="id_services" class="input">
                         <option value="">sélectionnez un service</option>
-                        <option value="1">Service 1</option>
-                        <option value="2">Service 2</option>
-                        <option value="3">Service 3</option>
-                        <option value="4">Service 4</option>
-                        <option value="5">Service 5</option>
-
+                        <?php foreach ($services as $ser) : ?>  <!-- boucle pour afficher liste des services -->
+                        <option value="<?php echo $ser['id_Services']; ?>"><?php echo htmlspecialchars($ser['nom_Ser']?? ''); ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="list">

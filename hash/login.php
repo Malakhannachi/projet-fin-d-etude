@@ -1,26 +1,32 @@
 <?php ob_start(); ?> 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
-</head>
-<body>
-<h1>SE CONNECTER</h1>
-   <form action="index.php?action=login" method="post">
-       
-    <label for="email">Email</label>
-       <input type="email" name="email" id="email" placeholder="email"><br>
-
-       <label for="password">Mot de passe</label>
-       <input type="password" name="mdp" id="password" placeholder="password"><br>
-
-       <input type="submit" name="submit" value="Se connecter">
-   </form>
+<!-- hero section -->
+<section id="hero-devis">    
     
-</body>
-</html>
+        <h1 class="devis-hero"> Connexion </h1>
+    
+</section>
+
+ <section id="devis" class="devis-background1">
+     
+    <div class="form devis-background2" >
+    <h2 class="title-devis1">Se Connecter</h2>
+            <form action="index.php?action=login" method="post" class="formulaire">
+                <div class="form-group " >
+                    <div class="nom">
+        <label for="email" class="label-login">Email</label>
+        <input type="email" name="email" id="email" placeholder="email"class="input-login"><br>
+
+        <label for="password" class="label-login">Mot de passe</label>
+        <input type="password" name="mdp" id="password" placeholder="password" class="input-login"><br>
+
+        <a href="index.php?action=accueil" ><button class="btn">Se connecter <span>&#x2197;</span></button></a>
+
+    </div>
+   </form>
+   </section> 
+
 <?php
 $contenu = ob_get_clean();
 require "template/template.php";
+
+

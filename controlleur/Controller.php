@@ -13,9 +13,10 @@ class Controller
         //section des services
 
         $pdo = Connect::seConnecter();
+        //afficher liste dynamique des services
         $requete = $pdo->query("
             SELECT * 
-            FROM services
+            FROM services limit 3
         ");
         $services = $requete->fetchAll(PDO::FETCH_ASSOC);
 
@@ -26,6 +27,15 @@ class Controller
             FROM avis limit 3
         ");
         $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
+        // section devis
+        // obtenir tous les services 
+        $requeteDev = $pdo->query("
+        SELECT *
+        FROM services ");
+        $requeteDev->execute();
+        $serDev = $requeteDev->fetchAll(PDO::FETCH_ASSOC);
+
+
 
         require("view/accueil.php");
         
@@ -33,11 +43,12 @@ class Controller
     public function addDevAcceuil()
     {
         $pdo = Connect::seConnecter();
-
         if (isset($_POST['submit'])) {
+            // var_dump("inside addDevAcceuil");
+            // die();
             $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);  // filtrer codes malveillants
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $telephone = filter_input(INPUT_POST, "telephone", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $tel = filter_input(INPUT_POST, "tel", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $liste_Service = filter_input(INPUT_POST, "liste_Service", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -66,6 +77,8 @@ class Controller
             if (empty($besoin)) {
                 $errors['besoin'] = "Le besoin est requis.";
             }
+
+           
             date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
@@ -75,7 +88,7 @@ class Controller
                     
                         "nom" => $nom,
                         "prenom" => $prenom,
-                        "telephone" => $telephone,
+                        "telephone" => $tel,
                         "email" => $email,
                         "id_Services" => $liste_Service,
                         "besoin" => $besoin,
@@ -101,6 +114,15 @@ class Controller
     //page Devis
     public function devis()
     {
+        
+        $pdo = Connect::seConnecter();
+        //afficher liste dynamique des services
+        $requeteDev = $pdo->query("
+        SELECT *
+        FROM services ");
+        $requeteDev->execute();
+        $services = $requeteDev->fetchAll(PDO::FETCH_ASSOC);
+        //var_dump($services);
 
         require("view/devis.php");
     }
@@ -122,10 +144,11 @@ class Controller
         $totalPages = ceil($totalAvis / $avisPerPage);
 
         // faire une requete pour recuperer les avis
-        $requete = $pdo->prepare("SELECT * FROM avis LIMIT :limit OFFSET :offset");
-        $requete->bindValue(':limit', $avisPerPage, PDO::PARAM_INT);
-        $requete->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $requete->execute();
+        $requete = $pdo->prepare("SELECT * FROM avis LIMIT :lim OFFSET :offs"); // offset pour la pagination 
+        $requete->execute([
+            "lim" => $avisPerPage,
+            "offs" => $offset
+        ]);
 
         $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
 
@@ -198,19 +221,21 @@ class Controller
             $liste_Service = filter_input(INPUT_POST, "liste_Service", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             // var_dump("inside post");
+            // var_dump($liste_Service);die();
             // die();
-            //var_dump($nom, $prenom, $telephone, $email, $liste_Service, $besoin);die();
-            $errors = [];
+            $errors = []; // declarer le tableau d'erreurs
+            
             // Validation
             if (empty($nom)) {
                 $errors['nom'] = "Le nom est requis.";
             }
+
             if (empty($prenom)) {
                 $errors['prenom'] = "Le prénom est requis.";
             }
-            if (empty($tel)) {
+            if (empty($telephone)) {
                 $errors['tel'] = "Le numéro de téléphone est requis.";
-            } elseif (!preg_match("/^\d{10}$/", $tel)) {
+            } elseif (!preg_match("/^\d{10}$/", $telephone)) {
                 $errors['tel'] = "Le numéro de téléphone doit comporter 10 chiffres .";
             }
             if (empty($email)) {
@@ -222,7 +247,11 @@ class Controller
             if (empty($besoin)) {
                 $errors['besoin'] = "Le besoin est requis.";
             }
+            // var_dump($errors);
+            // die();
             date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
+
+            
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
                         INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Devis) 
@@ -287,6 +316,7 @@ class Controller
                 $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $image = $_FILES['image']['name'];
                 
+                
                 // Validation
                 $errors = [];
                 if (empty($nom)) {
@@ -327,19 +357,22 @@ class Controller
                             echo 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
                         }
                     }
+                    date_default_timezone_set('Europe/Paris');
                     $requete = $pdo->prepare("
-                            INSERT INTO avis (commentaire, note, nom, prenom, image)
-                            VALUES (:commentaire, :note, :nom, :prenom, :image)
+                            INSERT INTO avis (commentaire, note, nom, prenom, image, date_Avis)
+                            VALUES (:commentaire, :note, :nom, :prenom, :image, :date_Avis)
                         ");
                         $requete->execute([
                             'commentaire' => $commentaire,
                             'note' => $note,
                             'nom' => $nom,
                             'prenom' => $prenom,
-                            'image' => $image
+                            'image' => $image,
+                            'date_Avis' => date('Y-m-d H:i:s'),
+
                         ]);
                     header('Location: index.php?action=secAvis');
-                    exit;
+                           exit;
                 } else {
                     var_dump($errors);
                     die();

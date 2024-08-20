@@ -9,7 +9,7 @@
 </section>
 <section id="avis">
     <div class="bloc-avis ">
-    <?php foreach($avis as $av):?>
+    <?php foreach($avis as $av):?> <!--boucle pour afficher les avis -->
         <div class="card-avis">
             <img class="avis-img" src="public/image/<?php echo htmlspecialchars($av['image'] );?>" alt="<?php echo htmlspecialchars($av['nom'].' '.$av['prenom']);?>"/>
             
@@ -18,7 +18,7 @@
                 </p> 
                 <div class="stars">
                     <?php $stars = $av['note'];
-                    for ($i=0; $i < $stars ; $i++) {
+                    for ($i=0; $i < $stars ; $i++) { //boucle pour afficher les étoiles
         
                         echo "<span class='stars'>&#9733;</span>"; /*&#9733; pour laisser un étoile vide pour l'instant */
                     }
