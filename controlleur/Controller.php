@@ -77,13 +77,11 @@ class Controller
             if (empty($besoin)) {
                 $errors['besoin'] = "Le besoin est requis.";
             }
-
-           
             date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
-                        INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Devis) 
-                        VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Devis)");
+                        INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
+                        VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Dem)");
                 $requeteDev->execute([
                     
                         "nom" => $nom,
@@ -92,7 +90,7 @@ class Controller
                         "email" => $email,
                         "id_Services" => $liste_Service,
                         "besoin" => $besoin,
-                        "date_Devis" => date("Y-m-d H:i:s")  // changer le format de la datetime en francais
+                        "date_Dem" => date("Y-m-d H:i:s")  // changer le format de la datetime en francais
 
                     ]);
                     
@@ -124,7 +122,7 @@ class Controller
         $services = $requeteDev->fetchAll(PDO::FETCH_ASSOC);
         //var_dump($services);
 
-        require("view/devis.php");
+        require("view/demandeDev.php");
     }
 
     //Page Avis
@@ -144,11 +142,11 @@ class Controller
         $totalPages = ceil($totalAvis / $avisPerPage);
 
         // faire une requete pour recuperer les avis
-        $requete = $pdo->prepare("SELECT * FROM avis LIMIT :lim OFFSET :offs"); // offset pour la pagination 
-        $requete->execute([
-            "lim" => $avisPerPage,
-            "offs" => $offset
-        ]);
+        $requete = $pdo->prepare("SELECT * FROM avis LIMIT :lim OFFSET :offs");
+        // bindvalue est une fonction qui permet de lier une variable a une requete 
+            $requete->bindValue(':lim', $avisPerPage, PDO::PARAM_INT); 
+            $requete->bindValue(':offs', $offset, PDO::PARAM_INT);
+            $requete->execute();
 
         $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
 
@@ -254,7 +252,7 @@ class Controller
             
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
-                        INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Devis) 
+                        INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
                         VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Devis)");
                 $requeteDev->execute([
                     
