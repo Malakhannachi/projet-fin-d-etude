@@ -8,13 +8,18 @@ use PDO;
 
 class AdminController
 {
+    /*--===== Section Devis ========--*/
     //liste devis
     public function listDev()
     {
+
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("SELECT * 
-        FROM devis");
-        $devis = $requete->fetchAll(PDO::FETCH_ASSOC);
+            FROM demande_devis");
+        $devis = $requete->fetchAll();
+
+        // var_dump($devis);
+        // die();
 
         require "view/admin/listDev.php";
     }
@@ -22,23 +27,22 @@ class AdminController
     // modifier devis
     public function editDevis($id)
     {
-        
+
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("SELECT * FROM devis WHERE id_Devis = :id");
-        $requete->execute(['id' => $id]);
-        $devis = $requete->fetch(PDO::FETCH_ASSOC);
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nom = $_POST['nom'] ?? '';
-            $prenom = $_POST['prenom'] ?? '';
-            $tel = $_POST['tel'] ?? '';
-            $email = $_POST['email'] ?? '';
-            $besoin = $_POST['besoin'] ?? '';
-            
+            $nom = $_POST['nom'];  // filtrer codes malveillants
+            $prenom = $_POST['prenom'];
+            $tel = $_POST['tel'];
+            $email = $_POST['email'];
+            $besoin = $_POST['besoin'];
+
+            // ajouter les filtres des "input" 
+
             $requete = $pdo->prepare("
-            UPDATE devis 
+            UPDATE demande_devis 
             SET nom = :nom, prenom = :prenom, tel = :tel, email = :email, besoin = :besoin 
-            WHERE id_Devis = :id
+            WHERE id_Dem = :id
             ");
             $requete->execute([
                 'nom' => $nom,
@@ -48,71 +52,141 @@ class AdminController
                 'besoin' => $besoin,
                 'id' => $id
             ]);
-            
+
             header('Location:index.php?action=listDev');
             exit();
+        } else { // if ($_SERVER['REQUEST_METHOD'] === 'GET')
+            //afficher le formulaire rempli avec les infos
+            $requete = $pdo->prepare("SELECT * FROM demande_devis WHERE id_Dem = :id");
+            $requete->execute(['id' => $id]);
+            $devis = $requete->fetch(PDO::FETCH_ASSOC);
+
+            require "view/admin/editDevis.php";
         }
-        
-        require "view/admin/editDevis.php";
     }
     // supprimer devis
     public function deleteDevis($id)
     {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("DELETE FROM devis WHERE id_Devis = :id");
+        $requete = $pdo->prepare("DELETE FROM demande_devis WHERE id_Dem = :id");
         $requete->execute(['id' => $id]);
-        
+
         header('Location:index.php?action=listDev');
         exit();
     }
-
+/*--===== Section Avis ========--*/
     // lister Avis
+
     public function listAvis()
+    {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("SELECT * 
+        FROM avis");
+        $avis = $requete->fetchAll();
+
+        // var_dump($avis);
+        // die();
+
+
+
+        require "view/admin/listAvis.php";
+    }
+
+    // supprimer Avis
+
+    public function deleteAvis($id)
+    {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("DELETE FROM avis WHERE id_Avis = :id");
+        $requete->execute(['id' => $id]);
+
+        header('Location:index.php?action=listAvis');
+        exit();
+    }
+
+    //modifier Avis
+    public function editAvis($id)
+
+    {
+        // var_dump($id);
+        // die();
+        $pdo = Connect::seConnecter();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $nom = $_POST['nom'];  
+            $prenom = $_POST['prenom'];  
+            $commentaire = $_POST['commentaire'];
+            $note = $_POST['note'];
+
+            // var_dump($nom, $prenom, $commentaire, $note);
+            // die();
+
+            $requete = $pdo->prepare("
+            UPDATE avis 
+            SET nom = :nom, prenom = :prenom, commentaire = :commentaire, note = :note
+            WHERE id_Avis = :id
+            ");
+            $requete->execute([
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'commentaire' => $commentaire,
+                'note' => $note,
+                'id' => $id
+            ]);
+
+            header('Location:index.php?action=listAvis');
+            exit();
+        } else {
+
+            $requete = $pdo->prepare("SELECT * FROM avis WHERE id_Avis = :id");
+            $requete->execute(['id' => $id]);
+            $avis = $requete->fetch(PDO::FETCH_ASSOC);
+
+            require "view/admin/editAvis.php";
+        }
+    }
+
+    public function listService()
     {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
         SELECT * 
-        FROM avis");
-        $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
-    
-        require 'view/admin/listAvis.php';
+        FROM services
+        LEFT JOIN cat ON services.id_Cat = cat.id_Cat");
+        $services = $requete->fetchAll();
+        // var_dump($services);
+        // die();
+        require "view/admin/listService.php";
     }
-    // Ajouter Avis
-    public function addAvis()
-{
-    $errors = [];
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Retrieve and validate input
-        $commentaire = $_POST['commentaire'] ?? '';
-        $note = $_POST['note'] ?? '';
-        $id_Services = $_POST['id_Services'] ?? 1;
-        $nom = $_POST['nom'] ?? '';
-        $prenom = $_POST['prenom'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $tel = $_POST['tel'] ?? '';
-        $image = $_FILES['image']['name'] ?? '';
 
-        // ajouter test sur l'image
+    public function editServices($id)
+    {
+        $pdo = Connect::seConnecter();
+        if (isset($_POST['submit'])) {
+            $nom_Ser = $_POST['nom_Ser'];
+            $description = $_POST['description'];
+            $image = $_FILES['image']['name'];
+            $id_Cat = $_POST['id_Cat'];
+            // modifier l'image
+            $uploadDirectory = __DIR__ . '/../public/image/';  //remplacer par le chemin absolu de votre dossier image
 
-        if (empty($errors)) {
-
-            $uploadDirectory = __DIR__ . '/../public/image/';
-
-            // Handle file upload
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                //var_dump($_FILES['image']['name']);
+                //die();
+
                 $fileTmpPath = $_FILES['image']['tmp_name'];
-                $fileName = $_FILES['image']['name'];
-                $fileSize = $_FILES['image']['size'];
-                $fileType = $_FILES['image']['type'];
-                $fileNameCmps = explode(".", $fileName);
-                $fileExtension = strtolower(end($fileNameCmps));
-                $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    
+                $fileName = $_FILES['image']['name'];    // nom du fichier
+                $fileSize = $_FILES['image']['size'];   // taille du fichier
+                $fileType = $_FILES['image']['type'];   // type du fichier
+                $fileNameCmps = explode(".", $fileName); // nom du fichier
+                $fileExtension = strtolower(end($fileNameCmps)); // extension du fichier
+                $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensions autorisées
+
                 if (in_array($fileExtension, $allowedfileExtensions)) {
-                    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-                    $dest_path = $uploadDirectory . $newFileName;
-    
-                    if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;   // md5 pour le nom de l'image unique
+                    $dest_path = $uploadDirectory . $newFileName;                    // destination du fichier
+
+                    if (move_uploaded_file($fileTmpPath, $dest_path)) {                   // deplacer le fichier
                         $image = $newFileName;
                     } else {
                         echo 'There was an error moving the uploaded file.';
@@ -121,115 +195,119 @@ class AdminController
                     echo 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
                 }
             }
-
-            $pdo = Connect::seConnecter();
+            //modifier le service
             $requete = $pdo->prepare("
-                INSERT INTO avis (commentaire, note, id_Services, nom, prenom, email, tel, image, date_Avis)
-                VALUES (:commentaire, :note, :id_Services, :nom, :prenom, :email, :tel, :image, NOW())
+            UPDATE services
+            SET nom_Ser = :nom_Ser, description = :description, image = :image, id_Cat = :id_Cat
+            WHERE id_Services = :id_Services
             ");
             $requete->execute([
-                'commentaire' => $commentaire,
-                'note' => $note,
-                'id_Services' => $id_Services,
-                'nom' => $nom,
-                'prenom' => $prenom,
-                'email' => $email,
-                'tel' => $tel,
-                'image' => $image
+                'nom_Ser' => $nom_Ser,
+                'description' => $description,
+                'image' => $image,
+                'id_Cat' => $id_Cat,
+                'id_Services' => $id
             ]);
-
-            header('Location: index.php?action=listAvis');
+            header('Location:index.php?action=listService');
+            exit();
+            //afficher  le formulaire suite un click sur modifier 
+        } else {
+            $requete = $pdo->prepare("
+            SELECT * 
+            FROM services 
+            WHERE id_Services = :id");
+            $requete->execute(['id' => $id]);
+            $service = $requete->fetch(PDO::FETCH_ASSOC);
+            //afficher les categories
+            $requeteCat = $pdo->query("
+            SELECT *
+            FROM cat");
+            $categories = $requeteCat->fetchAll();
+            require "view/admin/editServices.php";
         }
     }
-
-    require 'view/admin/addAvis.php';
-}
-// modifier Avis
-public function editAvis($id)
-{
-    $pdo = Connect::seConnecter();
-    $query = $pdo->prepare("
-    SELECT * 
-    FROM avis 
-    WHERE id_Avis = :id");
-    $query->execute(['id' => $id]);
-    $avis = $query->fetch();
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $commentaire = $_POST['commentaire'] ?? '';
-        $note = $_POST['note'] ?? '';
-        $id_Services = $_POST['id_Services'] ?? 1;
-        $nom = $_POST['nom'] ?? '';
-        $prenom = $_POST['prenom'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $tel = $_POST['tel'] ?? '';
-        $image = $_FILES['image']['name'] ?? $avis['image'];
-
-        $uploadDirectory = __DIR__ . '/../public/image/';  //remplacer par le chemin absolu de votre dossier image
-
-        // echo $uploadDirectory;
+    public function addService()
+    {
+        // var_dump("inside addService method");
         // die();
 
-        // fichier uploade
-        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $fileTmpPath = $_FILES['image']['tmp_name'];
-            $fileName = $_FILES['image']['name'];
-            $fileSize = $_FILES['image']['size'];
-            $fileType = $_FILES['image']['type'];
-            $fileNameCmps = explode(".", $fileName);
-            $fileExtension = strtolower(end($fileNameCmps));
-            $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-
-            if (in_array($fileExtension, $allowedfileExtensions)) {
-                $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-                $dest_path = $uploadDirectory . $newFileName;
-
-                if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                    $image = $newFileName;
-                } else {
-                    echo 'There was an error moving the uploaded file.';
-                }
-            } else {
-                echo 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
+        $pdo = Connect::seConnecter();
+        if (isset($_POST['submit'])) {
+            // var_dump("inside addService POST method");
+            // die();
+            $nom_Ser = filter_input(INPUT_POST, "nom_Ser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $image = $_FILES['image']['name'];
+            $id_Cat = filter_input(INPUT_POST, "id_Cat", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $errors = [];
+            if (empty($nom_Ser)) {
+                $errors['nom_Ser'] = "Le nom est requis.";
             }
+            if (empty($description)) {
+                $errors['description'] = "La description est requise.";
+            }
+            if (empty($id_Cat)) {
+                $errors['id_Cat'] = "Le type est requis.";
+            }
+            if (empty($errors)) {
+                //ajouter une nouvelle image
+
+                $uploadDirectory = __DIR__ . '/../public/image/';  //remplacer par le chemin absolu de votre dossier image
+                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                    $fileTmpPath = $_FILES['image']['tmp_name'];
+                    $fileName = $_FILES['image']['name'];    // nom du fichier
+                    $fileSize = $_FILES['image']['size'];   // taille du fichier
+                    $fileType = $_FILES['image']['type'];   // type du fichier
+                    $fileNameCmps = explode(".", $fileName); // nom du fichier
+                    $fileExtension = strtolower(end($fileNameCmps)); // extension du fichier
+                    $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensions autorisées
+
+                    if (in_array($fileExtension, $allowedfileExtensions)) {
+                        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;   // md5 pour le nom de l'image unique
+                        $dest_path = $uploadDirectory . $newFileName;                    // destination du fichier
+
+                        if (move_uploaded_file($fileTmpPath, $dest_path)) {                   // deplacer le fichier
+                            $image = $newFileName;
+                        } else {
+                            echo 'There was an error moving the uploaded file.';
+                        }
+                    } else {
+                        echo 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
+                    }
+                }
+                //ajouter le service
+                $requete = $pdo->prepare("
+                INSERT INTO services
+                (nom_Ser, description, image, id_Cat)
+                VALUES
+                (:nom_Ser, :description, :image, :id_Cat)");
+                $requete->execute([
+                    'nom_Ser' => $nom_Ser,
+                    'description' => $description,
+                    'image' => $image,
+                    'id_Cat' => $id_Cat
+                ]);
+                header('Location:index.php?action=listService');
+                exit();
+                //afficher  le formulaire suite un click sur ajouter    
+            } 
+        } else {
+            // var_dump("inside addService GET request");
+            // die();
+
+            //afficher les categories
+            $requeteCat = $pdo->query(" SELECT * FROM cat");
+            $categories = $requeteCat->fetchAll();
+            require "view/admin/addService.php";
         }
-
-        $requete = $pdo->prepare("
-            UPDATE avis SET 
-            commentaire = :commentaire,
-            note = :note,
-            id_Services = :id_Services,
-            nom = :nom,
-            prenom = :prenom,
-            email = :email,
-            tel = :tel,
-            image = :image
-            WHERE id_Avis = :id
-        ");
-        $requete->execute([
-            'commentaire' => $commentaire,
-            'note' => $note,
-            'id_Services' => $id_Services,
-            'nom' => $nom,
-            'prenom' => $prenom,
-            'email' => $email,
-            'tel' => $tel,
-            'image' => $image,
-            'id' => $id
-        ]);
-
-        header('Location:index.php?action=listAvis');
     }
-
-    require 'view/admin/editAvis.php';
-}
-// supprimer Avis
-public function deleteAvis($id)
-{
-    $pdo = Connect::seConnecter();
-    $query = $pdo->prepare("DELETE FROM avis WHERE id_Avis = :id");
-    $query->execute(['id' => $id]);
-
-    header('Location:index.php?action=listAvis');
-}
+    public function deleteService($id)
+    {
+        $pdo = Connect::seConnecter();
+        $pdo->exec("DELETE FROM services WHERE id_Services = $id");
+        //var_dump("service supprime");
+       // die();
+        header('Location:index.php?action=listService');
+        exit();
+    }
 }

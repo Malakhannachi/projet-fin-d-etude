@@ -23,15 +23,15 @@
     <tbody>
         <?php foreach ($devis as $devi): ?>
             <tr>
-                <td><?php echo htmlspecialchars($devi['id_Devis']); ?></td>
+                <td><?php echo htmlspecialchars($devi['id_Dem']); ?></td>
                 <td><?php echo htmlspecialchars($devi['nom']); ?></td>
                 <td><?php echo htmlspecialchars($devi['prenom']); ?></td>
                 <td><?php echo htmlspecialchars($devi['tel']); ?></td>
                 <td><?php echo htmlspecialchars($devi['email']); ?></td>
                 <td><?php echo htmlspecialchars($devi['besoin']); ?></td>
                 <td>
-                    <a href="index.php?action=editDevis&id=<?php echo $devi['id_Devis']; ?>"><i class="fas fa-edit"></i></a>
-                    <a href="index.php?action=deleteDevis&id=<?php echo $devi['id_Devis']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce devis ?')"><i class="fa-solid fa-trash"></i></a>
+                    <a href="index.php?action=editDevis&id=<?php echo $devi['id_Dem']; ?>"><i class="fas fa-edit"></i></a>
+                    <a href="index.php?action=deleteDevis&id=<?php echo $devi['id_Dem']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce devis ?')"><i class="fa-solid fa-trash"></i></a>
                 </td>
             </tr>
         <?php endforeach; ?>

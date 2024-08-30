@@ -28,7 +28,7 @@ if (isset($_SESSION['user']['role'])) {
         </picture>
         <ul class="sec">
             <li><a href="index.php?action=accueil" class="item">Accueil</a></li>
-            <li><a href="index.php?action=service" class="item">Services <i class="fas fa-caret-down"></i></a>
+            <li class="item">Services <i class="fas fa-caret-down"></i></a>
                <!-- Menu déroulant -->
      
             <div class="dropdown-menu">
@@ -65,9 +65,9 @@ if (isset($_SESSION['user']['role'])) {
 
             </li>
             <li><a href="index.php?action=devis" class="item">Devis</a></li>
-            <li><a href="index.php?action=contact" class="item">Contact</a></li>
-            <?php if ($role == "admin") { ?> 
-                <li><a href="index.php?action=admin">Admin</a></li> <?php } ?>
+            <li><a href="index.php?action=listService" class="item">list services</a></li>
+            <li><a href="index.php?action=listDev" class="item">liste des devis</a></li>
+            <li><a href="index.php?action=listAvis" class="item">liste avis</a></li>
         </ul> 
         <!-- afficher le lien pour se connecter ou s'incrire -->
          <ul class="login">
@@ -76,7 +76,9 @@ if (isset($_SESSION['user']['role'])) {
                         <a href="index.php?action=logout" class="item">Se déconnecter</a>
                 <?php }   else { ?>
                     <li><a href="index.php?action=login" class="item">Se connecter</a></li>
-                    <li><a href="index.php?action=register" class="item">S'inscrire</a></li> 
+                    <?php if ($role == "admin") { ?> 
+                        <li><a href="index.php?action=register" class="item">S'inscrire</a></li> 
+                    <?php } ?>
 
                 <?php } ?> 
          </ul>

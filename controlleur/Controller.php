@@ -80,7 +80,7 @@ class Controller
             date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
-                        INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
+                        INSERT INTO demande_devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
                         VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Dem)");
                 $requeteDev->execute([
                     
@@ -144,9 +144,9 @@ class Controller
         // faire une requete pour recuperer les avis
         $requete = $pdo->prepare("SELECT * FROM avis LIMIT :lim OFFSET :offs");
         // bindvalue est une fonction qui permet de lier une variable a une requete 
-            $requete->bindValue(':lim', $avisPerPage, PDO::PARAM_INT); 
-            $requete->bindValue(':offs', $offset, PDO::PARAM_INT);
-            $requete->execute();
+        $requete->bindValue(':lim', $avisPerPage, PDO::PARAM_INT); 
+        $requete->bindValue(':offs', $offset, PDO::PARAM_INT);
+        $requete->execute();
 
         $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
 
@@ -184,23 +184,7 @@ class Controller
 
         require("view/serviceDet.php");
     }
-    public function admin()
-    {
-        $pdo = Connect::seConnecter();
-        $requete = $pdo->query("
-        SELECT devis.id_Devis, devis.date_Devis, devis.besoin, users.nom
-        FROM devis
-        INNER JOIN users ON devis.id_User = users.id_User; ");
-
-        $requeteAvis = $pdo->query("
-        SELECT avis.commentaire, avis.date_Avis, avis.note, services.nom_Ser, users.nom
-        FROM avis
-        INNER JOIN services ON services.id_Services = avis.id_Services
-        INNER JOIN users ON avis.id_User = users.id_User;  ");
-
-
-        require("view/admin.php");
-    }
+    
     //page pour afficher un msg de succées 
     public function secDev()
     {
@@ -252,7 +236,7 @@ class Controller
             
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
-                        INSERT INTO devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
+                        INSERT INTO demande_devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
                         VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Devis)");
                 $requeteDev->execute([
                     

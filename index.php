@@ -1,4 +1,6 @@
 <?php
+
+use Controlleur\AdminController;
 use Controlleur\Controller;
 use Controlleur\SecuritController;
 
@@ -8,6 +10,7 @@ spl_autoload_register(function ($class_name) {
 
 $ctrFrm = new Controller();
 $secuCtrl = new SecuritController();
+$adminCtrl = new AdminController();
 $id = isset($_GET['id']) ? $_GET["id"] : null; 
 
 if(isset($_GET['action'])) {
@@ -36,9 +39,7 @@ if(isset($_GET['action'])) {
         case
         "addDevis":$ctrFrm->addMyDevis();  //page devis
         break;
-        case
-        "delDev":$ctrFrm->delDev($id);
-        break;
+// x        
         case
         "avis":$ctrFrm->avis();
         break;
@@ -56,12 +57,40 @@ if(isset($_GET['action'])) {
         break;
         case
         "secDev":$ctrFrm->secDev();
-       // case
-       // "service":$ctrFrm->service();
-       // break;
-        case 
-        'serviceDet': $ctrFrm->serviceDet($id);
+        case
+        "listDev": $adminCtrl->listDev();
         break;
+        case
+        "editDevis": $adminCtrl->editDevis($id);
+        break;
+        case
+        "deleteDevis": $adminCtrl->deleteDevis($id);
+        break;
+        case
+        "listAvis": $adminCtrl->listAvis();
+        break;
+        case
+        "deleteAvis": $adminCtrl->deleteAvis($id);
+        break;
+        case
+        "editAvis": $adminCtrl->editAvis($id);
+        break;
+        case
+        "serviceDet": $ctrFrm->serviceDet($id);
+        break;
+        case 
+        "listService": $adminCtrl->listService();
+        break;
+        case
+        'editServices': $adminCtrl->editServices($id);
+        break;
+        case
+        "addService": $adminCtrl->addService();
+        break;
+        case
+        "deleteService": $adminCtrl->deleteService($id);
+        break;
+        
            
       
         

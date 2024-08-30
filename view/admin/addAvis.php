@@ -14,6 +14,7 @@
     </div> 
     <div class="form devis-background2" >
     <h2 class="title-devis1">Ajouter un Avis</h2>
+    <!--formulaire pour ajouter un service -->
             <form action="index.php?action=addAvis" method="post" class="formulaire" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" pour l'image -->
                 <div class="form-group " >
                     <div class="nom">

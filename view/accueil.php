@@ -33,7 +33,13 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
                 <div class="card-content">
                     <h4 class="card-title"><?php echo htmlspecialchars($service['nom_Ser']  );?></h4>
                     <p class="card-text">
-                    <?php echo htmlspecialchars($service['description'] );?>
+                    <?php 
+                    if
+                        (strlen($service['description']) > 100)
+                        echo substr (htmlspecialchars($service['description']), 0, 100)."...";   // substr afficher seulement les 60 premiers caractères avec le ...
+                        else
+                        echo htmlspecialchars($service['description']);
+                        ?>
                     </p>
                     <a href="index.php?action=serviceDet&id=<?php echo htmlspecialchars($service['id_Services'] );?>" ><button class="btn">Voir plus</button></a> 
                 </div>
