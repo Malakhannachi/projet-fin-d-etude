@@ -592,7 +592,7 @@ option{
 }
 #services-industriaux{
     width: 100%;
-    height: 100vh;
+    
     display: flex;
     flex-direction:column;
     align-items: center;
@@ -653,3 +653,30 @@ option{
     border-radius: 5px;
     border: none;
 }
+
+/*--===== liste service  ========--*/
+#all-devis{
+    width: 100%;
+    display: flex;
+    flex-direction:column;
+    justify-content: flex-start;
+    background-color: #F3F5F7;
+    padding-bottom: 120px;
+    padding-top: 100px;
+}
+ .table-devis {
+     width: 100%;
+     border: #132535 1px solid;
+     border-collapse: collapse;
+     margin-top: 20px;
+     margin-bottom: 20px;
+
+ }
+ .table-devis td, .table-devis th {
+     border: #132535 1px solid;
+     padding: 10px;
+     text-align: center;
+     color: #132535;
+     
+ }
+ 

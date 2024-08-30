@@ -18,6 +18,7 @@
             <th>Description</th>
             <th>Image</th>
             <th>nom de catégorie</th>
+            <th>Actions</th>
             
         </tr>
     </thead>

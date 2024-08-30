@@ -117,13 +117,42 @@ class AdminController
             $prenom = $_POST['prenom'];  
             $commentaire = $_POST['commentaire'];
             $note = $_POST['note'];
+            $image = $_FILES['image']['name'];
 
             // var_dump($nom, $prenom, $commentaire, $note);
             // die();
+            // modifier l'image
+            $uploadDirectory = __DIR__ . '/../public/image/';  //remplacer par le chemin absolu de votre dossier image
+
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                //var_dump($_FILES['image']['name']);
+                //die();
+
+                $fileTmpPath = $_FILES['image']['tmp_name'];
+                $fileName = $_FILES['image']['name'];    // nom du fichier
+                $fileSize = $_FILES['image']['size'];   // taille du fichier
+                $fileType = $_FILES['image']['type'];   // type du fichier
+                $fileNameCmps = explode(".", $fileName); // nom du fichier
+                $fileExtension = strtolower(end($fileNameCmps)); // extension du fichier
+                $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensions autorisées
+
+                if (in_array($fileExtension, $allowedfileExtensions)) {
+                    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;   // md5 pour le nom de l'image unique
+                    $dest_path = $uploadDirectory . $newFileName;                    // destination du fichier
+
+                    if (move_uploaded_file($fileTmpPath, $dest_path)) {                   // deplacer le fichier
+                        $image = $newFileName;
+                    } else {
+                        echo 'There was an error moving the uploaded file.';
+                    }
+                } else {
+                    echo 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
+                }
+            }
 
             $requete = $pdo->prepare("
             UPDATE avis 
-            SET nom = :nom, prenom = :prenom, commentaire = :commentaire, note = :note
+            SET nom = :nom, prenom = :prenom, commentaire = :commentaire, note = :note, image = :image
             WHERE id_Avis = :id
             ");
             $requete->execute([
@@ -131,13 +160,14 @@ class AdminController
                 'prenom' => $prenom,
                 'commentaire' => $commentaire,
                 'note' => $note,
+                'image' => $image,
                 'id' => $id
             ]);
 
             header('Location:index.php?action=listAvis');
             exit();
         } else {
-
+            // afficher le formulaire 
             $requete = $pdo->prepare("SELECT * FROM avis WHERE id_Avis = :id");
             $requete->execute(['id' => $id]);
             $avis = $requete->fetch(PDO::FETCH_ASSOC);

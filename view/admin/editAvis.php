@@ -2,8 +2,8 @@
 
 <section id="hero-devis">    
     
-        <h1 class="devis-hero">Ajouter un avis</h1>
-        <p class="text-hero">Votre satisfaction est notre priorité. Partagez votre avis !</p>
+        <h1 class="devis-hero">Modifier un avis</h1>
+        
 
 </section>
 
@@ -27,6 +27,7 @@
                         
                     </div>
                 </div> 
+                
                 <div class="list">
                     <label for="id_services" class="label-devis">Note</label>
                     <select name="note" id="id_services" class="input">
@@ -45,6 +46,13 @@
                         <?php echo $avis['commentaire']; ?>
                     </textarea>
                 </div>
+                <div class="nom">
+                        <label for="image" class="label-devis">Image</label>
+                        <input type="file" name="image" id="image" class="input" placeholder="image">
+                        <?php if (!empty($_SESSION["errors"]['image'])): ?>
+                            <div class="error"><?php echo $_SESSION["errors"]['image']; ?></div>
+                        <?php endif; ?>
+                    </div>
                 
                 <div class="list">
                     <button class="btn-avis" type="submit" name="submit">Envoyer <span>&#x2197;</span></button>

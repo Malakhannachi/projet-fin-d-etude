@@ -33,10 +33,10 @@ if (isset($_SESSION['user']['role'])) {
      
             <div class="dropdown-menu">
                     <ul>
-                        <li class="item1">Nettoyage <i class="fas fa-caret-right"></i></a>
+                        <li ><a href="index.php?action=listServicesParCat" class="item1">Nettoyage <i class="fas fa-caret-right"></i></a>
                             <div class="dropdown-menu1">
                                 <ul>
-                                    <li><a href="index.php?action=serviceDet&id=1" class="item1">Nettoyage Industriel</a></li>
+                                    <li><a href="index.php?action=serviceDet&id" class="item1">Nettoyage Industriel</a></li>
                                     <li><a href="index.php?action=service" class="item1">Nettoyage Particulier</a></li>
                                 </ul>
 

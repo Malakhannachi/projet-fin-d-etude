@@ -19,6 +19,9 @@ if(isset($_GET['action'])) {
         "accueil":$ctrFrm->accueil(); 
         break;
         case
+        "listServicesParCat":$ctrFrm->listServicesParCat($id);
+        break;
+        case
         "addDevAcceuil":$ctrFrm->addDevAcceuil();
         break;
         case
@@ -31,15 +34,11 @@ if(isset($_GET['action'])) {
         "logout":$secuCtrl->logout();
         break;
         case
-        "admin":$ctrFrm->admin();
-        break;
-        case
         "devis":$ctrFrm->devis();
         break;
         case
         "addDevis":$ctrFrm->addMyDevis();  //page devis
-        break;
-// x        
+        break;      
         case
         "avis":$ctrFrm->avis();
         break;
@@ -90,6 +89,8 @@ if(isset($_GET['action'])) {
         case
         "deleteService": $adminCtrl->deleteService($id);
         break;
+        
+
         
            
       

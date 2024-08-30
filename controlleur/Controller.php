@@ -7,7 +7,17 @@ use PDO;
 
 class Controller
 {
-
+    public function listServicesParCat($id)
+    {
+        $pdo = Connect ::seConnecter();
+        $requete = $pdo->prepare("
+            SELECT *    
+            FROM cat   
+            INNER JOIN services ON cat.id_Cat = services.id_Cat
+        ");
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function accueil()
     {
         //section des services
