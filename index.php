@@ -4,7 +4,7 @@ use Controlleur\AdminController;
 use Controlleur\Controller;
 use Controlleur\SecuritController;
 
-spl_autoload_register(function ($class_name) {
+spl_autoload_register(function ($class_name) { //chargement des classes
     require $class_name.'.php';
 });
 
@@ -17,9 +17,6 @@ if(isset($_GET['action'])) {
     switch($_GET['action']) {
         case 
         "accueil":$ctrFrm->accueil(); 
-        break;
-        case
-        "listServicesParCat":$ctrFrm->listServicesParCat($id);
         break;
         case
         "addDevAcceuil":$ctrFrm->addDevAcceuil();
@@ -57,7 +54,13 @@ if(isset($_GET['action'])) {
         case
         "secDev":$ctrFrm->secDev();
         case
+        "listDemandeDevis": $adminCtrl->listDemandeDevis();
+        break;
+        case
         "listDev": $adminCtrl->listDev();
+        break;
+        case
+        "pageOffre": $adminCtrl->pageOffre($id);
         break;
         case
         "editDevis": $adminCtrl->editDevis($id);
@@ -88,6 +91,11 @@ if(isset($_GET['action'])) {
         break;
         case
         "deleteService": $adminCtrl->deleteService($id);
+        break;
+        case
+        "traitmentDevis": $adminCtrl->traitmentDevis($id);
+        break;
+        default: $ctrFrm->accueil();
         break;
         
 

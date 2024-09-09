@@ -28,7 +28,7 @@
             <tr>
                 <td><?php echo htmlspecialchars($ser['id_Services']); ?></td>
                 <td><?php echo htmlspecialchars($ser['nom_Ser']); ?></td>
-                <td><?php echo htmlspecialchars($ser['description']); ?></td>
+                <td class="desc"><?php echo htmlspecialchars($ser['description']); ?></td>
                 <td><img class="ser-img" src="public/image/<?php echo htmlspecialchars($ser['image']); ?>" alt="Image of <?php echo htmlspecialchars($ser['nom_Ser']); ?>" ></td>
                 <td><?php echo htmlspecialchars($ser['nom_Cat']); ?></td>
                 

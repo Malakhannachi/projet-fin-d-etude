@@ -11,19 +11,22 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
             <strong>Nous sommes là pour vous faciliter la vie !</strong>
         </p>
         <p class="par">
-        Des services de qualité pour votre maison et votre entreprise : nettoyage, bricolage, installations électriques et vidéosurveillance
+            Des services de qualité pour votre maison et votre entreprise : nettoyage, bricolage, installations électriques et vidéosurveillance
         </p>
         <a href="index.php?action=devis" ><button class="btn">Devis Express <span>&#x2197;</span></button></a>
     </div>
+    
 </section>
 
 <!--===== Section services =======-->
 
 <section id="services">
-    <h2 class="title">Nos services</h2>
-    <p class="description">
-        Chez <strong>MK service</strong>, nous offrons des services de nettoyage, déménagement et bricolage pour simplifier votre vie avec des solutions fiables et personnalisées
-    </p>
+    <div class="par-sec">
+        <h2 class="title">Nos services</h2>
+        <p class="description">
+            Chez <strong>MK services</strong>, nous offrons des services de nettoyage, déménagement et bricolage pour simplifier votre vie avec des solutions fiables et personnalisées
+        </p>
+    </div>
     
     <div class="bloc">
         <?php foreach($services as $service):?>
@@ -94,14 +97,14 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
         <form action="index.php?action=addDevAcceuil" method="post" class="formulaire">
         <div class="form-group">
             <div class="nom">
-                <label for="nom">Nom</label>
+                <label for="nom" class="label-devis">Nom</label>
                 <input type="text" name="nom" id="nom" class="input" placeholder="Nom" value="<?php echo htmlspecialchars($nom ?? ''); ?>">
                 <?php if (!empty($errors['nom'])): ?>
                     <div class="error"><?php echo $errors['nom']; ?></div>
                 <?php endif; ?>
             </div>
             <div class="nom">
-                <label for="prenom">Prenom</label>
+                <label for="prenom" class="label-devis">Prenom</label>
                 <input type="text" name="prenom" id="prenom" class="input" placeholder="Prénom" value="<?php echo htmlspecialchars($prenom ?? ''); ?>">
                 <?php if (!empty($errors['prenom'])): ?>
                     <div class="error"><?php echo $errors['prenom']; ?></div>
@@ -109,14 +112,14 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
             </div>
         </div>
         <div class="list">
-            <label for="tel">Numéro de téléphone</label>
+            <label for="tel" class="label-devis">Numéro de téléphone</label>
             <input type="tel" name="tel" id="tel" class="input" placeholder="06 00 00 00 00" value="<?php echo htmlspecialchars($tel ?? ''); ?>">
             <?php if (!empty($errors['tel'])): ?>
                 <div class="error"><?php echo $errors['tel']; ?></div>
             <?php endif; ?>
         </div>
         <div class="list">
-            <label for="email">Email</label>
+            <label for="email" class="label-devis">Email</label>
             <input type="email" name="email" id="email" class="input" placeholder="Email" value="<?php echo htmlspecialchars($email ?? ''); ?>">
             <?php if (!empty($errors['email'])): ?>
                 <div class="error"><?php echo $errors['email']; ?></div>
@@ -132,7 +135,7 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
                     </select>
                 </div>
         <div class="list">
-            <label for="besoin">Votre besoin</label>
+            <label for="besoin" class="label-devis">Votre besoin</label>
             <textarea name="besoin" id="besoin" rows="5" placeholder="Votre besoin"><?php echo htmlspecialchars($besoin ?? ''); ?></textarea>
             <?php if (!empty($errors['besoin'])): ?>
                 <div class="error"><?php echo $errors['besoin']; ?></div>

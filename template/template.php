@@ -7,6 +7,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
         <link rel = "stylesheet" href = "public/css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <title>PFE</title>
        
 </head>
@@ -14,7 +17,11 @@
 <body>
 
 <?php
-
+use Controlleur\Controller;
+$ctrFrm = new Controller();
+$cate = $ctrFrm-> listServicesParCat(); //  utiluser la fonction pour afficher les données de tableau categorie  de la base de données 
+//var_dump($cate);
+//die();
 if (isset($_SESSION['user']['role'])) {
     $role = $_SESSION['user']['role'];
 } else {
@@ -33,41 +40,29 @@ if (isset($_SESSION['user']['role'])) {
      
             <div class="dropdown-menu">
                     <ul>
-                        <li ><a href="index.php?action=listServicesParCat" class="item1">Nettoyage <i class="fas fa-caret-right"></i></a>
+                    <?php foreach ($cate as $cat): ?>
+                        <li ><a class="item1"><?php echo $cat['nom_Cat']; ?><i class="fas fa-caret-right"></i></a>
                             <div class="dropdown-menu1">
                                 <ul>
-                                    <li><a href="index.php?action=serviceDet&id" class="item1">Nettoyage Industriel</a></li>
-                                    <li><a href="index.php?action=service" class="item1">Nettoyage Particulier</a></li>
+                                    <!--===== $cat['services'] =======-->
+                                    <?php  // boucle pour afficher les services
+                                    foreach ($cat['services'] as $ser): ?> 
+                                    <li><a href="index.php?action=serviceDet&id= <?php echo $ser['id_Services'] ; ?>" class="item1"><?php echo $ser['nom_Ser'] ?></a></li>
+                                    <?php endforeach; ?>
                                 </ul>
-
+                    
                             </div>
                         </li>
-                        <li class="item1">Déménagement et Livraison <i class="fas fa-caret-right"></i></a>
-                        <div class="dropdown-menu1">
-                                <ul>
-                                    <li><a href="index.php?action=serviceDet&id=2" class="item1">Déménagement</a></li>
-                                    <li><a href="index.php?action=service" class="item1">Livraison</a></li>
-                                </ul>
-
-                            </div>
-                        </li>
-                        <li class="item1">Bricolage <i class="fas fa-caret-right"></i></a>
-                            <div class="dropdown-menu1">
-                                <ul>
-                                    <li><a href="index.php?action=service" class="item1">Peinture</a></li>
-                                    <li><a href="index.php?action=service" class="item1">Jardinage</a></li>
-                                </ul>
-
-                            </div>
-                        </li>
+                        <?php endforeach; ?>
+                        
                     </ul>
                 </div>
 
             </li>
             <li><a href="index.php?action=devis" class="item">Devis</a></li>
             <li><a href="index.php?action=listService" class="item">list services</a></li>
-            <li><a href="index.php?action=listDev" class="item">liste des devis</a></li>
-            <li><a href="index.php?action=listAvis" class="item">liste avis</a></li>
+            <li><a href="index.php?action=listDemandeDevis" class="item">liste des devis</a></li>
+            <li><a href="index.php?action=listDev" class="item">liste devis</a></li>
         </ul> 
         <!-- afficher le lien pour se connecter ou s'incrire -->
          <ul class="login">

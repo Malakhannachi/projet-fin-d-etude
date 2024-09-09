@@ -10,19 +10,21 @@ class AdminController
 {
     /*--===== Section Devis ========--*/
     //liste devis
-    public function listDev()
+    public function listDemandeDevis()
     {
 
         $pdo = Connect::seConnecter();
-        $requete = $pdo->query("SELECT * 
-            FROM demande_devis");
+        $requete = $pdo->query("
+        SELECT * 
+        FROM demande_devis");
         $devis = $requete->fetchAll();
 
         // var_dump($devis);
         // die();
 
-        require "view/admin/listDev.php";
+        require "view/admin/listDemandeDevis.php";
     }
+    
 
     // modifier devis
     public function editDevis($id)
@@ -74,6 +76,107 @@ class AdminController
         header('Location:index.php?action=listDev');
         exit();
     }
+// Afficher liste des devis
+    public function listDev() 
+    {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("
+        SELECT *
+        FROM devis 
+        INNER JOIN demande_devis ON devis.id_Dem = demande_devis.id_Dem");
+        $dev = $requete->fetchAll();
+        require "view/admin/listDev.php";
+    }
+
+    // afficher page traiter un devis
+    public function pageOffre($id)
+
+    {
+        //var_dump($id);
+        //die();
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        SELECT * 
+        FROM devis
+        INNER JOIN demande_devis ON devis.id_Dem = demande_devis.id_Dem 
+        WHERE devis.id_devis = :id
+        ");
+        $requete->execute(['id' => $id]);
+        $devis = $requete->fetch(PDO::FETCH_ASSOC);
+        //var_dump($devis);
+        //die();
+        require "view/admin/pageOffre.php";
+    }
+
+    // traitter un devis 
+    public function traitmentDevis($id)
+    {
+        $pdo = Connect::seConnecter();
+        if (isset($_POST['submit'])) {
+            $nom_Ser = filter_input(INPUT_POST, "nom_Ser", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $qte = filter_input(INPUT_POST, "qte", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $prix_ht = filter_input(INPUT_POST, "prix_ht", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $tva = filter_input(INPUT_POST, "tva", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $montant = filter_input(INPUT_POST, "montant", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $ttc = filter_input(INPUT_POST, "ttc", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $intitule = filter_input(INPUT_POST, "intitule", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $erreur = [];
+            if (empty($nom_Ser)) {
+                $erreur['nom_Ser'] = "Le nom du service est requis";
+            }
+            if (empty($qte)) {
+                $erreur['qte'] = "La quantité est requise";
+            }
+            if (empty($prix_ht)) {
+                $erreur['prix_ht'] = "Le prix HT est requis";
+            }
+            if (empty($tva)) {
+                $erreur['tva'] = "La TVA est requise";
+            }
+            if (empty($montant)) {
+                $erreur['montant'] = "Le montant est requis";
+            }
+            if (empty($ttc)) {
+                $erreur['ttc'] = "Le montant TTC est requis";
+            }
+
+            //var_dump($tva);
+            //die();
+            
+            $requete = $pdo->prepare("
+            INSERT INTO devis ( qte, prix_ht, tva, id_Dem, date_dev, intitule) 
+            VALUES ( :qte, :prix_ht, :tva, :id_Dem, :date_dev, :intitule)");
+            $requete->execute([
+                'qte' => $qte,
+                'prix_ht' => $prix_ht,
+                'tva' => $tva,
+                'id_Dem' => $id,
+                'date_dev' => date('Y-m-d'),
+                'intitule' => $intitule
+            ]);
+            header('Location:index.php?action=listDev');
+            
+            
+        }else {
+           
+            // recuprer les données de table demande devis 
+            $requete = $pdo->prepare("
+                SELECT * FROM demande_devis
+                INNER JOIN services ON demande_devis.id_Services = services.id_Services
+                WHERE demande_devis.id_Dem = :id
+                ");
+            $requete->execute(['id' => $id]);
+            $demandeDevis = $requete->fetch(PDO::FETCH_ASSOC); 
+            $requeteDevis = $pdo->prepare("SELECT * FROM devis ORDER BY id_devis DESC LIMIT 1");
+            $requeteDevis->execute();
+            $devis = $requeteDevis->fetch(PDO::FETCH_ASSOC);
+            // var_dump($devis);
+            // die();
+            
+            require "view/admin/traitmentDevis.php";
+        }
+    }
 /*--===== Section Avis ========--*/
     // lister Avis
 
@@ -91,6 +194,7 @@ class AdminController
 
         require "view/admin/listAvis.php";
     }
+    
 
     // supprimer Avis
 

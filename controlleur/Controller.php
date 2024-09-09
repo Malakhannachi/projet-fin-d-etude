@@ -7,7 +7,7 @@ use PDO;
 
 class Controller
 {
-    public function listServicesParCat($id)
+    public function listServicesParCat()   // afficher le navigateur des services par categorie
     {
         $pdo = Connect ::seConnecter();
         $requete = $pdo->prepare("
@@ -16,7 +16,22 @@ class Controller
             INNER JOIN services ON cat.id_Cat = services.id_Cat
         ");
         $requete->execute();
-        return $requete->fetchAll(PDO::FETCH_ASSOC);
+        $results = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+
+        // var_dump($results);
+        
+        $cats = [];  // tableau vide pour remplir le navigateur
+        foreach ($results as $row) {
+            $cats[$row['id_Cat']]['nom_Cat'] = $row['nom_Cat']; // remplir tableau par les categories 
+            $cats[$row['id_Cat']]['services'][] = [
+                'id_Services' => $row['id_Services'], // [] pour ajouter des services suite à base de l'id
+                'nom_Ser' => $row['nom_Ser'],
+            ];
+        }
+        //var_dump($cats[1]);
+        //die();
+        return $cats;
     }
     public function accueil()
     {
@@ -40,13 +55,10 @@ class Controller
         // section devis
         // obtenir tous les services 
         $requeteDev = $pdo->query("
-        SELECT *
-        FROM services ");
+            SELECT *
+            FROM services ");
         $requeteDev->execute();
         $serDev = $requeteDev->fetchAll(PDO::FETCH_ASSOC);
-
-
-
         require("view/accueil.php");
         
     }
@@ -88,6 +100,8 @@ class Controller
                 $errors['besoin'] = "Le besoin est requis.";
             }
             date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
+            $dateDuJour = date("Y-m-d H:i:s");
+            
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
                         INSERT INTO demande_devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
@@ -100,7 +114,7 @@ class Controller
                         "email" => $email,
                         "id_Services" => $liste_Service,
                         "besoin" => $besoin,
-                        "date_Dem" => date("Y-m-d H:i:s")  // changer le format de la datetime en francais
+                        "date_Dem" => $dateDuJour  // changer le format de la datetime en francais
 
                     ]);
                     
