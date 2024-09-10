@@ -1,3 +1,4 @@
+
 <section id="hero-devis">    
     <h1 class="devis-hero"> Devis</h1>
     
@@ -24,7 +25,7 @@
     
     ?>
     <div>
-        <h3>Devis n°<?= $devis['id_devis'] ?></h3>
+        <h3>Devis n°<?= $devis['id_devis'] ?>/2024</h3>
         <p>Le <?= $newDate ?></p>
         <p>Par <?= $devis['nom'] ?></p>
         <p>Adresse email : <?= $devis['email'] ?></p>
@@ -32,9 +33,15 @@
         <p>Adresse : <?= $devis['adresse'] ?></p>
         <p><?= $devis['CodePostal'] . ' ' . $devis['ville'] ?></p>
     </div>
-    <input type="button" onclick="printDevis()" value="imprimer le devis!" />
+    
     </div>
     <div id="impression-devis">
+        <?php 
+        $totalTva = $devis['qte'] * $devis['prix_ht'] ;
+        $total = $totalTva * (1 + $devis['tva'] / 100)  ;
+        ?>
+        
+       
         <table class="table-devis">
             <thead>
         <tr>
@@ -51,35 +58,36 @@
             <td><?= $devis['besoin'] ?></td>
             <td><?= $devis['qte'] ?></td>
             <td><?= $devis['prix_ht'] ?></td>
-            <td></td>
+            <td><?= number_format($totalTva, 2) ?></td>
             <td><?= $devis['tva'] ?></td>
-            <td></td>
+            <td><?= number_format($total , 2)  ?> 
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" class="colonne">Total  : <?= $total  ?></td>
         </tr>
         </tbody>
 
         </table>
-        
-
-
     </div>
     <div>
         <p>
-            montant de la de la devix est de : <?= $devis['prix_ht'] ?>
+            montant de la de la devix est de : <?= $total  ?>
         </p>
         <p>
             validité du devis : 3 mois 
         </p>
         <p>
-            merci pour votre confiance , <?= $devis['nom'] ?>, Nous restons à votre disposition pour toute information complémentaire ou assistance supplémentaire
+            Merci pour votre confiance , <?= $devis['nom'] ?>, Nous restons à votre disposition pour toute information complémentaire ou assistance supplémentaire
         </p>
         <p>
             Cordialement,
         </p>
     </div>
 
-
+    <a href="index.php?action=pageOffre&id_devis=<?= $devis['id_devis'] ?>"  class="btn-avis" > imprimer le Devis</a>
 </section>
-<script>
+<!--<script>
 function printDevis() {
      var printContents = document.getElementById('impression-devis').innerHTML;
      var originalContents = document.body.innerHTML;
@@ -90,7 +98,7 @@ function printDevis() {
 
      document.body.innerHTML = originalContents;
 }
-</script>
+</script> -->
 
 
 <?php

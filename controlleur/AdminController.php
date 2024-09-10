@@ -3,6 +3,8 @@
 namespace Controlleur;
 
 use Model\Connect;
+require_once 'vendor/autoload.php';
+use Dompdf\Dompdf;
 use PDO;
 
 
@@ -90,23 +92,38 @@ class AdminController
 
     // afficher page traiter un devis
     public function pageOffre($id)
-
-    {
-        //var_dump($id);
-        //die();
-        $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
+{
+    // Connexion à la base de données et récupération des données du devis
+    $pdo = Connect::seConnecter();
+    $requete = $pdo->prepare("
         SELECT * 
         FROM devis
         INNER JOIN demande_devis ON devis.id_Dem = demande_devis.id_Dem 
         WHERE devis.id_devis = :id
-        ");
-        $requete->execute(['id' => $id]);
-        $devis = $requete->fetch(PDO::FETCH_ASSOC);
-        //var_dump($devis);
-        //die();
-        require "view/admin/pageOffre.php";
+    ");
+    $requete->execute(['id' => $id]);
+    $devis = $requete->fetch(PDO::FETCH_ASSOC);
+    //var_dump($devis);
+    //die();
+    if (!$devis) {
+        echo "Le devis n'existe pas.";
+        return;
     }
+
+    // Commencer la mise en tampon de sortie pour capturer le contenu HTML de la page
+    ob_start();
+    include('view/admin/pageOffre.php');
+    $html = ob_get_clean();
+
+
+    // Générer le PDF
+   
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+    $dompdf->stream("offre_{$id}.pdf", ['Attachment' => 0]);
+}
 
     // traitter un devis 
     public function traitmentDevis($id)

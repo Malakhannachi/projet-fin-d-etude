@@ -11,7 +11,7 @@
 <table class="table-devis">
     <thead>
         <tr>
-            
+            <th>ID</th>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Téléphone</th>
@@ -19,7 +19,6 @@
             <th>Besoin</th>
             <th>Nbre de jour</th>
             <th>Prix HTVA</th>
-            
             <th>Actions</th>
     
         </tr>
@@ -27,7 +26,7 @@
     <tbody>
         <?php foreach ($dev as $devi): ?>
             <tr>
-
+                <td><?php echo htmlspecialchars($devi['id_devis']); ?></td>
                 <td><?php echo htmlspecialchars($devi['nom']); ?></td>
                 <td><?php echo htmlspecialchars($devi['prenom']); ?></td>
                 <td><?php echo htmlspecialchars($devi['tel']); ?></td>
