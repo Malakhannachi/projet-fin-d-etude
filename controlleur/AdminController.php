@@ -105,16 +105,16 @@ class AdminController
     $devis = $requete->fetch(PDO::FETCH_ASSOC);
     //var_dump($devis);
     //die();
-    if (!$devis) {
+   if (!$devis) {
         echo "Le devis n'existe pas.";
         return;
     }
 
     // Commencer la mise en tampon de sortie pour capturer le contenu HTML de la page
-    ob_start();
-    include('view/admin/pageOffre.php');
-    $html = ob_get_clean();
-
+    
+    require('view/admin/pageOffre.php');
+    $html = ob_get_contents();
+    
 
     // Générer le PDF
    
@@ -122,7 +122,7 @@ class AdminController
     $dompdf->loadHtml($html);
     $dompdf->setPaper('A4', 'portrait');
     $dompdf->render();
-    $dompdf->stream("offre_{$id}.pdf", ['Attachment' => 0]);
+    $dompdf->stream("offre_{$devis['id_Dem']}.pdf", ['Attachment' => 0]);
 }
 
     // traitter un devis 

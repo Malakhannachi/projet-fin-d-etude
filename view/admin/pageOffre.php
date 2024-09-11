@@ -42,7 +42,7 @@
         ?>
         
        
-        <table class="table-devis">
+        <table class="table-devis table">
             <thead>
         <tr>
             <th>Désignation</th>
@@ -63,9 +63,7 @@
             <td><?= number_format($total , 2)  ?> 
             </td>
         </tr>
-        <tr>
-            <td colspan="6" class="colonne">Total  : <?= $total  ?></td>
-        </tr>
+        
         </tbody>
 
         </table>

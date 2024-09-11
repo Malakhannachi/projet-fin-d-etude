@@ -167,6 +167,7 @@ ul{
 .btn:hover{
     background-color: #142637;
 }
+
 /*--===== Section services ========--*/
 #services{
     width: 100%;
@@ -297,7 +298,7 @@ ul{
 .btn-avis{
     width: 200px;
     height: 40px;
-    margin-top: 20px;
+    
     border-radius: 5px;
     border: none;
     background-color: #FFD028;
@@ -305,6 +306,10 @@ ul{
     font-weight: bold;
     font-size: large;
     cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
 }
 .stars{
     color: #FFD028;
@@ -759,7 +764,32 @@ option{
     background-color: #F3F5F7;
     padding: 20px;
 }
-.colonne {
-    text-align: right;
+.table-devis table {
+    
+    height: 200px;
 }
+
+/*--===== secDev ========--*/
+
+#success {  
+        width: 100%;
+        flex-direction: row;
+        display: flex;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../image/smilie.png") ; /*image plus sembre*/
+        background-repeat: no-repeat; /*n'est pas repeate*/
+        background-size: cover; /*la largeur et la hauteur sont respectivement 100% de la largeur et de la hauteur de l'image*/
+        
+    } 
+    .title-succes{
+        font-size: 50px;
+        color: #F3F5F7;
+        padding: 20px;
+    }
+    .text-succes{
+        font-size: 20px;
+        color: #F3F5F7;
+        padding: 20px;
+    }
+
+
  

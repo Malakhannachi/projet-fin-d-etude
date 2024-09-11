@@ -16,6 +16,7 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
         <a href="index.php?action=devis" ><button class="btn">Devis Express <span>&#x2197;</span></button></a>
     </div>
     
+    
 </section>
 
 <!--===== Section services =======-->
@@ -146,6 +147,13 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
         </div>
     </form>
         </div>
+
+</section>
+
+<!--===== Section portfolio =======-->
+
+<section>
+     
 
 </section>
        
