@@ -28,10 +28,6 @@
                     <label for="email" class="label-login">Email</label>
                     <input type="email" name="email" id="email" placeholder="email"class="input-login"><br>
                 </div>
-                <div class="list">
-                    <label for="password" class="label-login">Mot de passe</label>
-                    <input type="password" name="mdp" id="password" placeholder="password" class="input-login"><br>
-                </div>
 
                 <div class="list">
 

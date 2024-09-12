@@ -153,7 +153,12 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
 <!--===== Section portfolio =======-->
 
 <section>
-     
+     <h2>Nos Réalisations pour MKServices</h2>
+
+        <div>
+            <img src="../view/img/intercarrat.png" alt="entreprise intercarrat">
+            <img src="../view/img/voltac.png" alt="entreprise voltac">
+        </div>
 
 </section>
        
