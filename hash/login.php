@@ -19,7 +19,7 @@
         <label for="password" class="label-login">Mot de passe</label>
         <input type="password" name="mdp" id="password" placeholder="password" class="input-login"><br>
 
-        <a href="index.php?action=accueil" ><button class="btn">Se connecter <span>&#x2197;</span></button></a>
+        <a href="index.php?action=accueil" ><button class="btn" type="submit" name="submit">Se connecter <span>&#x2197;</span></button></a>
 
     </div>
    </form>

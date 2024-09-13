@@ -83,7 +83,7 @@
         </p>
     </div>
 
-    <a href="index.php?action=pageOffre&id_devis=<?= $devis['id_devis'] ?>"  class="btn-avis" > imprimer le Devis</a>
+    <a href="index.php?action=imprimDevis&id=<?= $devis['id_devis'] ?>"  class="btn-avis" > imprimer le Devis</a>
 </section>
 <!--<script>
 function printDevis() {

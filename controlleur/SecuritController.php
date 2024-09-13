@@ -8,13 +8,17 @@ class SecuritController
     {
         if (isset($_POST['submit']))
         {
-            var_dump("inside post");
+            // var_dump("inside post");
             $pdo = Connect::seConnecter();
             $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input (INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
             $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // var_dump($nom , $prenom , $email , $mdp , $mdp2);
+            // die();
+            
             if ($nom && $prenom && $email && $mdp && $mdp2) 
             {
                 //verifier si email existe
@@ -29,8 +33,7 @@ class SecuritController
                     //redirection vers login
                     header('location: index.php?action=login');
                     exit();
-                }else
-                {
+                } else {
                     //verifier si mdp = mdp2
                     if ($mdp == $mdp2) 
                     {

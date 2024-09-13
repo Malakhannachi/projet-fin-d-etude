@@ -53,6 +53,7 @@ if(isset($_GET['action'])) {
         break;
         case
         "secDev":$ctrFrm->secDev();
+        break;
         case
         "listDemandeDevis": $adminCtrl->listDemandeDevis();
         break;
@@ -61,6 +62,9 @@ if(isset($_GET['action'])) {
         break;
         case
         "pageOffre": $adminCtrl->pageOffre($id);
+        break;
+        case
+        "imprimDevis": $adminCtrl->imprimDevis($id);
         break;
         case
         "editDevis": $adminCtrl->editDevis($id);

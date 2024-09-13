@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,10 +24,11 @@ $ctrFrm = new Controller();
 $cate = $ctrFrm-> listServicesParCat(); //  utiluser la fonction pour afficher les données de tableau categorie  de la base de données 
 //var_dump($cate);
 //die();
-if (isset($_SESSION['user']['role'])) {
-    $role = $_SESSION['user']['role'];
+if (isset($_SESSION['user']['role'])) // si l'utilisateur est connecté
+{
+    $role = $_SESSION['user']['role']; //session prend valeur du role
 } else {
-    $role = 'user';
+    $role = 'user'; // sinon le role est 'user'
 }
 ?>
 <!--===== Navbar =======-->
@@ -60,9 +63,15 @@ if (isset($_SESSION['user']['role'])) {
 
             </li>
             <li><a href="index.php?action=devis" class="item">Devis</a></li>
-            <li><a href="index.php?action=listService" class="item">list services</a></li>
-            <li><a href="index.php?action=listDemandeDevis" class="item">liste des devis</a></li>
-            <li><a href="index.php?action=listDev" class="item">liste devis</a></li>
+            <li><a href="index.php?action=contact" class="item">Contact</a></li>
+           <?php if($role == 'admin')   // si l'utilisateur est admin on affiche les liens
+           {?>
+           <a href="index.php?action=listAvis" class="item"> liste des Avis</a>
+           <a href="index.php?action=listService" class="item">liste des services</a>
+           <a href="index.php?action=listDev" class="item">liste des devis</a>
+           <a href="index.php?action=listDemandeDevis" class="item">liste des demandes de devis</a>
+                 <?php } ?>
+            
         </ul> 
         <!-- afficher le lien pour se connecter ou s'incrire -->
          <ul class="login">
@@ -71,11 +80,10 @@ if (isset($_SESSION['user']['role'])) {
                         <a href="index.php?action=logout" class="item">Se déconnecter</a>
                 <?php }   else { ?>
                     <li><a href="index.php?action=login" class="item">Se connecter</a></li>
-                    <?php if ($role == "admin") { ?> 
-                        <li><a href="index.php?action=register" class="item">S'inscrire</a></li> 
+                    <li><a href="index.php?action=register" class="item">S'inscrire</a></li> 
                     <?php } ?>
-
-                <?php } ?> 
+                    
+                     
          </ul>
     </nav>
     <main>

@@ -103,8 +103,31 @@ class AdminController
     ");
     $requete->execute(['id' => $id]);
     $devis = $requete->fetch(PDO::FETCH_ASSOC);
-    //var_dump($devis);
-    //die();
+    // var_dump($id);
+    // die();
+   if (!$devis) {
+        echo "Le devis n'existe pas.";
+        return;
+    }
+
+    // Commencer la mise en tampon de sortie pour capturer le contenu HTML de la page
+    require 'view/admin/pageOffre.php';
+
+}
+    public function imprimDevis($id)
+{
+    // Connexion à la base de données et récupération des données du devis
+    $pdo = Connect::seConnecter();
+    $requete = $pdo->prepare("
+        SELECT * 
+        FROM devis
+        INNER JOIN demande_devis ON devis.id_Dem = demande_devis.id_Dem 
+        WHERE devis.id_devis = :id
+    ");
+    $requete->execute(['id' => $id]);
+    $devis = $requete->fetch(PDO::FETCH_ASSOC);
+    // var_dump($id);
+    // die();
    if (!$devis) {
         echo "Le devis n'existe pas.";
         return;
@@ -112,9 +135,13 @@ class AdminController
 
     // Commencer la mise en tampon de sortie pour capturer le contenu HTML de la page
     
-    require('view/admin/pageOffre.php');
-    $html = ob_get_contents();
+    ob_start();  // Commencer la mise en tampon de sortie
     
+    require 'view/admin/devis-pdf.php'; // Afficher le contenu HTML de la page
+    $html = ob_get_clean();  // Capturer le contenu HTML de la page
+
+    // var_dump($html);
+    // die();
 
     // Générer le PDF
    

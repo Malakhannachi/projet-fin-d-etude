@@ -1,11 +1,10 @@
-<?php ob_start(); ?>
+
 
 <p>Bienvenue, <?= ($_SESSION["user"]["nom"]) ?>!</p>   <!-- afficher le nom d'admin-->
 <p>Vous pouvez ajouter un Devis</p>
 
 <!-- formulaire pour ajouter un devis -->
  
-<?php ob_start(); ?>
 
 <!-- hero section -->
 <section id="hero-devis">    
@@ -66,8 +65,5 @@
 </section>
 
 <?php
-$contenu = ob_get_clean();
-require "template/template.php";
-
 $contenu = ob_get_clean();
 require "template/template.php";

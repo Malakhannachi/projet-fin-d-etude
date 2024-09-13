@@ -39,7 +39,7 @@
                     <input type="password" name="mdp2" id="mdp2" class="input-login"><br>
                 </div>
 
-                    <button type="submit" class="btn">S'inscrire</button>
+                    <button type="submit" name="submit" class="btn">S'inscrire</button>
                 </div>
 
             </form>

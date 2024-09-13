@@ -422,6 +422,62 @@ option{
     color: black;
 }
 
+/*--===== Section portfolio ========--*/
+#portfolio-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    background-color: #F3F5F7;
+}
+.title-portfolio{
+    font-size: 30px;
+    padding: 10px;
+    font-weight: bold;
+    color: #142637;
+    text-align: center;
+}
+.portfolio {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+    
+}
+.img-por {
+    
+    object-fit: cover;
+}
+/*--===== Section choisir ========--*/
+#choisir {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+   
+    background-color: white;
+}
+
+.choisir-content {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    color: #142637;
+}
+.title-choisir {
+    font-size: 40px;
+    padding: 10px;
+    font-weight: bold;
+    color: #142637;
+
+}
+
 
 /*--===== Footer ========--*/
 .footer{
@@ -771,15 +827,18 @@ option{
 
 /*--===== secDev ========--*/
 
-#success {  
-        width: 100%;
-        flex-direction: row;
-        display: flex;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../image/smilie.png") ; /*image plus sembre*/
-        background-repeat: no-repeat; /*n'est pas repeate*/
-        background-size: cover; /*la largeur et la hauteur sont respectivement 100% de la largeur et de la hauteur de l'image*/
-        
-    } 
+#success{  
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../image/smilie.png") ; /*image plus sembre*/
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat; /*n'est pas repeate*/
+    background-size: cover;
+    margin-top: 74px; /*pour eviter de coller le menu au hero*/
+} 
     .title-succes{
         font-size: 50px;
         color: #F3F5F7;

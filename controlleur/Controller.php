@@ -213,6 +213,9 @@ class Controller
     //page pour afficher un msg de succées 
     public function secDev()
     {
+        // var_dump('inside secDev');
+        // die();
+        
         require("view/secDev.php");
     }
     //Ajouter un Devis
@@ -280,6 +283,7 @@ class Controller
                     exit;
             } else {
 
+                
                 $_SESSION['errors'] = $errors;
                 
                 // rediger l'utilisateur vers la page devis

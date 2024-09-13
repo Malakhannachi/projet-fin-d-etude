@@ -1,5 +1,7 @@
-<?php ob_start(); 
+<?php 
 $errors = $_SESSION["errors"] ?? []; // afficher les erreurs  
+
+
 ?>
 
 <!-- hero section -->
@@ -149,20 +151,33 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
         </div>
 
 </section>
+<!--===== Section choisir=======-->
+<section id="choisir">
+
+    <div class="choisir-content">
+       <h2 class="title-choisir">Choisir MKservices c'est </h2>
+
+    </div>
+    <div class="choisir-img">
+        <img src="public/image/section.png" alt="démangeur">
+    </div>
+    
+ </section>
 
 <!--===== Section portfolio =======-->
 
-<section>
-     <h2>Nos Réalisations pour MKServices</h2>
+<section id="portfolio-section">
+     <h2 class="title-portfolio">Portfolio de MKservices</h2>
 
-        <div>
-            <img src="../view/img/intercarrat.png" alt="entreprise intercarrat">
-            <img src="../view/img/voltac.png" alt="entreprise voltac">
+        <div class="portfolio">
+            <img class="img-por" src="public/image/intercarrat.png" alt="entreprise intercarrat">
+            <img src="public/image/voltac.png" alt="entreprise voltac">
         </div>
 
 </section>
-       
+
 <?php
-session_unset();
+// session_unset();
+unset($_SESSION["errors"]);
 $contenu = ob_get_clean();
 require "template/template.php";
