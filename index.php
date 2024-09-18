@@ -99,6 +99,12 @@ if(isset($_GET['action'])) {
         case
         "traitmentDevis": $adminCtrl->traitmentDevis($id);
         break;
+        case
+        "cgu": $ctrFrm->cgu();
+        break;
+        case
+        "cgv": $ctrFrm->cgv();
+        break;
         default: $ctrFrm->accueil();
         break;
         

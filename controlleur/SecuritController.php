@@ -10,16 +10,44 @@ class SecuritController
         {
             // var_dump("inside post");
             $pdo = Connect::seConnecter();
-            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input (INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
             $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             // var_dump($nom , $prenom , $email , $mdp , $mdp2);
             // die();
+            //tester si le mot de passe doit avoir 12 caracteres, une majuscule, une minuscule et un chiffre avec expression regulliare 
+            $errors = [];
+            if (empty($pseudo)) {
+                $errors['pseudo'] = "Le pseudo est requis.";
+            }
+            if (empty($email)) {
+                $errors['email'] = "L'email est requis.";
+            }
+            if (empty($mdp)) {
+                $errors['mdp'] = "Le mot de passe est requis.";
+            }elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{12}$/', $mdp)) {
+                $errors['mdp'] = "*Le mot de passe doit avoir 12 caractères, une majuscule, une minuscule et un chiffre.";
+            }
+            if (empty($mdp2)) {
+                $errors['mdp2'] = "Le mot de passe de confirmation est requis.";
+            } elseif ($mdp != $mdp2) {
+                $errors['mdp2'] = "Les mots de passe ne correspondent pas.";
+            }
             
-            if ($nom && $prenom && $email && $mdp && $mdp2) 
+             //var_dump($errors);
+            //die();
+             // Si des erreurs existent, ne pas continuer
+            if (!empty($errors)) {
+                $_SESSION['errors'] = $errors;
+                header('location: index.php?action=register');
+                exit();
+            }
+            if (!isset($_POST['cgu'])) {
+                $errors['cgu'] = "Vous devez accepter les Conditions Générales d'Utilisation pour continuer.";
+            }
+            if ( $pseudo  && $email && $mdp && $mdp2) 
             {
                 //verifier si email existe
                 $requete = $pdo -> prepare("
@@ -35,15 +63,14 @@ class SecuritController
                     exit();
                 } else {
                     //verifier si mdp = mdp2
-                    if ($mdp == $mdp2) 
+                    if  ($mdp == $mdp2)
                     {
                      //insertion d'utilisateur dans la bd   
                         $insert = $pdo -> prepare("
-                        INSERT INTO users (nom, prenom, email, mdp)
-                        VALUES (:nom, :prenom, :email, :mdp)");
+                        INSERT INTO users (pseudo, email, mdp)
+                        VALUES (:pseudo, :email, :mdp)");
                         $insert -> execute([
-                            'nom' => $nom,
-                            'prenom' => $prenom,
+                            'pseudo' => $pseudo,
                             'email' => $email,
                             'mdp' => password_hash($mdp, PASSWORD_DEFAULT)
                         ]);
@@ -51,6 +78,7 @@ class SecuritController
                         exit();
                     }else
                     {
+                        
                         header('location: index.php?action=register');
                         exit();
                     }

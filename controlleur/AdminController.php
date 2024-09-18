@@ -18,7 +18,8 @@ class AdminController
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
         SELECT * 
-        FROM demande_devis");
+        FROM demande_devis
+        ORDER BY date_Dem DESC");
         $devis = $requete->fetchAll();
 
         // var_dump($devis);
@@ -85,7 +86,8 @@ class AdminController
         $requete = $pdo->query("
         SELECT *
         FROM devis 
-        INNER JOIN demande_devis ON devis.id_Dem = demande_devis.id_Dem");
+        INNER JOIN demande_devis ON devis.id_Dem = demande_devis.id_Dem
+        ORDER BY date_dev DESC");
         $dev = $requete->fetchAll();
         require "view/admin/listDev.php";
     }

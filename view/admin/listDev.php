@@ -17,6 +17,7 @@
             <th>Téléphone</th>
             <th>Email</th>
             <th>Besoin</th>
+            <th>Date devis</th>
             <th>Nbre de jour</th>
             <th>Prix HTVA</th>
             <th>Actions</th>
@@ -32,6 +33,7 @@
                 <td><?php echo htmlspecialchars($devi['tel']); ?></td>
                 <td><?php echo htmlspecialchars($devi['email']); ?></td>
                 <td><?php echo htmlspecialchars($devi['besoin']); ?></td>
+                <td><?php echo htmlspecialchars($devi['date_dev']); ?></td>
                 <td><?php echo htmlspecialchars($devi['qte']); ?></td>
                 <td><?php echo htmlspecialchars($devi['prix_ht']); ?></td>
                 

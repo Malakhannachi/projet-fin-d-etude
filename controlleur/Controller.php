@@ -110,7 +110,6 @@ class Controller
                     
                         "nom" => $nom,
                         "prenom" => $prenom,
-                        
                         "telephone" => $tel,
                         "email" => $email,
                         "id_Services" => $liste_Service,
@@ -218,6 +217,17 @@ class Controller
         
         require("view/secDev.php");
     }
+    
+    //page condition génrale d'utilistation cgu  
+    public function cgu(){
+        require("view/cgu.php");
+    }
+
+    //page condition genrale de vente cgv
+    public function cgv(){
+        require("view/cgv.php");
+    }
+
     //Ajouter un Devis
     public function addMyDevis()
     {

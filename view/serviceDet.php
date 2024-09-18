@@ -18,6 +18,8 @@
             $pMd = str_replace($motGras, "<strong>$motGras</strong>", $p);
             echo $pMd;
         ?></p>
+
+<a href="index.php?action=devis" ><button class="btn-avis">Demander un devis <span>&#x2197;</span></button></a>
         
 </section>
 

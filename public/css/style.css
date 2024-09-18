@@ -28,7 +28,7 @@ body {
     width: 100%;
     padding: 0px 50px;
     position: fixed;
-    background-color: white;
+    background-color: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6 )), url("../image/slider-1.jpg") ; /*image plus sembre*/
     cursor: pointer;
     top: 0;
     z-index: 3;
@@ -133,12 +133,12 @@ ul{
 }
 .contenu{
     width: 50%;
-    height: 100%;
-    padding: 20px;
+   
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:flex-start;
+    align-items: center;
+
     
        
 }
@@ -146,6 +146,7 @@ ul{
     font-size: 20px;
     color: white;
     padding-bottom: 15px;
+    
     
 }
 .par{
@@ -428,12 +429,13 @@ option{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
-    background-color: #F3F5F7;
+    
+    
 }
 .title-portfolio{
     font-size: 30px;
-    padding: 10px;
+    padding-top: 20px;
+    margin-top: 10px;
     font-weight: bold;
     color: #142637;
     text-align: center;
@@ -444,13 +446,11 @@ option{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 30px;
+   
+  
     
 }
-.img-por {
-    
-    object-fit: cover;
-}
+
 /*--===== Section choisir ========--*/
 #choisir {
     width: 100%;
@@ -524,6 +524,7 @@ option{
     opacity: 0.7;
     font-size: 18px;
     font-weight: medium;
+    transition: 0.3s ease-in-out;
 }
 .page:hover{
     color: #FFD028;
@@ -545,11 +546,22 @@ option{
     line-height: 1.5;
     font-weight: medium;
     font-size: 18px;
+    text-decoration: none;
 }
-.titlefooter{
-    font-size: 20px;
-    font-weight: bold;
-    padding-bottom: 10px;
+.cgu-footer{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    opacity: 0.7;
+    line-height: 1.5;
+    font-weight: medium;
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+}
+.cgu-footer:hover{
+    color: #FFD028;
 }
 
 /*--===== page devis ========--*/
@@ -645,23 +657,39 @@ option{
     display: flex;
     flex-direction:row;
     background-color: #F3F5F7;
-    padding-top: 120px;
+    padding: 80px;
+    justify-content: center;
     
 }
 .contact-footer{
     width: 50%;
     height: 100%;
-    
-    
     display: flex;
     flex-direction: column;
-    padding: 30px 30px 15px 30px; 
+   
+   
    
 }
+.titlefooter{
+    font-size: 30px;
+    padding: 10px;
+    font-weight: bold;
+    color: #132535;
+    padding-bottom: 10px;
+}
+
 .icon{
     color: #132535;
     text-decoration: none;
     padding: 10px;
+    transition: 0.3s ease-in-out;
+}
+.icon:hover{
+    color: #FFD028;
+}
+.map{
+    width: 50%;
+    
 }
 
 /*--===== page services ========--*/
@@ -753,14 +781,14 @@ option{
 }
 
 /*--===== liste service  ========--*/
-#all-devis{
+.all-dev{
     width: 100%;
     display: flex;
     flex-direction:column;
     justify-content: flex-start;
+    
     background-color: #F3F5F7;
-    padding-bottom: 120px;
-    padding-top: 100px;
+   
 }
  .table-devis {
      width: 90%;
@@ -772,17 +800,30 @@ option{
 
  }
  .table-devis td, .table-devis th {
-     border: #132535 1px solid;
+     border: #000000 1px solid;
      padding: 10px;
-     color: #132535;
-     text-align: center;
      
+     
+     
+ }
+ .table-devis th {
+     
+     color: #132535;
+     font-weight: bold;
+     text-align: center;
+     padding: 10px;
+ }
+
+ .table-devis td {
+     color: #132535;
+     text-align:justify;
+     padding: 10px;
  }
  .desc {
     font-size: 15px;
     color: #132535;
     text-align: justify; 
-    padding: 20px;
+    padding: 15px;
  }
 
  /*--===== page traitment devis  ========--*/
@@ -828,7 +869,74 @@ option{
 /*--===== secDev ========--*/
 
 #success{  
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../image/smilie.png") ; /*image plus sembre*/
+    
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /*pour eviter de coller le menu au hero*/
+} 
+    .title-suc{
+        font-size: 50px;
+        font-weight: bold;
+        color: #132535;
+        padding: 20px;
+    }
+    .text-suc{
+        font-size: 20px;
+        font-weight: bold;
+        color: #132535;
+        padding: 20px;
+        text-align: center;
+    }
+    .checkmark {
+        width: 100px;
+        height: 100px;
+        stroke-width: 4;
+        stroke: #132535;
+        stroke-miterlimit: 10;
+        margin: 0 auto;
+        display: block;
+      }
+      
+      .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 4;
+        stroke: #132535;
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+      }
+      
+      .checkmark__check {
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        stroke-width: 4;
+        stroke: #132535;
+        fill: none;
+        animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.7s forwards;
+      }
+      
+      @keyframes stroke {
+        100% {
+          stroke-dashoffset: 0;
+        }
+      }
+      
+      .btn-suc {
+        background-color: #FFD028;
+        color:#132535;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+      }
+
+    /*--===== cgu ========--*/
+   .hero-cgu{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6 )), url("../image/cgu.jpg") ; /*image plus sembre*/
     width: 100%;
     height: 400px;
     display: flex;
@@ -837,18 +945,77 @@ option{
     justify-content: center;
     background-repeat: no-repeat; /*n'est pas repeate*/
     background-size: cover;
-    margin-top: 74px; /*pour eviter de coller le menu au hero*/
-} 
-    .title-succes{
-        font-size: 50px;
-        color: #F3F5F7;
-        padding: 20px;
-    }
-    .text-succes{
-        font-size: 20px;
-        color: #F3F5F7;
-        padding: 20px;
-    }
+    margin-top: 74px;
+
+
+
+
+    
+   } 
+   .cgu-title{
+    font-weight: bold;
+    font-size: 65px;
+    text-align: center;
+    color:white; 
+   }
+   .cgu{
+    width: 50%;
+    background-color: #F3F5F7;
+    margin: auto;
+    padding: 20px;
+    text-align: justify;
+    margin-bottom: 20px;
+    border-radius: 10px;
+   }
+   .resume{
+    font-size: 30px ;
+    font-weight: bold;
+    color: #132535;
+    padding: 20px;
+   }
+   .cgu-cgu{
+    font-size: 20px;
+    color: #132535;
+    padding: 10px;
+   }
+   .cgu-text{
+    font-size: 18px;
+    color: #132535;
+    padding: 8px;
+   }
+   
+
+/*--===== page register ========--*/
+.error{
+    color: red;
+    font-size: 10px;
+    padding: 5px;
+}
+.cgu-register{
+    width: 50%;
+    background-color: #F3F5F7;
+    margin-left: auto;
+    padding: 20px;
+    
+    margin-bottom: 20px;
+    border-radius: 10px;
+   }
+   .cgu-label{
+    font-size: 16px ;
+    color: #132535;
+    padding: 20px;
+
+
+   }
+   .cgu-link{
+    text-decoration: none;
+    color : #132535;
+   }
+
+   .cgu-link:hover{
+    color: #FFD028;
+   }
+
 
 
  

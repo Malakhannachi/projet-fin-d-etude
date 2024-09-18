@@ -62,15 +62,17 @@ if (isset($_SESSION['user']['role'])) // si l'utilisateur est connecté
                 </div>
 
             </li>
-            <li><a href="index.php?action=devis" class="item">Devis</a></li>
-            <li><a href="index.php?action=contact" class="item">Contact</a></li>
            <?php if($role == 'admin')   // si l'utilisateur est admin on affiche les liens
            {?>
            <a href="index.php?action=listAvis" class="item"> liste des Avis</a>
            <a href="index.php?action=listService" class="item">liste des services</a>
            <a href="index.php?action=listDev" class="item">liste des devis</a>
            <a href="index.php?action=listDemandeDevis" class="item">liste des demandes de devis</a>
-                 <?php } ?>
+           
+           <?php } ?>
+           
+           <li><a href="index.php?action=devis" class="item">Devis</a></li>
+            <li><a href="index.php?action=contact" class="item">Contact</a></li>
             
         </ul> 
         <!-- afficher le lien pour se connecter ou s'incrire -->
@@ -98,9 +100,9 @@ if (isset($_SESSION['user']['role'])) // si l'utilisateur est connecté
             <img class="logofooter" src="public/image/logo_mk.png" alt="logo"/>
             <div class="social">
                 <h3 class="titlefooter">Accédez à nos services</h3>
-                <a href="service netoyage" class="page"> service netoyage</a>
-                <a href="service démenagment" class="page">service démenagment</a>
-                <a href="service bricolage" class="page">service bricolage</a>   
+                <a href="service netoyage" class="page"> Service de livraison</a>
+                <a href="service démenagment" class="page">Service démenagment</a>
+                <a href="service bricolage" class="page">Service bricolage</a>   
             </div>
             <div class="link">
                 <h3 class="titlefooter">Nos pages</h3>
@@ -109,7 +111,7 @@ if (isset($_SESSION['user']['role'])) // si l'utilisateur est connecté
                 <a href="index.php?action=devis" class="page">Devis</a>
             </div>
             <div class="contact">
-                <h3 class="titlefooter">contacter nous</h3>
+                <h3 class="titlefooter">Contacter nous</h3>
                 <a href="tel:+33658964485" class="page"><i class="fa-solid fa-phone"></i> +33658964485</a>
                 <a href="mailto:contact.mkservices26@gmail.com" class="page"><i class="fa-solid fa-envelope"></i> contact.mkservices26@gmail.com</a>
                 <a href="https://maps.app.goo.gl/92zYpyWpZHhMFQQG8" target="_blank" class="page"><i class="fa-solid fa-location-dot"></i> 24 Rue Jean Giraudoux, Strasbourg, France</a>
@@ -117,7 +119,7 @@ if (isset($_SESSION['user']['role'])) // si l'utilisateur est connecté
             
         </div>
         <hr class="hr">
-        <p class="copyright">&copy;MK services 2024 - Tous droits réservés</p>
+        <p class="copyright">&copy;MK services 2024 - Tous droits réservés . <a class="cgu-footer" href="index.php?action=cgu">Conditions Générales d'Utilisation</a>. <a class="cgu-footer" href="index.php?action=cgv" >Conditions Génrales de Vente</a></p>
         
     </footer>
 </body>

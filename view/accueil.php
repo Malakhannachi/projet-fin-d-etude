@@ -152,7 +152,7 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
 
 </section>
 <!--===== Section choisir=======-->
-<section id="choisir">
+<!--<section id="choisir">
 
     <div class="choisir-content">
        <h2 class="title-choisir">Choisir MKservices c'est </h2>
@@ -162,16 +162,17 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
         <img src="public/image/section.png" alt="démangeur">
     </div>
     
- </section>
+ </section>-->
 
 <!--===== Section portfolio =======-->
 
 <section id="portfolio-section">
-     <h2 class="title-portfolio">Portfolio de MKservices</h2>
+     <h2 class="title-portfolio">Réalisations qui ont satisfait nos clients</h2>
 
         <div class="portfolio">
             <img class="img-por" src="public/image/intercarrat.png" alt="entreprise intercarrat">
             <img src="public/image/voltac.png" alt="entreprise voltac">
+            <img src="public/image/soprema.png" alt="soprema.png">
         </div>
 
 </section>

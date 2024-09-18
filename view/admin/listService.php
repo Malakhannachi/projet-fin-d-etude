@@ -9,7 +9,7 @@
 </section>
 
 
-<section class="all-devis">
+<section class="all-dev">
 <table class="table-devis">
     <thead>
         <tr>
