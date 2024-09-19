@@ -15,8 +15,8 @@ class SecuritController
             $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            // var_dump($nom , $prenom , $email , $mdp , $mdp2);
-            // die();
+            var_dump($pseudo, $email , $mdp , $mdp2);
+            die();
             //tester si le mot de passe doit avoir 12 caracteres, une majuscule, une minuscule et un chiffre avec expression regulliare 
             $errors = [];
             if (empty($pseudo)) {
@@ -35,6 +35,9 @@ class SecuritController
             } elseif ($mdp != $mdp2) {
                 $errors['mdp2'] = "Les mots de passe ne correspondent pas.";
             }
+            if (!isset($_POST['cgu'])) {
+                $errors['cgu'] = "Vous devez accepter les Conditions Générales d'Utilisation pour continuer.";
+            }
             
              //var_dump($errors);
             //die();
@@ -44,9 +47,7 @@ class SecuritController
                 header('location: index.php?action=register');
                 exit();
             }
-            if (!isset($_POST['cgu'])) {
-                $errors['cgu'] = "Vous devez accepter les Conditions Générales d'Utilisation pour continuer.";
-            }
+            
             if ( $pseudo  && $email && $mdp && $mdp2) 
             {
                 //verifier si email existe

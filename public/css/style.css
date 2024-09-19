@@ -138,20 +138,21 @@ ul{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    padding-top: 100px;
     
        
 }
 .lead{
-    font-size: 20px;
+    font-size: 28px;
     color: white;
     padding-bottom: 15px;
-    
+    padding-left:120px ;
     
 }
 .par{
-    font-size: 18px;
+    font-size: 20px;
     color: white;
+    padding-left:120px ;
     text-align: justify;
    
 }

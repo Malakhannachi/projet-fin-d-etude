@@ -13,7 +13,7 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
             <strong>Nous sommes là pour vous faciliter la vie !</strong>
         </p>
         <p class="par">
-            Des services de qualité pour votre maison et votre entreprise : nettoyage, bricolage, installations électriques et vidéosurveillance
+            Des services de qualité pour votre maison et votre entreprise : <strong> Déménagement, Nettoyage et Bricolage !</strong> 
         </p>
         <a href="index.php?action=devis" ><button class="btn">Devis Express <span>&#x2197;</span></button></a>
     </div>

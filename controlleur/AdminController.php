@@ -490,4 +490,14 @@ class AdminController
         header('Location:index.php?action=listService');
         exit();
     }
+
+    //page profil
+
+    public function profil($id){
+
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("SELECT * FROM users WHERE id_User = $id");
+        $user = $requete->fetch();
+        require "view/admin/profil.php";
+    }
 }

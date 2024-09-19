@@ -105,6 +105,9 @@ if(isset($_GET['action'])) {
         case
         "cgv": $ctrFrm->cgv();
         break;
+        case
+        "profil": $adminCtrl->profil($id);
+        break;
         default: $ctrFrm->accueil();
         break;
         

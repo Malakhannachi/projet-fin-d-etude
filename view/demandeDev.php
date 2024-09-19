@@ -62,6 +62,6 @@
 </section>
 
 <?php
-session_unset(); // vider les erreurs
+unset($_SESSION["errors"]); // vider les erreurs
 $contenu = ob_get_clean();
 require "template/template.php";
