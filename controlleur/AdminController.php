@@ -186,10 +186,8 @@ class AdminController
             if (empty($ttc)) {
                 $erreur['ttc'] = "Le montant TTC est requis";
             }
-
             //var_dump($tva);
             //die();
-            
             $requete = $pdo->prepare("
             INSERT INTO devis ( qte, prix_ht, tva, id_Dem, date_dev, intitule) 
             VALUES ( :qte, :prix_ht, :tva, :id_Dem, :date_dev, :intitule)");

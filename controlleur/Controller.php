@@ -232,7 +232,6 @@ class Controller
     public function addMyDevis()
     {
         $pdo = Connect::seConnecter();
-
         if (isset($_POST['submit'])) {
             $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);  // filtrer codes malveillants
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -270,8 +269,6 @@ class Controller
             // var_dump($errors);
             // die();
             date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
-
-            
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
                         INSERT INTO demande_devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
