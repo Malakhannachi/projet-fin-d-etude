@@ -4,7 +4,80 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <title>MK services</title>
+    <!-- tarte au citron script -->
+    <script src="/projet fin d'etude/tarteaucitron/tarteaucitron.js"></script>
+        <script type="text/javascript">
+
+            // console.log(tarteaucitron);
+            
+        tarteaucitron.init({
+    	  "privacyUrl": "", /* Privacy policy url */
+          "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
+
+    	  "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+    	  "cookieName": "tarteaucitron", /* Cookie name */
+    
+    	  "orientation": "middle", /* Banner position (top - bottom) */
+       
+          "groupServices": false, /* Group services by category */
+          "showDetailsOnClick": true, /* Click to expand the description */
+          "serviceDefaultState": "wait", /* Default state (true - wait - false) */
+                           
+    	  "showAlertSmall": false, /* Show the small banner on bottom right */
+    	  "cookieslist": false, /* Show the cookie list */
+                           
+          "closePopup": false, /* Show a close X on the banner */
+
+          "showIcon": true, /* Show cookie icon to manage cookies */
+          //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+          "iconPosition": "BottomRight", /* BottomRight, BottomLeft, TopRight and TopLeft */
+
+    	  "adblocker": false, /* Show a Warning if an adblocker is detected */
+                           
+          "DenyAllCta" : true, /* Show the deny all button */
+          "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+          "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+          "alwaysNeedConsent": false, /* Ask the consent for "Privacy by design" services */
+                           
+    	  "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+    	  "removeCredit": false, /* Remove credit link */
+    	  "moreInfoLink": true, /* Show more info link */
+
+          "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+          "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+
+    	  //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+                          
+          "readmoreLink": "", /* Change the default readmore link */
+
+          "mandatory": true, /* Show a message about mandatory cookies */
+          "mandatoryCta": true, /* Show the disabled accept button when mandatory on */
+    
+          //"customCloserId": "", /* Optional a11y: Custom element ID used to open the panel */
+          
+          "googleConsentMode": true, /* Enable Google Consent Mode v2 for Google ads and GA4 */
+          
+          "partnersList": false /* Show the number of partners on the popup/middle banner */
+        });        
+        console.log(tarteaucitron);
+        
+        </script>
+
+<script type="text/javascript">
+        (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
+        </script>
+
+<script async src="https://www.googletagmanager.com/ns.html?id=GTM-KGM3BCFW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GTM-KGM3BCFW')
+    </script>
+
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,11 +86,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>PFE</title>
+       
 
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KGM3BCFW"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+  
+<!-- End Google Tag Manager (noscript) -->
 
     <?php
 
@@ -41,7 +127,17 @@
         </picture>
         <ul class="sec">
             <li><a href="index.php?action=accueil" class="item">Accueil</a></li>
-            <li class="item">Services <i class="fas fa-caret-down"></i></a>
+            
+            <?php if ($role == 'admin')   // si l'utilisateur est admin on affiche les liens
+            { ?>
+                <li><a href="index.php?action=listAvis" class="item"> liste des Avis</a></li>
+                <li><a href="index.php?action=listService" class="item">liste des services</a></li>
+                <li><a href="index.php?action=listDev" class="item">liste des devis</a></li>
+                <li><a href="index.php?action=listDemandeDevis" class="item">liste des demandes de devis</a></li>
+                
+
+            <?php } else { ?>
+                <li class="item">Services <i class="fas fa-caret-down"></i></a>
                 <!-- Menu déroulant -->
 
                 <div class="dropdown-menu">
@@ -65,30 +161,21 @@
                 </div>
 
             </li>
-            <?php if ($role == 'admin')   // si l'utilisateur est admin on affiche les liens
-            { ?>
-                <a href="index.php?action=listAvis" class="item"> liste des Avis</a>
-                <a href="index.php?action=listService" class="item">liste des services</a>
-                <a href="index.php?action=listDev" class="item">liste des devis</a>
-                <a href="index.php?action=listDemandeDevis" class="item">liste des demandes de devis</a>
-                
-
-            <?php } else { ?>
-
                 <li><a href="index.php?action=devis" class="item">Devis</a></li>
                 <li><a href="index.php?action=contact" class="item">Contact</a></li>
             <?php } ?>
         </ul>
         <!-- afficher le lien pour se connecter ou s'incrire -->
         <ul class="login">
+            <!--===== afficher le nom de l'utilisateur connecté  =======-->
             <?php
             if (isset($_SESSION["user"])) {     ?>
-            <li><a href="index.php?action=profil&id=<?php echo $_SESSION["user"]["id_User"]; ?>" class="item"><i class="fas fa-user"></i> <?php echo $_SESSION["user"]["pseudo"]; ?></a></li>
-            <li><a href="index.php?action=logout" class="item">Se déconnecter</a></li>
+            <li><a class="item" href="index.php?action=profil&id=<?php echo $_SESSION["user"]["id_User"]; ?>" class="item"><i class="fas fa-user"></i> <?php echo $_SESSION["user"]["pseudo"]; ?></a></li>
+            <li><a href="index.php?action=logout" class="item2">Se déconnecter</a></li>
                 
             <?php } else { ?>
-                <li><a href="index.php?action=login" class="item">Se connecter</a></li>
-                <li><a href="index.php?action=register" class="item">S'inscrire</a></li>
+                <li><a href="index.php?action=login" class="item2">Se connecter</a></li>
+                <li><a href="index.php?action=register" class="item2">S'inscrire</a></li>
             <?php } ?>
 
 
@@ -128,6 +215,9 @@
         <p class="copyright">&copy;MK services 2024 - Tous droits réservés . <a class="cgu-footer" href="index.php?action=cgu">Conditions Générales d'Utilisation</a>. <a class="cgu-footer" href="index.php?action=cgv">Conditions Génrales de Vente</a></p>
 
     </footer>
+    
+
+        
 </body>
 
 </html>

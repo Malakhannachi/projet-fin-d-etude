@@ -59,6 +59,13 @@ ul{
 .item:hover{
     color: #FFD028;
 }
+.item2{
+    text-decoration: none;
+    color: #132535;
+    padding: 10px;
+    font-weight: bold; 
+    width: 150px;
+}
 .dropdown-menu {
     display: block;
     position: absolute;
