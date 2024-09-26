@@ -61,12 +61,14 @@
           
           "partnersList": false /* Show the number of partners on the popup/middle banner */
         });        
-        console.log(tarteaucitron);
         
         </script>
 
-<script type="text/javascript">
-        (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
+        
+<!-- recaptcha -->
+        <script type="text/javascript">
+                tarteaucitron.user.recaptchaapi = '6LfXFk8qAAAAAHgFqaeKL--ZYBXHUCMRKFgVhta5';
+                (tarteaucitron.job = tarteaucitron.job || []).push('recaptcha');
         </script>
 
 <script async src="https://www.googletagmanager.com/ns.html?id=GTM-KGM3BCFW"></script>
@@ -77,7 +79,7 @@
         gtag('config', 'GTM-KGM3BCFW')
     </script>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

@@ -17,7 +17,6 @@
     
     </div>
 
-    <div class="youtube_player" videoID="PJCvmeRILLk?si=19XDz6h608Z-NZbE" width="width" height="height" theme="theme (dark | light)" rel="rel (1 | 0)" controls="controls (1 | 0)" showinfo="showinfo (1 | 0)" autoplay="autoplay (0 | 1)" mute="mute (0 | 1)" loop="loop (0 | 1)" loading="loading (0 | 1)" data-start="start" data-end="end"></div>
     
     <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2639.2258442260445!2d7.698608110493328!3d48.58637441969304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4796b7d236a00fb7%3A0x5afaaa6d8dafbc82!2s24%20Rue%20Jean%20Giraudoux%2C%2067200%20Strasbourg%2C%20France!5e0!3m2!1sfr!2stn!4v1723375626554!5m2!1sfr!2stn" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 

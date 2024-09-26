@@ -55,13 +55,27 @@ $errors = $_SESSION["errors"] ?? []; //afficher les erreurs
                     <div class="error"><?= $errors['cgu']; ?></div>
                 <?php endif; ?>
             </div>
-
+            <input type="hidden" id="recaptchaResponse" name="recaptcha-response"> <!-- input type hidden pour prendre la reponse du recaptcha-->
+            <!-- <div class="g-recaptcha" data-sitekey="6LfXFk8qAAAAAHgFqaeKL--ZYBXHUCMRKFgVhta5"></div> -->
+            <?php if (!empty($errors['recaptchaResponse'])): ?>
+                            <div class="error"><?php echo $errors['recaptchaResponse']; ?></div>
+                        <?php endif; ?>
+                <div class="btn-devis">
                     <button type="submit" name="submit" class="btn">S'inscrire</button>
                 </div>
 
             </form>
    </div>
 </section>
+<!-- recaptcha -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LfXFk8qAAAAAHgFqaeKL--ZYBXHUCMRKFgVhta5"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6LfXFk8qAAAAAHgFqaeKL--ZYBXHUCMRKFgVhta5', {action: 'homepage'}).then(function(token) {
+        document.getElementById('recaptchaResponse').value = token
+    });
+});
+</script>
 
 
 <?php

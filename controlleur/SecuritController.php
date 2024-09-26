@@ -14,6 +14,7 @@ class SecuritController
             $email = filter_input (INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
             $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $recaptchaResponse = filter_input(INPUT_POST, 'recaptcha-response', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             //var_dump($pseudo, $email , $mdp , $mdp2);
             //die();
@@ -27,9 +28,11 @@ class SecuritController
             }
             if (empty($mdp)) {
                 $errors['mdp'] = "Le mot de passe est requis.";
-            }elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{12}$/', $mdp)) {
-                $errors['mdp'] = "*Le mot de passe doit avoir 12 caractères, une majuscule, une minuscule et un chiffre.";
             }
+            
+            // elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{12}$/', $mdp)) {
+            //     $errors['mdp'] = "*Le mot de passe doit avoir 12 caractères, une majuscule, une minuscule et un chiffre.";
+            // }
             if (empty($mdp2)) {
                 $errors['mdp2'] = "Le mot de passe de confirmation est requis.";
             } elseif ($mdp != $mdp2) {
@@ -38,15 +41,49 @@ class SecuritController
             if (!isset($_POST['cgu'])) {
                 $errors['cgu'] = "Vous devez accepter les Conditions Générales d'Utilisation pour continuer.";
             }
+            if (empty($recaptchaResponse)) {
+                $errors['recaptchaResponse'] = "Le Captcha est requis.";
+            }
             
-             //var_dump($errors);
-            //die();
+            $url = "https://www.google.com/recaptcha/api/siteverify?secret=6LfXFk8qAAAAANV2uezoqs5X2csRpKl-B-7D0TBu&response={$recaptchaResponse}";
+
+            // On vérifie si curl est installé
+            if(function_exists('curl_version')){
+                $curl = curl_init($url);       // curl utiluse url pour le requête
+                curl_setopt($curl, CURLOPT_HEADER, false);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_TIMEOUT, 1);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                $response = curl_exec($curl);
+
+            }else{
+                // On utilisera file_get_contents
+                $response = file_get_contents($url);
+            }
+
+            // var_dump($response);
+            // die();
+
+            if(empty($response)){
+                $errors['recaptchaResponse'] = 'Le captcha n\'est pas valide';
+            }else{
+                $data = json_decode($response);
+            }
+
+            if($data->success == false) {
+                $errors['recaptchaResponse'] = 'Le captcha n\'est pas valide';
+            }
+            //  var_dump($recaptchaResponse);
+            // die();
              // Si des erreurs existent, ne pas continuer
             if (!empty($errors)) {
                 $_SESSION['errors'] = $errors;
                 header('location: index.php?action=register');
                 exit();
             }
+
+            // On prépare l'URL
+          
             
             if ( $pseudo  && $email && $mdp && $mdp2) 
             {
@@ -56,7 +93,7 @@ class SecuritController
                 FROM users 
                 WHERE email = :email");
                 $requete -> execute(['email' => $email]);
-                $user = $requete -> fetch();
+                $user = $requete->fetch();
                 if ($user) 
                 {
                     //redirection vers login
