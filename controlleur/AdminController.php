@@ -494,8 +494,20 @@ class AdminController
     public function profil($id){
 
         $pdo = Connect::seConnecter();
+        if( isset($_POST['submit'])){
+            $pseudo = $_POST['pseudo'];
+            $email = $_POST['email'];
+            $mdp = $_POST['mdp'];
+            $role = $_POST['role'];
+            $requete = $pdo->prepare("UPDATE users SET pseudo = :pseudo, email = :email, mdp = :mdp, role = :role WHERE id_User = :id");
+            $requete->execute(['pseudo' => $pseudo, 'email' => $email, 'mdp' => $mdp, 'role' => $role, 'id' => $id]);
+            header('Location:index.php?action=profil&id='.$id);
+            exit();
+        }
+        else{
         $requete = $pdo->query("SELECT * FROM users WHERE id_User = $id");
-        $user = $requete->fetch();
+        $profil = $requete->fetch(PDO::FETCH_ASSOC);
         require "view/admin/profil.php";
     }
+}
 }

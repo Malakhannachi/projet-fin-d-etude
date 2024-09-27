@@ -28,11 +28,9 @@ class SecuritController
             }
             if (empty($mdp)) {
                 $errors['mdp'] = "Le mot de passe est requis.";
+            } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $mdp)) {
+                $errors['mdp'] = "*Le mot de passe doit avoir au moins 8 caractères, une majuscule, une minuscule et un chiffre.";
             }
-            
-            // elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{12}$/', $mdp)) {
-            //     $errors['mdp'] = "*Le mot de passe doit avoir 12 caractères, une majuscule, une minuscule et un chiffre.";
-            // }
             if (empty($mdp2)) {
                 $errors['mdp2'] = "Le mot de passe de confirmation est requis.";
             } elseif ($mdp != $mdp2) {
