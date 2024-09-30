@@ -1,6 +1,6 @@
 <?php 
+ob_start();
 $errors = $_SESSION["errors"] ?? []; // afficher les erreurs  
-
 
 ?>
 

@@ -81,13 +81,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name= "description" content="Services de déménagement, livraison, nettoyage et bricolage sur mesure. Fiabilité, rapidité et qualité pour particuliers et entreprises. Satisfaction garantie !">
+    <meta name="keywords" content="demenagement, livraison rapide,livraison industriel, nettoyage industriel,nettoyage professionnel, bricolage">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="public/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
        
 
 </head>
@@ -123,66 +125,7 @@
     }
     ?>
     <!--===== Navbar =======-->
-    <nav class="nav">
-        <picture>
-            <img class="logo" src="public/image/logo_mk.png" alt="logo" />
-        </picture>
-        <ul class="sec">
-            <li><a href="index.php?action=accueil" class="item">Accueil</a></li>
-            
-            <?php if ($role == 'admin')   // si l'utilisateur est admin on affiche les liens
-            { ?>
-                <li><a href="index.php?action=listAvis" class="item"> liste des Avis</a></li>
-                <li><a href="index.php?action=listService" class="item">liste des services</a></li>
-                <li><a href="index.php?action=listDev" class="item">liste des devis</a></li>
-                <li><a href="index.php?action=listDemandeDevis" class="item">liste des demandes de devis</a></li>
-                
-
-            <?php } else { ?>
-                <li class="item">Services <i class="fas fa-caret-down"></i></a>
-                <!-- Menu déroulant -->
-
-                <div class="dropdown-menu">
-                    <ul>
-                        <?php foreach ($cate as $cat): ?>
-                            <li><a class="item1"><?php echo $cat['nom_Cat']; ?><i class="fas fa-caret-right"></i></a>
-                                <div class="dropdown-menu1">
-                                    <ul>
-                                        <!--===== $cat['services'] =======-->
-                                        <?php  // boucle pour afficher les services
-                                        foreach ($cat['services'] as $ser): ?>
-                                            <li><a href="index.php?action=serviceDet&id= <?php echo $ser['id_Services']; ?>" class="item1"><?php echo $ser['nom_Ser'] ?></a></li>
-                                        <?php endforeach; ?>
-                                    </ul>
-
-                                </div>
-                            </li>
-                        <?php endforeach; ?>
-
-                    </ul>
-                </div>
-
-            </li>
-                <li><a href="index.php?action=devis" class="item">Devis</a></li>
-                <li><a href="index.php?action=contact" class="item">Contact</a></li>
-            <?php } ?>
-        </ul>
-        <!-- afficher le lien pour se connecter ou s'incrire -->
-        <ul class="login">
-            <!--===== afficher le nom de l'utilisateur connecté  =======-->
-            <?php
-            if (isset($_SESSION["user"])) {     ?>
-            <li><a class="item" href="index.php?action=profil&id=<?php echo $_SESSION["user"]["id_User"]; ?>" class="item"><i class="fas fa-user"></i> <?php echo $_SESSION["user"]["pseudo"]; ?></a></li>
-            <li><a href="index.php?action=logout" class="item2">Se déconnecter</a></li>
-                
-            <?php } else { ?>
-                <li><a href="index.php?action=login" class="item2">Se connecter</a></li>
-                <li><a href="index.php?action=register" class="item2">S'inscrire</a></li>
-            <?php } ?>
-
-
-        </ul>
-    </nav>
+ 
     <main>
         <div id="contenu">
             <?= $contenu ?>
@@ -192,29 +135,34 @@
     <!--===== Footer =======-->
     <footer class="footer">
         <div class="sec">
+            <div class="logF">
             <img class="logofooter" src="public/image/logo_mk.png" alt="logo" />
+            </div>
             <div class="social">
-                <h3 class="titlefooter">Accédez à nos services</h3>
+                <h3 class="titlefooter1">Accédez à nos services</h3>
                 <a href="service netoyage" class="page"> Service de livraison</a>
                 <a href="service démenagment" class="page">Service démenagment</a>
                 <a href="service bricolage" class="page">Service bricolage</a>
             </div>
             <div class="link">
-                <h3 class="titlefooter">Nos pages</h3>
+                <h3 class="titlefooter1">Nos pages</h3>
                 <a href="index.php?action=accueil" class="page">Accueil</a>
                 <a href="index.php?action=listeServ" class="page">Services</a>
                 <a href="index.php?action=devis" class="page">Devis</a>
             </div>
             <div class="contact">
-                <h3 class="titlefooter">Contacter nous</h3>
+                <h3 class="titlefooter1">Contacter nous</h3>
                 <a href="tel:+33658964485" class="page"><i class="fa-solid fa-phone"></i> +33658964485</a>
                 <a href="mailto:contact.mkservices26@gmail.com" class="page"><i class="fa-solid fa-envelope"></i> contact.mkservices26@gmail.com</a>
                 <a href="https://maps.app.goo.gl/92zYpyWpZHhMFQQG8" target="_blank" class="page"><i class="fa-solid fa-location-dot"></i> 24 Rue Jean Giraudoux, Strasbourg, France</a>
             </div>
 
         </div>
-        <hr class="hr">
-        <p class="copyright">&copy;MK services 2024 - Tous droits réservés . <a class="cgu-footer" href="index.php?action=cgu">Conditions Générales d'Utilisation</a>. <a class="cgu-footer" href="index.php?action=cgv">Conditions Génrales de Vente</a></p>
+        <hr class="hr"> <!-- hr de separation -->
+
+        <div class="copyright">
+            <span class="cgu-footer">&copy;MK services 2024 - Tous droits réservés</span><a class="cgu-footer" href="index.php?action=cgu">Conditions Générales d'Utilisation</a> <a class="cgu-footer" href="index.php?action=cgv">Conditions Génrales de Vente</a>
+        </div>
 
     </footer>
     
