@@ -330,6 +330,7 @@ ul{
     background-size: cover;
     display: flex;
     flex-direction: row;
+    
     align-items: center;
     padding: 50px;
 }
@@ -1040,6 +1041,18 @@ option{
         text-align: center;
         justify-content: center;
     }
+    #devis{
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+    .nav{
+        display: none  ;
+    }
+    .form{
+        width: 100%;
+    }
+   
     
 }
 

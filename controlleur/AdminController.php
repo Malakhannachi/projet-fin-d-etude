@@ -188,6 +188,7 @@ class AdminController
             }
             //var_dump($tva);
             //die();
+            //requete pour inserer dans table devis
             $requete = $pdo->prepare("
             INSERT INTO devis ( qte, prix_ht, tva, id_Dem, date_dev, intitule) 
             VALUES ( :qte, :prix_ht, :tva, :id_Dem, :date_dev, :intitule)");
@@ -200,10 +201,8 @@ class AdminController
                 'intitule' => $intitule
             ]);
             header('Location:index.php?action=listDev');
-            
-            
-        }else {
-           
+            exit();  
+        }else {    
             // recuprer les données de table demande devis 
             $requete = $pdo->prepare("
                 SELECT * FROM demande_devis

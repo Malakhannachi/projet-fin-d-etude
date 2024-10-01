@@ -125,7 +125,67 @@
     }
     ?>
     <!--===== Navbar =======-->
- 
+    <nav class="nav">
+        <picture>
+            <img class="logo" src="public/image/logo_mk.png" alt="logo" />
+        </picture>
+    
+        <ul class="sec">
+            <li><a href="index.php?action=accueil" class="item">Accueil</a></li>
+            
+            <?php if ($role == 'admin')   // si l'utilisateur est admin on affiche les liens
+            { ?>
+                <li><a href="index.php?action=listAvis" class="item"> liste des Avis</a></li>
+                <li><a href="index.php?action=listService" class="item">liste des services</a></li>
+                <li><a href="index.php?action=listDev" class="item">liste des devis</a></li>
+                <li><a href="index.php?action=listDemandeDevis" class="item">liste des demandes de devis</a></li>
+                
+
+            <?php } else { ?>
+                <li class="item">Services <i class="fas fa-caret-down"></i></a>
+                <!-- Menu déroulant -->
+
+                <div class="dropdown-menu">
+                    <ul>
+                        <?php foreach ($cate as $cat): ?>
+                            <li class="item1"> <?php echo $cat['nom_Cat']; ?><i class="fas fa-caret-right"></i>
+                                <div class="dropdown-menu1">
+                                    <ul>
+                                        <!--===== $cat['services'] =======-->
+                                        <?php  // boucle pour afficher les services
+                                        foreach ($cat['services'] as $ser): ?>
+                                            <li><a href="index.php?action=serviceDet&id= <?php echo $ser['id_Services']; ?>" class="item1"><?php echo $ser['nom_Ser'] ?></a></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+
+                    </ul>
+                </div>
+
+            </li>
+                <li><a href="index.php?action=devis" class="item">Devis</a></li>
+                <li><a href="index.php?action=contact" class="item">Contact</a></li>
+            <?php } ?>
+        </ul>
+        <!-- afficher le lien pour se connecter ou s'incrire -->
+        <ul class="login">
+            <!--===== afficher le nom de l'utilisateur connecté  =======-->
+            <?php
+            if (isset($_SESSION["user"])) {     ?>
+            <li><a class="item2" href="index.php?action=profil&id=<?php echo $_SESSION["user"]["id_User"]; ?>" class="item"><i class="fas fa-user"></i> <?php echo $_SESSION["user"]["pseudo"]; ?></a></li>
+            <li><a href="index.php?action=logout" class="item2">Se déconnecter</a></li>
+                
+            <?php } else { ?>
+                <li><a href="index.php?action=login" class="item2">Se connecter</a></li>
+                <li><a href="index.php?action=register" class="item2">S'inscrire</a></li>
+            <?php } ?>
+
+
+        </ul>
+    </nav>
     <main>
         <div id="contenu">
             <?= $contenu ?>
@@ -136,7 +196,7 @@
     <footer class="footer">
         <div class="sec">
             <div class="logF">
-            <img class="logofooter" src="public/image/logo_mk.png" alt="logo" />
+                <img class="logofooter" src="public/image/logo_mk.png" alt="logo" />
             </div>
             <div class="social">
                 <h3 class="titlefooter1">Accédez à nos services</h3>
@@ -158,8 +218,7 @@
             </div>
 
         </div>
-        <hr class="hr"> <!-- hr de separation -->
-
+        <hr class="hr">
         <div class="copyright">
             <span class="cgu-footer">&copy;MK services 2024 - Tous droits réservés</span><a class="cgu-footer" href="index.php?action=cgu">Conditions Générales d'Utilisation</a> <a class="cgu-footer" href="index.php?action=cgv">Conditions Génrales de Vente</a>
         </div>

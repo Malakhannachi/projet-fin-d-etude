@@ -35,7 +35,7 @@
         <?php endforeach; ?>     
     </div>
      <!-- Pagination -->
-     <div class="pagination">
+    <div class="pagination">
         <?php if ($page > 1): ?>
             <a href="?action=avis&page=<?php echo $page - 1; ?>" class="pagination-link">&laquo;</a>
         <?php endif; ?>

@@ -136,7 +136,6 @@ class Controller
     //page Devis
     public function devis()
     {
-        
         $pdo = Connect::seConnecter();
         //afficher liste dynamique des services
         $requeteDev = $pdo->query("
@@ -145,7 +144,7 @@ class Controller
         $requeteDev->execute();
         $services = $requeteDev->fetchAll(PDO::FETCH_ASSOC);
         //var_dump($services);
-
+        //die();
         require("view/demandeDev.php");
     }
 
@@ -153,10 +152,10 @@ class Controller
     public function avis()
     {
         $pdo = Connect::seConnecter();
-
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $avisPerPage = 6;
-        $offset = ($page - 1) * $avisPerPage;
+         // calculer le nombre total d'avis
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // page courante
+        $avisPerPage = 6; // 6 aviss par page
+        $offset = ($page - 1) * $avisPerPage; // offset pour commencer à partir de la page courante
 
         // faire une requete pour compter le nombre d'avis
         $totalAvisQuery = $pdo->query("SELECT COUNT(*) as count FROM avis");
@@ -239,16 +238,11 @@ class Controller
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $liste_Service = filter_input(INPUT_POST, "liste_Service", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            // var_dump("inside post");
-            // var_dump($liste_Service);die();
-            // die();
             $errors = []; // declarer le tableau d'erreurs
-            
             // Validation
             if (empty($nom)) {
                 $errors['nom'] = "Le nom est requis.";
             }
-
             if (empty($prenom)) {
                 $errors['prenom'] = "Le prénom est requis.";
             }
@@ -262,7 +256,6 @@ class Controller
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = "L'email n'est pas valide.";
             }
-
             if (empty($besoin)) {
                 $errors['besoin'] = "Le besoin est requis.";
             }
@@ -282,22 +275,16 @@ class Controller
                         "id_Services" => $liste_Service,
                         "besoin" => $besoin,
                         "date_Devis" => date("Y-m-d H:i:s")  // changer le format de la datetime en francais
-
                     ]);
-                    
                     // rediger l'utilisateur vers la page de success
                     header('Location: index.php?action=secDev');
                     exit;
             } else {
-
-                
                 $_SESSION['errors'] = $errors;
-                
                 // rediger l'utilisateur vers la page devis
                 header('Location: index.php?action=devis');
                 exit;
             }
-
         }
     }
 

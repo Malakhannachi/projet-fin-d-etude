@@ -15,10 +15,9 @@ class SecuritController
             $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $recaptchaResponse = filter_input(INPUT_POST, 'recaptcha-response', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
             //var_dump($pseudo, $email , $mdp , $mdp2);
             //die();
-            //tester si le mot de passe doit avoir 12 caracteres, une majuscule, une minuscule et un chiffre avec expression regulliare 
+            //tester si le mot de passe doit avoir 8 caracteres, une majuscule, une minuscule et un chiffre avec expression regulliare 
             $errors = [];
             if (empty($pseudo)) {
                 $errors['pseudo'] = "Le pseudo est requis.";
@@ -79,10 +78,7 @@ class SecuritController
                 header('location: index.php?action=register');
                 exit();
             }
-
-            // On prépare l'URL
-          
-            
+            // On prépare l'URL pour la requête 
             if ( $pseudo  && $email && $mdp && $mdp2) 
             {
                 //verifier si email existe
@@ -119,8 +115,6 @@ class SecuritController
                         exit();
                     }
                 }
-               
-
         
             }
         }

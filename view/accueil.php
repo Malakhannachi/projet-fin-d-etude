@@ -85,10 +85,9 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
     </div >
     <a href="index.php?action=avis" ><button class="btn-avis">Voir plus <span>&#x2197;</span></button></a>
   
-    <!--===== Section Devis =======-->
-
 
 </section> 
+<!--===== Section Devis =======-->
 <section id="devis" class="devis-background">
     <div class="devis-content">
     <h2 class="title-devis">Illuminez votre message - Contactez-nous</h2>
