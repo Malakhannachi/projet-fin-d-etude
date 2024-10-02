@@ -13,7 +13,7 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
             <strong>Nous sommes là pour vous faciliter la vie !</strong>
         </p>
         <p class="par">
-            Des services de qualité pour votre maison et votre entreprise : <strong> Déménagement, Nettoyage et Bricolage !</strong> 
+            Des services de qualité pour votre maison et votre entreprise : Livraison,Déménagement, Nettoyage et Bricolage !
         </p>
         <a href="index.php?action=devis" ><button class="btn">Devis Express <span>&#x2197;</span></button></a>
     </div>
@@ -47,7 +47,7 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
                         echo htmlspecialchars($service['description']);
                         ?>
                     </p>
-                    <a href="index.php?action=serviceDet&id=<?php echo htmlspecialchars($service['id_Services'] );?>" ><button class="btn">Voir plus</button></a> 
+                    <a href="index.php?action=serviceDet&id=<?php echo htmlspecialchars($service['id_Services'] );?>" ><button class="card-btn">Voir plus</button></a> 
                 </div>
             </div>
         <?php endforeach; ?>
@@ -167,12 +167,13 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
 
 <section id="portfolio-section">
      <h2 class="title-portfolio">Réalisations qui ont satisfait nos clients</h2>
+    
+            <div class="portfolio">
+                <img class="img-por" src="public/image/intercarrat.png" alt="entreprise intercarrat">
+                <img src="public/image/voltac.png" alt="entreprise voltac">
+            </div>
+       
 
-        <div class="portfolio">
-            <img class="img-por" src="public/image/intercarrat.png" alt="entreprise intercarrat">
-            <img src="public/image/voltac.png" alt="entreprise voltac">
-            <img src="public/image/soprema.png" alt="soprema.png">
-        </div>
 
 </section>
 

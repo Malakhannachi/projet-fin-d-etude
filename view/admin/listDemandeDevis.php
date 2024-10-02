@@ -5,8 +5,6 @@
 <section id="hero-devis">    
     <h1 class="devis-hero">Liste des demandes devis</h1>
 </section>
-
-
 <section class="all-devis">
 <table class="table-devis">
     <thead>
@@ -19,7 +17,6 @@
             <th>Besoin</th>
             <th>Date demande devis </th>
             <th>Actions</th>
-    
         </tr>
     </thead>
     <tbody>
@@ -35,6 +32,10 @@
                 <td>
                     <a href="index.php?action=editDevis&id=<?php echo $devi['id_Dem']; ?>"><i class="fas fa-edit"></i></a>
                     <a href="index.php?action=deleteDevis&id=<?php echo $devi['id_Dem']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce devis ?')"><i class="fa-solid fa-trash"></i></a>
+                </td>
+                <td>
+                    <button><a href="index.php?action=traitmentDevis&id=<?php echo $devi['id_Dem']; ?>"> Traiter</a>
+                    </button>
                 </td>
             </tr>
         <?php endforeach; ?>

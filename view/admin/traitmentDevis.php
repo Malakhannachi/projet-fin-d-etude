@@ -7,14 +7,14 @@
 </section>
 
 <section id="devis" class="devis-background1">
-    <div>
+   <!-- <div>
         <img class="logo" src="public/image/logo_mk.png" alt="logo"/>
         <h3>MKServices</h3>
         <p>24 Rue Jean Giridoux </p>
         <p>76200 Strasbourg </p>
         <p>Tél : 01 23 45 67 89</p>
         <p>Mail : 0kGQ1@example.com</p>
-    </div>
+    </div> -->
     <?php
     // afficher numero de devis avec condition de longueur et ajouter plus 1  dans id devis pour calculer le numero de devis 
     $IdDev = $devis['id_devis']+1;

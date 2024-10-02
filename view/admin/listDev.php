@@ -5,8 +5,6 @@
 <section id="hero-devis">    
     <h1 class="devis-hero">Liste des  devis</h1>
 </section>
-
-
 <section class="all-devis">
 <table class="table-devis">
     <thead>
@@ -39,7 +37,6 @@
                 
                 <td>
                     
-                    <a href="index.php?action=traitmentDevis&id=<?php echo $devi['id_Dem']; ?>"> <i class="fa-solid fa-reply"></i></a>
                     <a href="index.php?action=pageOffre&id=<?php echo $devi['id_devis']; ?>"> <i class="fa-solid fa-eye"></i></a>
                 </td>
             </tr>

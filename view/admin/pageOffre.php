@@ -7,15 +7,16 @@
 <section id="offre" class="devis-background1">
     <div class="sec-offre">
 
-    <div>
-        <img class="logo" src="public/image/logo_mk.png" alt="logo"/>
-        <h3>MKServices</h3>
+    <div class="info">
+        <div class="mk">
+            <img class="logo" src="public/image/logo_mk.png" alt="logo"/>
+            <h3>MKServices</h3>
+        </div>
         <p>24 Rue Jean Giridoux </p>
         <p>76200 Strasbourg </p>
         <p>Tél : 01 23 45 67 89</p>
-        <p>Mail : 0kGQ1@example.com</p>
+        <p>Mail : contact.mkservices26@gmail.com</p>
     </div>
-    
     <?php
     // Unix time = 1685491200 à l'aide de la fonction strtotime
     $unixTime = strtotime($devis['date_dev']);
@@ -24,7 +25,7 @@
     $newDate = date("d/m/Y", $unixTime);
     
     ?>
-    <div>
+    <div class="info">
         <h3>Devis n°<?= $devis['id_devis'] ?>/2024</h3>
         <p>Le <?= $newDate ?></p>
         <p>Par <?= $devis['nom'] ?></p>

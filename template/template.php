@@ -136,9 +136,9 @@
             <?php if ($role == 'admin')   // si l'utilisateur est admin on affiche les liens
             { ?>
                 <li><a href="index.php?action=listAvis" class="item"> liste des Avis</a></li>
-                <li><a href="index.php?action=listService" class="item">liste des services</a></li>
-                <li><a href="index.php?action=listDev" class="item">liste des devis</a></li>
-                <li><a href="index.php?action=listDemandeDevis" class="item">liste des demandes de devis</a></li>
+                <li><a href="index.php?action=listService" class="item">liste des Services</a></li>
+                <li><a href="index.php?action=listDev" class="item">liste des Devis</a></li>
+                <li><a href="index.php?action=listDemandeDevis" class="item">liste.Demandes.Devis</a></li>
                 
 
             <?php } else { ?>

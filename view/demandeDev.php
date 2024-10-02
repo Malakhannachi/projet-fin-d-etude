@@ -41,6 +41,26 @@
                     <input type="text" name="email" id="email" class="input" placeholder="email">
                 </div>
                 <div class="list">
+                    <label for="adresse"  class="label-devis">Adresse</label>
+                    <input type="text" name="adresse" id="adresse" class="input" placeholder="adresse">
+                </div>
+                <div class="form-group " >
+                    <div class="nom">
+                        <label for="ville" class="label-devis">Ville</label>
+                        <input type="text" name="ville" id="ville" class="input" placeholder="ville">
+                        <?php if (!empty($_SESSION["errors"]['ville'])): ?>
+                            <div class="error"><?php echo $_SESSION["errors"]['ville']; ?></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="nom">
+                        <label for="codePostal" class="label-devis">Code Postal</label>
+                        <input type="number" name="codePostal" id="codePostal" class="input" placeholder="code postal">
+                        <?php if (!empty($_SESSION["errors"]['codePostal'])): ?>
+                            <div class="error"><?php echo $_SESSION["errors"]['codePostal']; ?></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="list">
                     <label for="id_services" class="label-devis">sélectionnez un service</label>
                     <select name=" liste_Service" id="id_services" class="input">
                         <option value="">sélectionnez un service</option>

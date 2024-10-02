@@ -236,6 +236,9 @@ class Controller
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $telephone = filter_input(INPUT_POST, "telephone", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $ville = filter_input(INPUT_POST, "ville", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $codePostal = filter_input(INPUT_POST, "codePostal", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $adresse = filter_input(INPUT_POST, "adresse", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $liste_Service = filter_input(INPUT_POST, "liste_Service", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $besoin = filter_input(INPUT_POST, "besoin", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $errors = []; // declarer le tableau d'erreurs
@@ -264,14 +267,17 @@ class Controller
             date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
-                        INSERT INTO demande_devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
-                        VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Devis)");
+                        INSERT INTO demande_devis(nom, prenom, tel, email, ville, codePostal, adresse, id_Services, besoin,date_Dem) 
+                        VALUES (:nom, :prenom, :telephone, :email, :ville, :codePostal, :adresse, :id_Services, :besoin,:date_Devis)");
                 $requeteDev->execute([
                     
                         "nom" => $nom,
                         "prenom" => $prenom,
                         "telephone" => $telephone,
                         "email" => $email,
+                        "ville" => $ville,
+                        "codePostal" => $codePostal,
+                        "adresse" => $adresse,
                         "id_Services" => $liste_Service,
                         "besoin" => $besoin,
                         "date_Devis" => date("Y-m-d H:i:s")  // changer le format de la datetime en francais
