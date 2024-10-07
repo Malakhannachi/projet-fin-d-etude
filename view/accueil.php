@@ -61,7 +61,7 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
     <div class="bloc ">
         <?php foreach($avis as $av):?>
         <div class="card-avis">
-            <img class="avis-img" src="public/image/<?php echo htmlspecialchars($av['image'] );?>" alt="<?php echo htmlspecialchars($av['nom'].' '.$av['prenom']);?>"/>
+            <img class="avis-img" src="public/image/<?php echo htmlspecialchars($av['image'] );?>" alt="<?php echo htmlspecialchars($av['pseudo']);?>"/>
                 <p class="text-avis">
                     <?php echo htmlspecialchars($av['commentaire'] );?>
                  </p> 
@@ -79,7 +79,7 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
                     } 
                     ?>
                 </div>
-                <p class="avis-name"><strong><?php echo htmlspecialchars($av['nom'].' '.$av['prenom'] );?></strong></p>     
+                <p class="avis-name"><strong><?php echo htmlspecialchars($av['pseudo'] );?></strong></p>     
         </div>
         <?php endforeach; ?>
     </div >
@@ -127,6 +127,26 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
                 <div class="error"><?php echo $errors['email']; ?></div>
             <?php endif; ?>
         </div>
+                <div class="list">
+                    <label for="adresse"  class="label-devis">Adresse</label>
+                    <input type="text" name="adresse" id="adresse" class="input" placeholder="adresse">
+                </div>
+                <div class="form-group " >
+                    <div class="nom">
+                        <label for="ville" class="label-devis">Ville</label>
+                        <input type="text" name="ville" id="ville" class="input" placeholder="ville">
+                        <?php if (!empty($_SESSION["errors"]['ville'])): ?>
+                            <div class="error"><?php echo $_SESSION["errors"]['ville']; ?></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="nom">
+                        <label for="codePostal" class="label-devis">Code Postal</label>
+                        <input type="number" name="codePostal" id="codePostal" class="input" placeholder="code postal">
+                        <?php if (!empty($_SESSION["errors"]['codePostal'])): ?>
+                            <div class="error"><?php echo $_SESSION["errors"]['codePostal']; ?></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
         <div class="list">
                     <label for="id_services" class="label-devis">sélectionnez un service</label>
                     <select name=" liste_Service" id="id_services" class="input">

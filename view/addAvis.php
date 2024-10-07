@@ -14,23 +14,7 @@
     </div> 
     <div class="form devis-background2" >
     <h2 class="title-devis1">Ajouter un Avis</h2>
-            <form action="index.php?action=addAvis" method="post" class="formulaire" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" pour l'image -->
-                <div class="form-group " >
-                    <div class="nom">
-                        <label for="nom" class="label-devis">Nom</label>
-                        <input type="text" name="nom" id="nom" class="input" placeholder="nom">
-                        <?php if (!empty($_SESSION["errors"]['nom'])): ?>
-                            <div class="error"><?php echo $_SESSION["errors"]['nom']; ?></div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="nom">
-                        <label for="prenom" class="label-devis">Prenom</label>
-                        <input type="text" name="prenom" id="prenom" class="input" placeholder="prenom">
-                        <?php if (!empty($_SESSION["errors"]['prenom'])): ?>
-                            <div class="error"><?php echo $_SESSION["errors"]['prenom']; ?></div>
-                        <?php endif; ?>
-                    </div>
-                </div> 
+            <form action="index.php?action=addAvis" method="post" class="formulaire"> 
                 <div class="list">
                     <label for="id_services" class="label-devis">Note</label>
                     <select name=" note" id="id_services" class="input">
@@ -46,13 +30,7 @@
                     <label for="commentaire" class="label-devis">Commentaire</label>
                     <textarea name="commentaire" id="commentaire" rows="5" placeholder="Votre commentaire"></textarea>
                 </div>
-                <div class="nom">
-                        <label for="image" class="label-devis">Image</label>
-                        <input type="file" name="image" id="image" class="input" placeholder="image">
-                        <?php if (!empty($_SESSION["errors"]['image'])): ?>
-                            <div class="error"><?php echo $_SESSION["errors"]['image']; ?></div>
-                        <?php endif; ?>
-                    </div>
+                
                 <div class="list">
                     <button class="btn-avis" type="submit" name="submit">Envoyer <span>&#x2197;</span></button>
                 </div>

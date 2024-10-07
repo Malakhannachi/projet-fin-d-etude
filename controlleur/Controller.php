@@ -49,9 +49,13 @@ class Controller
 
         $requete = $pdo->query("
             SELECT * 
-            FROM avis limit 3
+            FROM avis 
+            Inner JOIN users ON avis.id_User = users.id_User
+            limit 3
+        
         ");
         $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
+        
         // section devis
         // obtenir tous les services 
         $requeteDev = $pdo->query("
@@ -165,7 +169,10 @@ class Controller
         $totalPages = ceil($totalAvis / $avisPerPage);
 
         // faire une requete pour recuperer les avis
-        $requete = $pdo->prepare("SELECT * FROM avis LIMIT :lim OFFSET :offs");
+        $requete = $pdo->prepare("SELECT * 
+        FROM avis
+        Inner JOIN users ON avis.id_User = users.id_User 
+        LIMIT :lim OFFSET :offs");
         // bindvalue est une fonction qui permet de lier une variable a une requete 
         $requete->bindValue(':lim', $avisPerPage, PDO::PARAM_INT); 
         $requete->bindValue(':offs', $offset, PDO::PARAM_INT);
@@ -309,7 +316,9 @@ class Controller
         }
         //Page Avis 
         public function pageAvis()
+        
         {
+            
             require("view/addAvis.php");
                 
         }
@@ -319,74 +328,38 @@ class Controller
     }
         //Ajouter un Avis
         public function addAvis(){
+            $errors = [];
             $pdo = Connect::seConnecter();
             if (isset($_POST['submit'])) {
-                $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $prenom = filter_input(INPUT_POST,"prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $commentaire = filter_input(INPUT_POST, "commentaire", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $image = $_FILES['image']['name'];
-                
-                
                 // Validation
-                $errors = [];
-                if (empty($nom)) {
-                    $errors['nom'] = "Le nom est requis.";
-                }   
-                if (empty($prenom)) {
-                    $errors['prenom'] = "Le prénom est requis.";
-                }
+               
                 if (empty($commentaire)) {
                     $errors['commentaire'] = "Le commentaire est requis.";
                 }
                 if (empty($note)) {
                     $errors['note'] = "La note est requise.";
                 }
-                if (empty($errors)) {
-                    $uploadDirectory = __DIR__ . '/../public/image/';  //remplacer par le chemin absolu de votre dossier image
-
-                    // tester l'existance de l'image
-                    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                        $fileTmpPath = $_FILES['image']['tmp_name'];
-                        $fileName = $_FILES['image']['name'];    // nom du fichier
-                        $fileSize = $_FILES['image']['size'];   // taille du fichier
-                        $fileType = $_FILES['image']['type'];   // type du fichier
-                        $fileNameCmps = explode(".", $fileName); // nom du fichier
-                        $fileExtension = strtolower(end($fileNameCmps)); // extension du fichier
-                        $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensions autorisées
-            
-                        if (in_array($fileExtension, $allowedfileExtensions)) {
-                            $newFileName = md5(time() . $fileName) . '.' . $fileExtension;   // md5 pour le nom de l'image unique
-                            $dest_path = $uploadDirectory . $newFileName;                    // destination du fichier
-            
-                            if (move_uploaded_file($fileTmpPath, $dest_path)) {                   // deplacer le fichier
-                                $image = $newFileName;
-                            } else {
-                                echo 'There was an error moving the uploaded file.';
-                            }
-                        } else {
-                            echo 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
-                        }
-                    }
+                
                     date_default_timezone_set('Europe/Paris');
-                    $requete = $pdo->prepare("
-                            INSERT INTO avis (commentaire, note, nom, prenom, image, date_Avis)
-                            VALUES (:commentaire, :note, :nom, :prenom, :image, :date_Avis)
+                    if (empty($errors)){
+                     $requete = $pdo->prepare("
+                            INSERT INTO avis (commentaire, note, date_Avis, id_User)
+                            VALUES (:commentaire, :note, :date_Avis, :id_User)
                         ");
                         $requete->execute([
                             'commentaire' => $commentaire,
                             'note' => $note,
-                            'nom' => $nom,
-                            'prenom' => $prenom,
-                            'image' => $image,
                             'date_Avis' => date('Y-m-d H:i:s'),
+                            'id_User' => $_SESSION['user']['id_User'] // prend l'id de l'utilisateur connecté
 
                         ]);
                     header('Location: index.php?action=secAvis');
                            exit;
                 } else {
-                    var_dump($errors);
-                    die();
+                    //var_dump($errors);
+                    //die();
                     $_SESSION['errors'] = $errors;
                     header('Location: index.php?action=pageAvis');
                     exit;

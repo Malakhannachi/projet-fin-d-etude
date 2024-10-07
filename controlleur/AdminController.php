@@ -7,7 +7,6 @@ require_once 'vendor/autoload.php';
 use Dompdf\Dompdf;
 use PDO;
 
-
 class AdminController
 {
     /*--===== Section Devis ========--*/
@@ -491,22 +490,74 @@ class AdminController
     //page profil
 
     public function profil($id){
-
+        
         $pdo = Connect::seConnecter();
         if( isset($_POST['submit'])){
+            $errors = [];
             $pseudo = $_POST['pseudo'];
             $email = $_POST['email'];
             $mdp = $_POST['mdp'];
             $role = $_POST['role'];
-            $requete = $pdo->prepare("UPDATE users SET pseudo = :pseudo, email = :email, mdp = :mdp, role = :role WHERE id_User = :id");
-            $requete->execute(['pseudo' => $pseudo, 'email' => $email, 'mdp' => $mdp, 'role' => $role, 'id' => $id]);
-            header('Location:index.php?action=profil&id='.$id);
-            exit();
+            $image = $_FILES['image']['name'];
+            if (empty($pseudo)) {
+                $errors['pseudo'] = "Le pseudo est requis.";
+            }
+            if (empty($email)) {
+                $errors['email'] = "L'email est requis.";
+            }
+            if (empty($mdp)) {
+                $errors['mdp'] = "Le mot de passe est requis.";
+            }
+            if (empty($role)) {
+                $errors['role'] = "Le role est requis.";
+            }
+            if (empty($image)) {
+                $errors['image'] = "L'image est requise.";
+            }
+            
+            if (empty($errors)) {
+                $uploadDirectory = __DIR__ . '/../public/image/';  //remplacer par le chemin absolu de votre dossier image
+
+                // tester l'existance de l'image
+                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                    $fileTmpPath = $_FILES['image']['tmp_name'];
+                    $fileName = $_FILES['image']['name'];    // nom du fichier
+                    $fileSize = $_FILES['image']['size'];   // taille du fichier
+                    $fileType = $_FILES['image']['type'];   // type du fichier
+                    $fileNameCmps = explode(".", $fileName); // nom du fichier
+                    $fileExtension = strtolower(end($fileNameCmps)); // extension du fichier
+                    $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensions autorisées
+        
+                    if (in_array($fileExtension, $allowedfileExtensions)) {
+                        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;   // md5 pour le nom de l'image unique
+                        $dest_path = $uploadDirectory . $newFileName;                    // destination du fichier
+        
+                        if (move_uploaded_file($fileTmpPath, $dest_path)) {                   // deplacer le fichier
+                            $image = $newFileName;
+                        } else {
+                            echo 'There was an error moving the uploaded file.';
+                        }
+                    } else {
+                        echo 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
+                    }
+                    
+                }
+                //modifier profil utilisateur
+                $requete = $pdo->prepare("UPDATE users SET pseudo = :pseudo, email = :email, mdp = :mdp, role = :role, image = :image WHERE id_User = :id");
+                $requete->execute(['pseudo' => $pseudo, 'email' => $email, 'mdp' => $mdp, 'role' => $role,  'image' => $image, 'id' => $id]);
+            } else {
+                $_SESSION['errors'] = $errors; // remplir la session avec les erreurs
+                header('Location:index.php?action=profil&id='.$id);
+                exit();
+              
+                
+            }
+            
+        } else {
+            $requete = $pdo->query("SELECT * FROM users WHERE id_User = $id");
+            $profil = $requete->fetch(PDO::FETCH_ASSOC);
+            require "view/admin/profil.php";
         }
-        else{
-        $requete = $pdo->query("SELECT * FROM users WHERE id_User = $id");
-        $profil = $requete->fetch(PDO::FETCH_ASSOC);
-        require "view/admin/profil.php";
     }
-}
+
 }

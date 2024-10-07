@@ -32,7 +32,7 @@
         <p>Adresse email : <?= $devis['email'] ?></p>
         <p>Téléphone : <?= $devis['tel'] ?></p>
         <p>Adresse : <?= $devis['adresse'] ?></p>
-        <p><?= $devis['CodePostal'] . ' ' . $devis['ville'] ?></p>
+        <p><?= $devis['codePostal'] . ' ' . $devis['ville'] ?></p>
     </div>
     
     </div>

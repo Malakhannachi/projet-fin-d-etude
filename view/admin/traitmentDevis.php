@@ -34,7 +34,7 @@
         <p class="text-devis1">Email : <?php echo htmlspecialchars($demandeDevis['email']);?></p>
         <p class="text-devis1">Telephone : <?php echo htmlspecialchars($demandeDevis['tel']);?></p>
         <p class="text-devis1">adresse : <?php echo htmlspecialchars($demandeDevis['adresse']);?></p>
-        <p class="text-devis1"><?php echo htmlspecialchars($demandeDevis['CodePostal'] . ' ' . $demandeDevis['ville']);?></p>
+        <p class="text-devis1"><?php echo htmlspecialchars($demandeDevis['codePostal'] . ' ' . $demandeDevis['ville']);?></p>
         <?php date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
             $dateDuJour = date("d/m/Y");?>
             <p class="text-devis1">Date : <?php echo htmlspecialchars($dateDuJour);?></p>

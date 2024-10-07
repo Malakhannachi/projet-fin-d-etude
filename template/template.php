@@ -121,7 +121,7 @@
     {
         $role = $_SESSION['user']['role']; //session prend valeur du role
     } else {
-        $role = 'user'; // sinon le role est 'user'
+        $role = 'visiteur';
     }
     ?>
     <!--===== Navbar =======-->

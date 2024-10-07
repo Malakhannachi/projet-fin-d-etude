@@ -35,10 +35,16 @@
                 <div class="list">
                     <label for="telephone"  class="label-devis">Numéro de téléphone</label>
                     <input type="tel" name="telephone" id="telephone" class="input" placeholder="06 00 00 00 00">
+                    <?php if (!empty($errors['tel'])): ?>
+                <div class="error"><?php echo $errors['tel']; ?></div>
+            <?php endif; ?>
                 </div>
                 <div class="list">
                     <label for="email" class="label-devis">Email</label>
                     <input type="text" name="email" id="email" class="input" placeholder="email">
+                    <?php if (!empty($errors['email'])): ?>
+                <div class="error"><?php echo $errors['email']; ?></div>
+            <?php endif; ?>
                 </div>
                 <div class="list">
                     <label for="adresse"  class="label-devis">Adresse</label>
@@ -72,6 +78,9 @@
                 <div class="list">
                     <label for="besoin"  class="label-devis">Votre besoin</label>
                     <textarea name="besoin" id="bsoin" rows="5" placeholder="Votre besoin" > </textarea>
+                    <?php if (!empty($errors['besoin'])): ?>
+                <div class="error"><?php echo $errors['besoin']; ?></div>
+            <?php endif; ?>
                 </div>
                 <div class="list">
                     <button class="btn-avis" type="submit" name="submit">Envoyer <span>&#x2197;</span></button>

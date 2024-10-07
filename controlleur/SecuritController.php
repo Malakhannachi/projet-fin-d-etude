@@ -57,10 +57,7 @@ class SecuritController
                 // On utilisera file_get_contents
                 $response = file_get_contents($url);
             }
-
-            // var_dump($response);
-            // die();
-
+            // tester si le captcha est valide
             if(empty($response)){
                 $errors['recaptchaResponse'] = 'Le captcha n\'est pas valide';
             }else{

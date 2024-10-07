@@ -311,7 +311,7 @@ ul{
     border-radius: 5px;
     border: none;
     background-color: #FFD028;
-    color: white;
+    color: #142637;
     font-weight: bold;
     font-size: large;
     cursor: pointer;
@@ -325,6 +325,7 @@ ul{
 }
 .btn-avis:hover{
     background-color: #142637;
+    color: #FFD028;
 }
 
 /*--===== Section devis ========--*/
@@ -629,7 +630,7 @@ option{
     opacity: 0.8;
 }
 .label-devis{
-    font-size: 18px;
+    font-size: 14px;
     padding: 10px;
     color: #132535;
     
@@ -1081,8 +1082,7 @@ option{
         font-size: 20px;
         color: #132535;
         width: 100%;
-        padding-left: 100px;
-       
+        text-align: center;
         padding-right: 20px;
        
     }
@@ -1123,7 +1123,7 @@ option{
     .label-devis {
         text-align: start;
     }
-
+   
     .form{
         width: 100%;
     }
@@ -1190,6 +1190,7 @@ option{
    }
    .btn-avis{
     color: #132535;
+
    }
    .btn-avis:hover{
     background-color: #132535;
