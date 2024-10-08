@@ -44,18 +44,14 @@ class Controller
             FROM services limit 3
         ");
         $services = $requete->fetchAll(PDO::FETCH_ASSOC);
-
         //section des avis
-
         $requete = $pdo->query("
             SELECT * 
             FROM avis 
             Inner JOIN users ON avis.id_User = users.id_User
             limit 3
-        
         ");
-        $avis = $requete->fetchAll(PDO::FETCH_ASSOC);
-        
+        $avis = $requete->fetchAll(PDO::FETCH_ASSOC); 
         // section devis
         // obtenir tous les services 
         $requeteDev = $pdo->query("
@@ -208,7 +204,7 @@ class Controller
         // var_dump($service);
 
         if (!$service) {
-            header("Location: /404");
+            header("Location: /404"); // rediriger l'utilisateur vers la page 404
             exit();
         }
 

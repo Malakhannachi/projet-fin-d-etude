@@ -1049,6 +1049,23 @@ option{
    .cgu-link:hover{
     color: #FFD028;
    }
+   /*--===== devis-pdf ========--*/
+   .sec-offre{
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
+       width: 100%;
+   }
+   .table-imp{
+    width: 100%;
+    border-collapse: collapse ;
+    border: #142637 1px solid;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+   }
+
 /*--===== Responsive Accueil ========--*/
 @media screen and (max-width: 768px) {
     /*--===== section footer ========--*/
@@ -1061,7 +1078,6 @@ option{
         text-align: center;
         justify-content: center;
     }
-  
     /*--===== section nav ========--*/
     .nav{
         display: none  ;
