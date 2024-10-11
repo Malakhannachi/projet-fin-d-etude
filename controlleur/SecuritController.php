@@ -27,8 +27,8 @@ class SecuritController
             }
             if (empty($mdp)) {
                 $errors['mdp'] = "Le mot de passe est requis.";
-            } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/', $mdp)) {
-                $errors['mdp'] = "*Le mot de passe doit avoir au moins 8 caractères, une majuscule, une minuscule et un chiffre.";
+            } elseif (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{12,}$/', $mdp)) {
+                $errors['mdp'] = "*Le mot de passe doit avoir au moins 12 caractères, une majuscule, une minuscule et un chiffre.";
             }
             if (empty($mdp2)) {
                 $errors['mdp2'] = "Le mot de passe de confirmation est requis.";
@@ -43,19 +43,15 @@ class SecuritController
             }
             
             $url = "https://www.google.com/recaptcha/api/siteverify?secret=6LfXFk8qAAAAANV2uezoqs5X2csRpKl-B-7D0TBu&response={$recaptchaResponse}";
-
-            // On vérifie si curl est installé
-            if(function_exists('curl_version')){
+            if(function_exists('curl_version')){  // On vérifie si curl est installé
                 $curl = curl_init($url);       // curl utiluse url pour le requête
                 curl_setopt($curl, CURLOPT_HEADER, false);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl, CURLOPT_TIMEOUT, 1);
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
                 $response = curl_exec($curl);
-
-            }else{
-                // On utilisera file_get_contents
-                $response = file_get_contents($url);
+            }else{ 
+                $response = file_get_contents($url); // On utilisera file_get_contents
             }
             // tester si le captcha est valide
             if(empty($response)){
@@ -63,7 +59,6 @@ class SecuritController
             }else{
                 $data = json_decode($response);
             }
-
             if($data->success == false) {
                 $errors['recaptchaResponse'] = 'Le captcha n\'est pas valide';
             }

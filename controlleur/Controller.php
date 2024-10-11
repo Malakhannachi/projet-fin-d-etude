@@ -197,7 +197,7 @@ class Controller
         SELECT * FROM services 
         WHERE id_Services = :id"
         );
-        $requete->bindValue(':id', $id, PDO::PARAM_INT);
+        $requete->bindValue(':id', $id, PDO::PARAM_INT); 
         $requete->execute();
         $service = $requete->fetch(PDO::FETCH_ASSOC); // fetch 
 

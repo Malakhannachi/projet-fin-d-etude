@@ -140,10 +140,7 @@ class AdminController
     
     require 'view/admin/devis-pdf.php'; // Afficher le contenu HTML de la page
     $html = ob_get_clean();  // Capturer le contenu HTML de la page
-
-    // var_dump($html);
-    // die();
-
+    
     // Générer le PDF
    
     $dompdf = new Dompdf();
@@ -280,7 +277,7 @@ class AdminController
                 $fileType = $_FILES['image']['type'];   // type du fichier
                 $fileNameCmps = explode(".", $fileName); // nom du fichier
                 $fileExtension = strtolower(end($fileNameCmps)); // extension du fichier
-                $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensions autorisées
+                $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']; // Extensions autorisées
 
                 if (in_array($fileExtension, $allowedfileExtensions)) {
                     $newFileName = md5(time() . $fileName) . '.' . $fileExtension;   // md5 pour le nom de l'image unique

@@ -26,7 +26,7 @@
     
     ?>
     <div class="info">
-        <h3>Devis n°<?= $devis['id_devis'] ?>/2024</h3>
+        <h3>Devis n°<?= $devis['id_devis'] ?>/2024</h3> <!--condition pour changer l'année  -->
         <p>Le <?= $newDate ?></p>
         <p>Par <?= $devis['nom'] ?></p>
         <p>Adresse email : <?= $devis['email'] ?></p>
