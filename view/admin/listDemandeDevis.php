@@ -33,10 +33,15 @@
                     <a href="index.php?action=editDevis&id=<?php echo $devi['id_Dem']; ?>"><i class="fas fa-edit"></i></a>
                     <a href="index.php?action=deleteDevis&id=<?php echo $devi['id_Dem']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce devis ?')"><i class="fa-solid fa-trash"></i></a>
                 </td>
+                <?php if ($_SESSION['user']['role']=="admin")
+                {
+                    ?>
                 <td>
                     <button><a href="index.php?action=traitmentDevis&id=<?php echo $devi['id_Dem']; ?>"> Traiter</a>
                     </button>
                 </td>
+                <?php
+                } ?>
             </tr>
         <?php endforeach; ?>
     </tbody>

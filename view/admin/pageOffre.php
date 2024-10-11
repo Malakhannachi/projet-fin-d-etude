@@ -85,22 +85,8 @@
         </p>
     </div>
 
-    <a href="index.php?action=imprimDevis&id=<?= $devis['id_devis'] ?>"  class="btn-avis" > imprimer le Devis</a>
+    <a target="_blank" href="index.php?action=imprimDevis&id=<?= $devis['id_devis'] ?>"  class="btn-avis" > imprimer le Devis </a>
 </section>
-<!--<script>
-function printDevis() {
-     var printContents = document.getElementById('impression-devis').innerHTML;
-     var originalContents = document.body.innerHTML;
-
-     document.body.innerHTML = printContents;
-
-     window.print();
-
-     document.body.innerHTML = originalContents;
-}
-</script> -->
-
-
 <?php
     // afficher numero de devis avec condition de longueur et ajouter plus 1  dans id devis pour calculer le numero de devis
     $IdDev = $devis['id_devis']+1;
@@ -111,9 +97,6 @@ function printDevis() {
     } else {
         $formattedId = $IdDev;
     }
-
-
-
      $contenu = ob_get_clean(); 
      require "template/template.php"; 
     ?>

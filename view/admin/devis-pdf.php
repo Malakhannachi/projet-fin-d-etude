@@ -10,12 +10,13 @@
         </div>
         
         <?php
-        $unixTime = strtotime($devis['date_dev']);
+        $unixTime = strtotime($devis['date_dev']); //strtotime pour convertir la date en time 
         $newDate = date("d/m/Y", $unixTime);
+        $year = date("Y", $unixTime);    // afficher l'année
         ?>
         
         <div class="info">
-            <h3>Devis n°<?= $devis['id_devis'] ?>/2024</h3>
+            <h3>Devis n°<?= $devis['id_devis'] ?>/<?= $year ?></h3>
             <p>Le <?= $newDate ?></p>
             <p>Par <?= $devis['nom'] ?></p>
             <p>Adresse email : <?= $devis['email'] ?></p>

@@ -13,17 +13,25 @@ class AdminController
     //liste devis
     public function listDemandeDevis()
     {
-
         $pdo = Connect::seConnecter();
-        $requete = $pdo->query("
-        SELECT * 
-        FROM demande_devis
-        ORDER BY date_Dem DESC");
-        $devis = $requete->fetchAll();
-
-        // var_dump($devis);
-        // die();
-
+        //afficher liste des devis
+        if($_SESSION["user"]["role"]=="admin"){
+            $requete = $pdo->query("
+            SELECT * 
+            FROM demande_devis
+            ORDER BY date_Dem DESC");
+            $devis = $requete->fetchAll(); //fetchall pour recuperer tous les enregistrements
+        }else{
+            $requete = $pdo->prepare("
+                SELECT *
+                FROM demande_devis
+                WHERE id_User = :id");
+            $requete->execute(
+                ['id' => $_SESSION["user"]["id_User"]]
+            );
+            $devis = $requete->fetchAll();
+        }
+       
         require "view/admin/listDemandeDevis.php";
     }
     
@@ -57,7 +65,7 @@ class AdminController
                 'id' => $id
             ]);
 
-            header('Location:index.php?action=listDev');
+            header('Location:index.php?action=listDemandeDevis');
             exit();
         } else { // if ($_SERVER['REQUEST_METHOD'] === 'GET')
             //afficher le formulaire rempli avec les infos
@@ -75,7 +83,7 @@ class AdminController
         $requete = $pdo->prepare("DELETE FROM demande_devis WHERE id_Dem = :id");
         $requete->execute(['id' => $id]);
 
-        header('Location:index.php?action=listDev');
+        header('Location:index.php?action=listDemandeDevis');
         exit();
     }
 // Afficher liste des devis

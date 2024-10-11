@@ -104,18 +104,17 @@ class Controller
             
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
-                        INSERT INTO demande_devis(nom, prenom, tel, email, id_Services, besoin,date_Dem) 
-                        VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Dem)");
+                        INSERT INTO demande_devis(nom, prenom, tel, email, id_Services, besoin,date_Dem, id_User) 
+                        VALUES (:nom, :prenom, :telephone, :email, :id_Services, :besoin,:date_Dem, :id_User)");
                 $requeteDev->execute([
-                    
                         "nom" => $nom,
                         "prenom" => $prenom,
                         "telephone" => $tel,
                         "email" => $email,
                         "id_Services" => $liste_Service,
                         "besoin" => $besoin,
-                        "date_Dem" => $dateDuJour  // changer le format de la datetime en francais
-
+                        "date_Dem" => $dateDuJour,  // changer le format de la datetime en francais
+                        "id_User" => isset($_SESSION['user']) ? $_SESSION['user']['id_User'] : null,
                     ]);
                     
                     // rediger l'utilisateur vers la page de success
@@ -265,15 +264,14 @@ class Controller
             if (empty($besoin)) {
                 $errors['besoin'] = "Le besoin est requis.";
             }
-            // var_dump($errors);
-            // die();
+            
             date_default_timezone_set('Europe/Paris'); // changer le fuseau horaire
+            
             if (empty($errors)) {
                 $requeteDev = $pdo->prepare("
-                        INSERT INTO demande_devis(nom, prenom, tel, email, ville, codePostal, adresse, id_Services, besoin,date_Dem) 
-                        VALUES (:nom, :prenom, :telephone, :email, :ville, :codePostal, :adresse, :id_Services, :besoin,:date_Devis)");
-                $requeteDev->execute([
-                    
+                        INSERT INTO demande_devis(nom, prenom, tel, email, ville, codePostal, adresse, id_Services, besoin,date_Dem, id_User) 
+                        VALUES (:nom, :prenom, :telephone, :email, :ville, :codePostal, :adresse, :id_Services, :besoin,:date_Devis, :id_User)");
+                $requeteDev->execute([  
                         "nom" => $nom,
                         "prenom" => $prenom,
                         "telephone" => $telephone,
@@ -283,7 +281,8 @@ class Controller
                         "adresse" => $adresse,
                         "id_Services" => $liste_Service,
                         "besoin" => $besoin,
-                        "date_Devis" => date("Y-m-d H:i:s")  // changer le format de la datetime en francais
+                        "date_Devis" => date("Y-m-d H:i:s"),  // changer le format de la datetime en francais
+                        "id_User"=> isset($_SESSION['user']) ? $_SESSION['user']['id_User']: null, // ternary operator (remplace IF ? ELSE :)
                     ]);
                     // rediger l'utilisateur vers la page de success
                     header('Location: index.php?action=secDev');

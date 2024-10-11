@@ -131,41 +131,41 @@
         </picture>
     
         <ul class="sec">
-            <li><a href="index.php?action=accueil" class="item">Accueil</a></li>
-            
-            <?php if ($role == 'admin')   // si l'utilisateur est admin on affiche les liens
-            { ?>
+            <li><a href="index.php?action=accueil" class="item">Accueil</a></li>  
+            <?php if ($role == 'admin')  { ?>  <!-- si l'utilisateur est admin on affiche les liens -->    
                 <li><a href="index.php?action=listAvis" class="item"> liste des Avis</a></li>
                 <li><a href="index.php?action=listService" class="item">liste des Services</a></li>
                 <li><a href="index.php?action=listDev" class="item">liste des Devis</a></li>
                 <li><a href="index.php?action=listDemandeDevis" class="item">liste.Demandes.Devis</a></li>
-                
-
             <?php } else { ?>
+                <!-- si c'est un utilisateur ou admin connecté on affiche le liste -->
+                <?php if ($role == 'user') { ?>
+                    <li><a href="index.php?action=listDemandeDevis" class="item">liste.Demandes.Devis</a></li>
+                <?php } ?>
                 <li class="item">Services <i class="fas fa-caret-down"></i></a>
                 <!-- Menu déroulant -->
 
-                <div class="dropdown-menu">
-                    <ul>
-                        <?php foreach ($cate as $cat): ?>
-                            <li class="item1"> <?php echo $cat['nom_Cat']; ?><i class="fas fa-caret-right"></i>
-                                <div class="dropdown-menu1">
-                                    <ul>
-                                        <!--===== $cat['services'] =======-->
-                                        <?php  // boucle pour afficher les services
-                                        foreach ($cat['services'] as $ser): ?>
-                                            <li><a href="index.php?action=serviceDet&id= <?php echo $ser['id_Services']; ?>" class="item1"><?php echo $ser['nom_Ser'] ?></a></li>
-                                        <?php endforeach; ?>
-                                    </ul>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <?php foreach ($cate as $cat): ?>
+                                <li class="item1"> <?php echo $cat['nom_Cat']; ?><i class="fas fa-caret-right"></i>
+                                    <div class="dropdown-menu1">
+                                        <ul>
+                                            <!--===== $cat['services'] =======-->
+                                            <?php  // boucle pour afficher les services
+                                            foreach ($cat['services'] as $ser): ?>
+                                                <li><a href="index.php?action=serviceDet&id= <?php echo $ser['id_Services']; ?>" class="item1"><?php echo $ser['nom_Ser'] ?></a></li>
+                                            <?php endforeach; ?>
+                                        </ul>
 
-                                </div>
-                            </li>
-                        <?php endforeach; ?>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
 
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
 
-            </li>
+                </li>
                 <li><a href="index.php?action=devis" class="item">Devis</a></li>
                 <li><a href="index.php?action=contact" class="item">Contact</a></li>
             <?php } ?>

@@ -2,7 +2,7 @@
 
 <!-- hero section -->
 <section id="hero-devis">    
-    <h1 class="devis-hero"> Devis</h1>
+    <h1 class="devis-hero"> Traiter un devis</h1>
     
 </section>
 
@@ -26,8 +26,6 @@
         $formattedId = $IdDev;
     }
     ?>
-    
-    
     <div class="form devis-background2">
         <h2 class="title-devis1">Devis N°:<?php echo htmlspecialchars($formattedId.'-'.date('Y'));?></h2>
         <p class="text-devis1">Client : <?php echo htmlspecialchars($demandeDevis['nom'] . ' ' . $demandeDevis['prenom']);?></p>
