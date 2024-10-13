@@ -17,15 +17,11 @@
             <form action="index.php?action=editAvis&id=<?php echo htmlspecialchars($avis['id_Avis']) ?>" method="post" class="formulaire" enctype="multipart/form-data">
                 <div class="form-group " >
                     <div class="nom">
-                        <label for="nom" class="label-devis">Nom</label>
-                        <input type="text" name="nom" id="nom" class="input" placeholder="nom" value="<?php echo htmlspecialchars($avis['nom']) ?>">
+                        <label for="pseudo" class="label-devis">Pseudo</label>
+                        <input type="text" name="pseudo" id="pseudo" class="input" placeholder="nom" value="<?php echo htmlspecialchars($avis['pseudo']) ?>">
                         
                     </div>
-                    <div class="nom">
-                        <label for="prenom" class="label-devis">Prenom</label>
-                        <input type="text" name="prenom" id="prenom" class="input" placeholder="prenom" value="<?php echo htmlspecialchars($avis['prenom']) ?>">
-                        
-                    </div>
+                    
                 </div> 
                 
                 <div class="list">
@@ -36,7 +32,7 @@
                         <option value="1" <?php if ($avis['note'] == 1) echo "selected" ?>><span class='stars'>&#9733;</span></option>
                         <option value="2" <?php if ($avis['note'] == 2) echo "selected" ?>><span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span></option>
                         <option value="3" <?php if ($avis['note'] == 3) echo "selected" ?>><span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span></option>
-                        <option value="4"<?php if ($avis['note'] == 4) echo "selected" ?>><span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span></option>
+                        <option value="4"<?php if ($avis['note'] == 4) echo "selected" ?>><span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span></option> <!-- selected pour laisser l'option vide -->
                         <option value="5" <?php if ($avis['note'] == 5) echo "selected" ?>><span class='stars'>&#9733;</> <span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span> <span class='stars'>&#9733;</span></option>
                     </select>
                 </div>

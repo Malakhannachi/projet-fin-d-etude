@@ -43,8 +43,9 @@
                 </div>
                 <div class="list">
                     <input type="hidden" name="id_Dem" value="<?php echo htmlspecialchars($demandeDevis['id_Dem']);?>">
-                    <label for="intitule" class="label-devis"> Désignation</label>
+                    <label for="intitule" class="label-devis"> Service</label>
                     <input type="text" name="nom_Ser" id="nomSer" value="<?php echo htmlspecialchars($demandeDevis['nom_Ser']);?>">
+                    <label for="intitule" class="label-devis"> Désignation</label>
                     <textarea name="description" id="description" cols="30" rows="10"><?php echo htmlspecialchars($demandeDevis['besoin']);?></textarea>
                     <label for="quantité" class="quantité"> Nbre de jour</label>
                     <input type="text" name="qte" id="qte" oninput="calculerTTC()">

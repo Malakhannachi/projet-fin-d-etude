@@ -127,7 +127,7 @@
     <!--===== Navbar =======-->
     <nav class="nav">
         <picture>
-            <img class="logo" src="public/image/logo_mk.png" alt="logo" />
+           <a href="index.php?action=accueil"><img  class="logo" src="public/image/logo_mk.png" alt="logo" /></a>
         </picture>
     
         <ul class="sec">

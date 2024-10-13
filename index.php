@@ -100,6 +100,9 @@ if(isset($_GET['action'])) {
         "traitmentDevis": $adminCtrl->traitmentDevis($id);
         break;
         case
+        "sendDevis": $adminCtrl->sendDevis($id);
+        break;
+        case
         "cgu": $ctrFrm->cgu();
         break;
         case

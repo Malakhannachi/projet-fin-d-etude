@@ -251,6 +251,22 @@ ul{
     height: 250px;
     
 }
+.card-btn{
+    justify-content: flex-start;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 15px;
+    color: #132535;
+    background-color: #FFD028;
+    font-weight: medium;
+ 
+}
+.card-btn:hover{
+    background-color: #132535;
+    color: #FFD028;
+}
 /*--===== Section avis ========--*/
 #avis{
     width: 100%;

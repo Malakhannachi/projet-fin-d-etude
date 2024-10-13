@@ -38,7 +38,9 @@
                 <td>
                     
                     <a href="index.php?action=pageOffre&id=<?php echo $devi['id_devis']; ?>"> <i class="fa-solid fa-eye"></i></a>
+                    <a href="index.php?action=sendDevis&id=<?php echo $devi['id_devis']; ?>"><i class="fa-regular fa-paper-plane"></i></a>
                 </td>
+                
             </tr>
         <?php endforeach; ?>
     </tbody>

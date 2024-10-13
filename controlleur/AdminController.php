@@ -3,8 +3,9 @@
 namespace Controlleur;
 
 use Model\Connect;
-require_once 'vendor/autoload.php';
+require_once 'vendor/autoload.php'; //utiliser les bibliothèques
 use Dompdf\Dompdf;
+use PHPMailer\PHPMailer\PHPMailer;
 use PDO;
 
 class AdminController
@@ -151,11 +152,58 @@ class AdminController
     
     // Générer le PDF
    
-    $dompdf = new Dompdf();
+    $dompdf = new Dompdf(); //
     $dompdf->loadHtml($html);
     $dompdf->setPaper('A4', 'portrait');
     $dompdf->render();
     $dompdf->stream("offre_{$devis['id_Dem']}.pdf", ['Attachment' => 0]);
+}
+public function sendDevis($id){
+    $pdo = Connect::seConnecter();
+    $requete = $pdo->prepare("
+    SELECT * 
+    FROM devis
+    INNER JOIN demande_devis ON devis.id_Dem = demande_devis.id_Dem 
+    WHERE devis.id_devis = :id
+");
+$requete->execute(['id' => $id]);
+$devis = $requete->fetch(PDO::FETCH_ASSOC);
+// var_dump($id);
+// die();
+if (!$devis) {
+    echo "Le devis n'existe pas.";
+    return;
+}
+
+// Commencer la mise en tampon de sortie pour capturer le contenu HTML de la page
+
+ob_start(); // ouvrir 
+
+require 'view/admin/devis-pdf.php'; // Afficher le contenu HTML de la page
+$html = ob_get_clean();  // Capturer le contenu HTML de la page
+
+// Looking to send emails in production? Check out our Email API/SMTP product!
+$phpmailer = new PHPMailer();
+$phpmailer->isSMTP();
+$phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+$phpmailer->SMTPAuth = true;
+$phpmailer->Port = 2525;
+$phpmailer->Username = '31dccc036d51b1';
+$phpmailer->Password = '31569469ec38e4';
+
+$phpmailer->setFrom('fjJ0I@example.com', 'Mailer');
+$phpmailer->addAddress($devis['email'], $devis['nom']);
+$phpmailer->Subject = 'Devis de ' . $devis['nom'];
+
+$phpmailer->isHTML(true);
+$phpmailer->Body = $html;
+
+if ($phpmailer->send()) {
+    echo 'Mail bien envoyé';
+} else {
+    echo 'Mail non envoyé';
+    echo 'Mailer Error: ' . $phpmailer->ErrorInfo;
+}
 }
 
     // traitter un devis 
@@ -225,20 +273,18 @@ class AdminController
         }
     }
 /*--===== Section Avis ========--*/
-    // lister Avis
+    // liste Avis
 
     public function listAvis()
     {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->query("SELECT * 
-        FROM avis");
+        $requete = $pdo->query("
+        SELECT * 
+        FROM avis
+        INNER JOIN users ON avis.id_User = users.id_User");
         $avis = $requete->fetchAll();
-
         // var_dump($avis);
         // die();
-
-
-
         require "view/admin/listAvis.php";
     }
     
@@ -264,8 +310,7 @@ class AdminController
         $pdo = Connect::seConnecter();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $nom = $_POST['nom'];  
-            $prenom = $_POST['prenom'];  
+            $pseudo = $_POST['pseudo'];   
             $commentaire = $_POST['commentaire'];
             $note = $_POST['note'];
             $image = $_FILES['image']['name'];
@@ -303,12 +348,12 @@ class AdminController
 
             $requete = $pdo->prepare("
             UPDATE avis 
-            SET nom = :nom, prenom = :prenom, commentaire = :commentaire, note = :note, image = :image
+            SET pseudo = :pseudo, commentaire = :commentaire, note = :note, image = :image
             WHERE id_Avis = :id
+
             ");
             $requete->execute([
-                'nom' => $nom,
-                'prenom' => $prenom,
+                'pseudo' => $pseudo,
                 'commentaire' => $commentaire,
                 'note' => $note,
                 'image' => $image,
@@ -319,7 +364,11 @@ class AdminController
             exit();
         } else {
             // afficher le formulaire 
-            $requete = $pdo->prepare("SELECT * FROM avis WHERE id_Avis = :id");
+            $requete = $pdo->prepare("
+            SELECT * 
+            FROM avis 
+            INNER JOIN users ON avis.id_User = users.id_User
+            WHERE id_Avis = :id");
             $requete->execute(['id' => $id]);
             $avis = $requete->fetch(PDO::FETCH_ASSOC);
 

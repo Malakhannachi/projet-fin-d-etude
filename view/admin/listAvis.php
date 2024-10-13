@@ -11,9 +11,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>image</th>
+                <th>Pseudo</th>
+                <th>Image</th>
                 <th>Commentaire</th>
                 <th>Note</th>
                 <th>Date_Avis</th>
@@ -24,10 +23,8 @@
             <?php foreach ($avis as $av): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($av['id_Avis']); ?></td>
-                    <td><?php echo htmlspecialchars($av['nom']); ?></td>
-                    <td><?php echo htmlspecialchars($av['prenom']); ?></td>
-                    <td><img class="avis-img" src="public/image/<?php echo htmlspecialchars($av['image'] );?>" alt="<?php echo htmlspecialchars($av['nom'].' '.$av['prenom']);?>"/></td>
-                    
+                    <td><?php echo htmlspecialchars($av['pseudo']); ?></td>
+                    <td><?php echo htmlspecialchars($av['image']); ?></td>
                     <td><?php echo htmlspecialchars($av['commentaire']); ?></td>
                     <td><?php echo htmlspecialchars($av['note']); ?></td>
                     <td><?php echo htmlspecialchars($av['date_Avis']); ?></td>
