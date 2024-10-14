@@ -127,7 +127,7 @@
     <!--===== Navbar =======-->
     <nav class="nav">
         <picture>
-           <a href="index.php?action=accueil"><img  class="logo" src="public/image/logo_mk.png" alt="logo" /></a>
+           <a href="index.php?action=accueil"><img  class="logo" src="public/image/logo_mk.png" alt="logo mk services" /></a>
         </picture>
     
         <ul class="sec">
@@ -185,7 +185,78 @@
 
 
         </ul>
-    </nav>
+        </nav>
+    
+        <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Top Navigation Menu -->
+<div class="topnav">
+  <a href="index.php?action=accueil" class="active" src="public/image/logo_mk.png" alt="logo mk services"></a>
+  <!-- Navigation links (hidden by default) -->
+  <div id="myLinks">
+    <a href="index.php?action=accueil">Accueil</a>
+    <?php if ($role == 'admin')  { ?>  <!-- si l'utilisateur est admin on affiche les liens -->    
+                <li><a href="index.php?action=listAvis" class="responsive"> liste des Avis</a></li>
+                <li><a href="index.php?action=listService" class="responsive">liste des Services</a></li>
+                <li><a href="index.php?action=listDev" class="responsive">liste des Devis</a></li>
+                <li><a href="index.php?action=listDemandeDevis" class="responsive">liste.Demandes.Devis</a></li>
+            <?php } else { ?>
+                <!-- si c'est un utilisateur ou admin connecté on affiche le liste -->
+                <?php if ($role == 'user') { ?>
+                    <li><a href="index.php?action=listDemandeDevis" class="responsive">liste Demandes Devis</a></li>
+                <?php } ?>
+                <li class="responsive">Services <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-menu">
+                        <ul>
+                            <?php foreach ($cate as $cat): ?>
+                                <li class="item1"> <?php echo $cat['nom_Cat']; ?><i class="fas fa-caret-right"></i>
+                                    <div class="dropdown-menu1">
+                                        <ul>
+                                            <!--===== $cat['services'] =======-->
+                                            <?php  // boucle pour afficher les services
+                                            foreach ($cat['services'] as $ser): ?>
+                                                <li><a href="index.php?action=serviceDet&id= <?php echo $ser['id_Services']; ?>" class="item1"><?php echo $ser['nom_Ser'] ?></a></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+
+                        </ul>
+                    </div>
+
+                </li>
+                <li><a href="index.php?action=devis" class="item">Devis</a></li>
+                <li><a href="index.php?action=contact" class="item">Contact</a></li>
+            <?php } ?>
+        </ul>
+        <!-- afficher le lien pour se connecter ou s'incrire -->
+        <ul class="login">
+            <!--===== afficher le nom de l'utilisateur connecté  =======-->
+            <?php
+            if (isset($_SESSION["user"])) {     ?>
+            <li><a class="item2" href="index.php?action=profil&id=<?php echo $_SESSION["user"]["id_User"]; ?>" class="item"><i class="fas fa-user"></i> <?php echo $_SESSION["user"]["pseudo"]; ?></a></li>
+            <li><a href="index.php?action=logout" class="item2">Se déconnecter</a></li>
+                
+            <?php } else { ?>
+                <li><a href="index.php?action=login" class="item2">Se connecter</a></li>
+                <li><a href="index.php?action=register" class="item2">S'inscrire</a></li>
+            <?php } ?>
+
+
+        </ul>
+    
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>
+  <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+</nav>
     <main>
         <div id="contenu">
             <?= $contenu ?>

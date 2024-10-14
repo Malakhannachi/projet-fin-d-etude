@@ -182,7 +182,7 @@ ob_start(); // ouvrir
 require 'view/admin/devis-pdf.php'; // Afficher le contenu HTML de la page
 $html = ob_get_clean();  // Capturer le contenu HTML de la page
 
-// Looking to send emails in production? Check out our Email API/SMTP product!
+// configurer l'envoi de mail (SMTP) avec phpmailer 
 $phpmailer = new PHPMailer();
 $phpmailer->isSMTP();
 $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
@@ -570,32 +570,51 @@ if ($phpmailer->send()) {
             }
             
             if (empty($errors)) {
-                $uploadDirectory = __DIR__ . '/../public/image/';  //remplacer par le chemin absolu de votre dossier image
-
-                // tester l'existance de l'image
+                $uploadDirectory = __DIR__ . '/../public/image/';
+            
+                // Vérifier l'existence de l'image
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                     $fileTmpPath = $_FILES['image']['tmp_name'];
-                    $fileName = $_FILES['image']['name'];    // nom du fichier
-                    $fileSize = $_FILES['image']['size'];   // taille du fichier
-                    $fileType = $_FILES['image']['type'];   // type du fichier
-                    $fileNameCmps = explode(".", $fileName); // nom du fichier
-                    $fileExtension = strtolower(end($fileNameCmps)); // extension du fichier
-                    $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensions autorisées
-        
-                    if (in_array($fileExtension, $allowedfileExtensions)) {
-                        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;   // md5 pour le nom de l'image unique
-                        $dest_path = $uploadDirectory . $newFileName;                    // destination du fichier
-        
-                        if (move_uploaded_file($fileTmpPath, $dest_path)) {                   // deplacer le fichier
-                            $image = $newFileName;
+                    $fileName = $_FILES['image']['name'];
+                    $fileSize = $_FILES['image']['size'];
+                    $fileNameCmps = explode(".", $fileName);
+                    $fileExtension = strtolower(end($fileNameCmps));
+            
+                    // Extensions et types MIME autorisés
+                    $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+            
+                    // Vérifier le type MIME du fichier
+                    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                    $mimeType = finfo_file($finfo, $fileTmpPath);
+                    finfo_close($finfo);
+            
+                    // Limite de taille de fichier
+                    $maxFileSize = 2 * 1024 * 1024; // 2 Mo
+            
+                    if (in_array($fileExtension, $allowedfileExtensions) && in_array($mimeType, $allowedMimeTypes) && $fileSize <= $maxFileSize) {
+                        // Vérifier que le répertoire est accessible
+                        if (is_dir($uploadDirectory) && is_writable($uploadDirectory)) {
+                            // Générer un nom de fichier unique et sécurisé
+                            $newFileName = bin2hex(random_bytes(16)) . '.' . $fileExtension;
+                            $dest_path = $uploadDirectory . $newFileName;
+            
+                            // Déplacer le fichier vers la destination
+                            if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                                $image = $newFileName;
+                            } else {
+                                $errors['upload'] = "Erreur lors du déplacement du fichier.";
+                            }
                         } else {
-                            echo 'There was an error moving the uploaded file.';
+                            $errors['upload'] = "Le répertoire de destination n'existe pas ou n'est pas accessible.";
                         }
                     } else {
-                        echo 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
+                        $errors['image'] = "Le fichier n'est pas valide ou dépasse la taille maximale autorisée.";
                     }
-                    
+                } else {
+                    $errors['image'] = "Erreur lors de l'upload du fichier.";
                 }
+            
                 //modifier profil utilisateur
                 $requete = $pdo->prepare("UPDATE users SET pseudo = :pseudo, email = :email, mdp = :mdp, role = :role, image = :image WHERE id_User = :id");
                 $requete->execute(['pseudo' => $pseudo, 'email' => $email, 'mdp' => $mdp, 'role' => $role,  'image' => $image, 'id' => $id]);
@@ -613,5 +632,6 @@ if ($phpmailer->send()) {
             require "view/admin/profil.php";
         }
     }
+
 
 }
