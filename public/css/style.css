@@ -1082,6 +1082,9 @@ option{
     margin-right: auto;
    }
 
+   .topnav {
+        display: none;
+    }
 /*--===== Responsive Accueil ========--*/
 @media screen and (max-width: 768px) {
 
@@ -1132,11 +1135,13 @@ option{
         color: #FFD028;
     }
     /* Style the navigation menu */
-.topnav {
-    overflow: hidden;
-    background-color: #333;
-    position: relative;
-  }
+    .topnav {
+        overflow: hidden;
+        background-color: #333;
+        position: relative;
+        display: block;
+        z-index: 100;
+    }
   
   /* Hide the links inside the navigation menu (except for logo/home) */
   .topnav #myLinks {
