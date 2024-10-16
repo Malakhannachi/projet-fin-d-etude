@@ -271,7 +271,6 @@
                     <li><a href="index.php?action=register" class="item2">S'inscrire</a></li>
                 <?php } ?>
 
-
             </ul>
 
             <a href="#contact">Contact</a>
