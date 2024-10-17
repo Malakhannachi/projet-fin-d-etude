@@ -217,7 +217,6 @@ if ($phpmailer->send()) {
             $tva = filter_input(INPUT_POST, "tva", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $montant = filter_input(INPUT_POST, "montant", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $ttc = filter_input(INPUT_POST, "ttc", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $intitule = filter_input(INPUT_POST, "intitule", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             $erreur = [];
             if (empty($nom_Ser)) {
@@ -242,15 +241,15 @@ if ($phpmailer->send()) {
             //die();
             //requete pour inserer dans table devis
             $requete = $pdo->prepare("
-            INSERT INTO devis ( qte, prix_ht, tva, id_Dem, date_dev, intitule) 
-            VALUES ( :qte, :prix_ht, :tva, :id_Dem, :date_dev, :intitule)");
+            INSERT INTO devis ( qte, prix_ht, tva, id_Dem, date_dev) 
+            VALUES ( :qte, :prix_ht, :tva, :id_Dem, :date_dev)");
             $requete->execute([
                 'qte' => $qte,
                 'prix_ht' => $prix_ht,
                 'tva' => $tva,
                 'id_Dem' => $id,
                 'date_dev' => date('Y-m-d'),
-                'intitule' => $intitule
+                
             ]);
             header('Location:index.php?action=listDev');
             exit();  

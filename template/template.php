@@ -161,11 +161,11 @@
                 <li><a href="index.php?action=listAvis" class="item"> liste des Avis</a></li>
                 <li><a href="index.php?action=listService" class="item">liste des Services</a></li>
                 <li><a href="index.php?action=listDev" class="item">liste des Devis</a></li>
-                <li><a href="index.php?action=listDemandeDevis" class="item">liste.Demandes.Devis</a></li>
+                <li><a href="index.php?action=listDemandeDevis" class="item">liste Demandes Devis</a></li>
             <?php } else { ?>
                 <!-- si c'est un utilisateur ou admin connecté on affiche le liste -->
                 <?php if ($role == 'user') { ?>
-                    <li><a href="index.php?action=listDemandeDevis" class="item">liste.Demandes.Devis</a></li>
+                    <li><a href="index.php?action=listDemandeDevis" class="item">liste Demandes Devis</a></li>
                 <?php } ?>
                 <li class="item">Services <i class="fas fa-caret-down"></i></a>
                     <!-- Menu déroulant -->
@@ -200,7 +200,7 @@
             <!--===== afficher le nom de l'utilisateur connecté  =======-->
             <?php
             if (isset($_SESSION["user"])) {     ?>
-                <li><a class="item2" href="index.php?action=profil&id=<?php echo $_SESSION["user"]["id_User"]; ?>" class="item"><i class="fas fa-user"></i> <?php echo $_SESSION["user"]["pseudo"]; ?></a></li>
+                <li><a class="item2" href="index.php?action=profil&id=<?php echo $_SESSION["user"]["id_User"]; ?>"&nbsp;&nbsp; class="item">&nbsp;&nbsp;<i class="fas fa-user">&nbsp;&nbsp;</i> <?php echo $_SESSION["user"]["pseudo"]; ?></a></li>
                 <li><a href="index.php?action=logout" class="item2">Se déconnecter</a></li>
 
             <?php } else { ?>
