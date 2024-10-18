@@ -361,7 +361,7 @@ ul{
 }
 
 .devis-content{
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -644,6 +644,7 @@ option{
     padding: 10px;
     color: #132535;
     opacity: 0.8;
+    text-align: center;
 }
 .label-devis{
     font-size: 14px;
@@ -787,6 +788,17 @@ option{
     text-align: justify;
     padding: 20px;
     
+}
+
+/* ========== page profil =========== */
+
+.infosBienvenueProfil{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 /*--===== page login ========--*/
@@ -1185,12 +1197,7 @@ option{
     justify-content: center;
     padding: 20px;
     }
-    .devis-content{
-    width: 100%;
-
-    padding: 20px;
-    text-align: center;
-    }
+ 
     .title-devis{
     width: 100%;
     font-size: 26px;

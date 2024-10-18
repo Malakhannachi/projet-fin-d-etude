@@ -192,6 +192,7 @@
 
                 </li>
                 <li><a href="index.php?action=devis" class="item">Devis</a></li>
+                
                 <li><a href="index.php?action=contact" class="item">Contact</a></li>
             <?php } ?>
         </ul>
@@ -255,6 +256,7 @@
 
                 </li>
                 <li><a href="index.php?action=devis" class="item">Devis</a></li>
+                <li><a href="index.php?action=addAvis" class="item">Avis</a></li>
                 <li><a href="index.php?action=contact" class="item">Contact</a></li>
             <?php } ?>
             </ul>

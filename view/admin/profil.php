@@ -3,17 +3,20 @@
 
 <!-- hero section -->
 <section id="hero-devis">    
-    <h1 class="devis-hero">Modifier Devis</h1>
-    <p class="text-hero">Modifiez Votre Devis Sur-Mesure</p>
+    <h1 class="devis-hero">Modifier Profil</h1>
+    <p class="text-hero">Modifiez Votre Profil</p>
 </section>
 
 <section id="devis" class="devis-background1">
-Bienvenue <?php echo $_SESSION['user']['pseudo']; ?> !
-    <div class="devis-content">
-        <h2 class="title-devis1">Mettez à jour votre profil</h2>
-        <p class="text-devis1">Ajustez les détails de votre devis pour que notre équipe puisse mieux vous assister.</p>
+    <div class="infosBienvenueProfil">
+        <div class="BienvenuePseudo" >
+            Bienvenue <?php echo $_SESSION['user']['pseudo']; ?> !
+        </div>
+        <div class="devis-content">
+            <h2 class="title-devis1">Mettez à jour votre profil</h2>
+            <p class="text-devis1">Ajustez les détails de votre devis pour que notre équipe puisse mieux vous assister.</p>
+        </div>
     </div>
-    
     <div class="form devis-background2">
         <h2 class="title-devis1">Modifier un profil</h2>
         <form action="index.php?action=profil&id=<?= htmlspecialchars($profil['id_User']) ?>" method="post" class="formulaire" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" pour l'image -->

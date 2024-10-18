@@ -11,7 +11,7 @@ spl_autoload_register(function ($class_name) { //chargement des classes
 $ctrFrm = new Controller();
 $secuCtrl = new SecuritController();
 $adminCtrl = new AdminController();
-$id = isset($_GET['id']) ? $_GET["id"] : null; 
+$id = isset($_GET['id']) ? $_GET["id"] : null; // scope variable avec condition ternaire
 
 if(isset($_GET['action'])) {
     switch($_GET['action']) {
