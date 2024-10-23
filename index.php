@@ -13,6 +13,12 @@ $secuCtrl = new SecuritController();
 $adminCtrl = new AdminController();
 $id = isset($_GET['id']) ? $_GET["id"] : null; // scope variable avec condition ternaire
 
+// if(isset($_GET['id'])){
+//     $id = $_GET["id"];
+// } else {
+//     $id = null;
+// }
+
 if(isset($_GET['action'])) {
     switch($_GET['action']) {
         case 

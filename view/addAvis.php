@@ -14,7 +14,7 @@
     </div> 
     <div class="form devis-background2" >
     <h2 class="title-devis1">Ajouter un Avis</h2>
-            <form action="index.php?action=addAvis" method="post" class="formulaire"> 
+            <form action="index.php?action=addAvis" method="post" class="formulaire" enctype="multipart/form-data"> 
                 <div class="list">
                     <label for="id_services" class="label-devis">Note</label>
                     <select name=" note" id="id_services" class="input">
@@ -30,6 +30,13 @@
                     <label for="commentaire" class="label-devis">Commentaire</label>
                     <textarea name="commentaire" id="commentaire" rows="5" placeholder="Votre commentaire"></textarea>
                 </div>
+                <div class="nom">
+                        <label for="image" class="label-devis">Image</label>
+                        <input type="file" name="image" id="image" class="input" placeholder="image">
+                        <?php if (!empty($_SESSION["errors"]['image'])): ?>
+                            <div class="error"><?php echo $_SESSION["errors"]['image']; ?></div>
+                        <?php endif; ?>
+            </div>
                 
                 <div class="list">
                     <button class="btn-avis" type="submit" name="submit">Envoyer <span>&#x2197;</span></button>
@@ -43,5 +50,6 @@
 
 
 <?php
+unset($_SESSION["errors"]);
 $contenu = ob_get_clean();
 require "template/template.php";

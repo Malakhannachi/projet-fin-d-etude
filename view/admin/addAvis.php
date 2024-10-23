@@ -31,6 +31,7 @@
                     <label for="commentaire" class="label-devis">Commentaire</label>
                     <textarea name="commentaire" id="commentaire" rows="5" placeholder="Votre commentaire"></textarea>
                 </div>
+               
                 
                 <div class="list">
                     <button class="btn-avis" type="submit" name="submit">Envoyer <span>&#x2197;</span></button>
