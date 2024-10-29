@@ -1,5 +1,9 @@
 <?php
 
+use Controlleur\AvisController;
+use Controlleur\DevisController;
+use Controlleur\ServiceController;
+use Controlleur\SiteController;
 use Controlleur\AdminController;
 use Controlleur\Controller;
 use Controlleur\SecuritController;
@@ -9,23 +13,21 @@ spl_autoload_register(function ($class_name) { //chargement des classes
 });
 
 $ctrFrm = new Controller();
+$siteCtrl = new SiteController();
+$avisCtrl = new AvisController();
+$serviceCtrl = new ServiceController();
+$devisCtrl = new DevisController();
 $secuCtrl = new SecuritController();
 $adminCtrl = new AdminController();
 $id = isset($_GET['id']) ? $_GET["id"] : null; // scope variable avec condition ternaire
 
-// if(isset($_GET['id'])){
-//     $id = $_GET["id"];
-// } else {
-//     $id = null;
-// }
-
 if(isset($_GET['action'])) {
     switch($_GET['action']) {
         case 
-        "accueil":$ctrFrm->accueil(); 
+        "accueil":$siteCtrl->accueil(); 
         break;
         case
-        "addDevAcceuil":$ctrFrm->addDevAcceuil();
+        "addDevAcceuil":$devisCtrl->addDevAcceuil();
         break;
         case
         "login":$secuCtrl->login();
@@ -37,28 +39,28 @@ if(isset($_GET['action'])) {
         "logout":$secuCtrl->logout();
         break;
         case
-        "devis":$ctrFrm->devis();
+        "devis":$devisCtrl->devis();
         break;
         case
-        "addDevis":$ctrFrm->addMyDevis();  //page devis
+        "addDevis":$devisCtrl->addMyDevis();  //page devis
         break;      
         case
-        "avis":$ctrFrm->avis();
+        "avis":$avisCtrl->avis();
         break;
         case
-        "pageAvis":$ctrFrm->pageAvis();
+        "pageAvis":$avisCtrl->pageAvis();
         break;
         case
-        "addAvis":$ctrFrm->addAvis();
+        "addAvis":$avisCtrl->addAvis();
         break;
         case 
-        "secAvis":$ctrFrm->secAvis();
+        "secAvis":$avisCtrl->secAvis();
         break;
         case
-        "contact":$ctrFrm->contact();   
+        "contact":$siteCtrl->contact();   
         break;
         case
-        "secDev":$ctrFrm->secDev();
+        "secDev":$devisCtrl->secDev();
         break;
         case
         "listDemandeDevis": $adminCtrl->listDemandeDevis();
@@ -88,7 +90,7 @@ if(isset($_GET['action'])) {
         "editAvis": $adminCtrl->editAvis($id);
         break;
         case
-        "serviceDet": $ctrFrm->serviceDet($id);
+        "serviceDet": $serviceCtrl->serviceDet($id);
         break;
         case 
         "listService": $adminCtrl->listService();
@@ -109,15 +111,15 @@ if(isset($_GET['action'])) {
         "sendDevis": $adminCtrl->sendDevis($id);
         break;
         case
-        "cgu": $ctrFrm->cgu();
+        "cgu": $siteCtrl->cgu();
         break;
         case
-        "cgv": $ctrFrm->cgv();
+        "cgv": $siteCtrl->cgv();
         break;
         case
         "profil": $adminCtrl->profil($id);
         break;
-        default: $ctrFrm->accueil();
+        default: $siteCtrl->accueil();
         break;
         
 

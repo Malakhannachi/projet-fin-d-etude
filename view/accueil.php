@@ -5,21 +5,28 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
 ?>
 
 <!-- hero section -->
-<section id="hero">    
+<div class="hero-carousel">
+    <section id="hero">
+        <img src="public/image/slider-1.jpg" alt="Slider Image 1" class="hero-image">
+        <div class="overlay"></div>
+        <div class="contenu"> 
+            <p class="lead"><strong>Nous sommes là pour vous faciliter la vie !</strong></p>
+            <p class="par">Des services de qualité pour votre maison et votre entreprise : Livraison, Déménagement, Nettoyage et Bricolage !</p>
+            <a href="index.php?action=devis"><button class="btn">Devis Express <span>&#x2197;</span></button></a>
+        </div>    
+    </section>
     
-    <div class="contenu"> 
-         
-        <p class="lead">
-            <strong>Nous sommes là pour vous faciliter la vie !</strong>
-        </p>
-        <p class="par">
-            Des services de qualité pour votre maison et votre entreprise : Livraison,Déménagement, Nettoyage et Bricolage !
-        </p>
-        <a href="index.php?action=devis" ><button class="btn">Devis Express <span>&#x2197;</span></button></a>
-    </div>
-    
-    
-</section>
+    <section id="hero2">
+        <img src="public/image/demser.jpeg" alt="Slider Image 2" class="hero-image">
+        <div class="overlay"></div>
+        <div class="contenu"> 
+            <p class="lead"><strong>Nous sommes là pour vous faciliter la vie !</strong></p>
+            <p class="par">Des services de qualité pour votre maison et votre entreprise : Livraison, Déménagement, Nettoyage et Bricolage !</p>
+            <a href="index.php?action=devis"><button class="btn">Devis Express <span>&#x2197;</span></button></a>
+        </div>    
+    </section>
+</div>
+
 
 <!--===== Section services =======-->
 
@@ -54,6 +61,8 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
     </div>
 </section> 
 
+
+
 <!--===== Section Avis =======-->
 
 <section id="avis">
@@ -87,6 +96,33 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
   
 
 </section> 
+
+<!--===== Section nous choisir =======-->
+<section id="features-section">
+    <h2 class="title-features">Nous choisir</h2>
+    <div class="features-section">
+        <div class="feature-block">
+            <img src="public/image/N-picto-satisfaction.svg" alt="Icon 1">
+            <p>Des intervenants en CDI, formés et qualifiés</p>
+        </div>
+        <div class="feature-block">
+            <img src="public/image/N-picto-gestion-administrative.svg" alt="Icon 2">
+            <p>Nous répondons rapidement à vos besoins, pour vous offrir un service efficace et sans délai</p>
+        </div>
+        <div class="feature-block">
+            <img src="public/image/N-picto-pouce.svg" alt="Icon 3">
+            <p>Garantie “satisfait, refait ou remboursé”</p>
+        </div>
+        <!-- <div class="feature-block">
+            <img src="public/image/N-picto-reseau.svg" alt="Icon 4">
+            <p>50% de crédit d’impôt ou avance immédiate</p>
+        </div> -->
+        <div class="feature-block">
+            <img src="public/image/picto-credit-impot.svg" alt="Icon 5">
+            <p>Des tarifs compétitifs pour un service à la hauteur de vos attentes</p>
+        </div>
+    </div>
+</section>
 <!--===== Section Devis =======-->
 <section id="devis" class="devis-background">
     <div class="devis-content">
@@ -170,30 +206,17 @@ $errors = $_SESSION["errors"] ?? []; // afficher les erreurs
         </div>
 
 </section>
-<!--===== Section choisir=======-->
-<!--<section id="choisir">
-
-    <div class="choisir-content">
-       <h2 class="title-choisir">Choisir MKservices c'est </h2>
-
-    </div>
-    <div class="choisir-img">
-        <img src="public/image/section.png" alt="démangeur">
-    </div>
-    
- </section>-->
-
 <!--===== Section portfolio =======-->
 
 <section id="portfolio-section">
      <h2 class="title-portfolio">Réalisations qui ont satisfait nos clients</h2>
     
             <div class="portfolio">
-                <img class="img-por" src="public/image/intercarrat.png" alt="entreprise intercarrat">
-                <img src="public/image/voltac.png" alt="entreprise voltac">
+                <img class="img-por" src="public/image/1.png" alt="entreprise intercarrat">
+                <img src="public/image/2.png" alt="entreprise voltac">
+                <img class="img-por" src="public/image/3.png" alt="entreprise intercarrat">
+                <img src="public/image/4.png" alt="entreprise voltac">
             </div>
-       
-
 
 </section>
 

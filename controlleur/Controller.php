@@ -142,8 +142,7 @@ class Controller
         FROM services ");
         $requeteDev->execute();
         $services = $requeteDev->fetchAll(PDO::FETCH_ASSOC);
-        //var_dump($services);
-        //die();
+        
         require("view/demandeDev.php");
     }
 
@@ -296,31 +295,30 @@ class Controller
         }
     }
 
-    public function delDev($id)
-    {
-        $pdo = Connect::seConnecter();
-        $requeteDel = $pdo->prepare(
-                "
-                DELETE FROM devis 
-                WHERE devis.id_Devis = :id"
-            );
-        $requeteDel->execute([
-                "id" => $id
-            ]);
-            header("Location: index.php?action=admin");
+        public function delDev($id)
+        {
+            $pdo = Connect::seConnecter();
+            $requeteDel = $pdo->prepare(
+                    "
+                    DELETE FROM devis 
+                    WHERE devis.id_Devis = :id"
+                );
+            $requeteDel->execute([
+                    "id" => $id
+                ]);
+                header("Location: index.php?action=admin");
         }
         //Page Avis 
         public function pageAvis()
-        
         {
             
             require("view/addAvis.php");
                 
         }
         public function secAvis()
-    {
-        require("view/secAvis.php");
-    }
+        {
+            require("view/secAvis.php");
+        }
         //Ajouter un Avis
         public function addAvis(){
             $errors = [];
@@ -426,7 +424,7 @@ class Controller
                 ]);
             ?>
         
-        <?php
+         <?php
             header("Location: index.php?action=admin");
         }
     }
