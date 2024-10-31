@@ -23,9 +23,9 @@
             <?php foreach ($avis as $av): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($av['id_Avis']); ?></td>
-                    <td><?php echo htmlspecialchars($av['pseudo']); ?></td>
+                    <td><?php echo($av['pseudo']); ?></td>
                     <td><?php echo htmlspecialchars($av['image']); ?></td>
-                    <td><?php echo htmlspecialchars($av['commentaire']); ?></td>
+                    <td><?php echo ($av['commentaire']); ?></td>
                     <td><?php echo htmlspecialchars($av['note']); ?></td>
                     <td><?php echo htmlspecialchars($av['date_Avis']); ?></td>
                     <td>
